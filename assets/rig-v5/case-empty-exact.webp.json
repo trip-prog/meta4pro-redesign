@@ -1,0 +1,4 @@
+{
+  "prompt": "Use case: precise-object-edit\nAsset type: fixed base layer for a scroll-driven website PC assembly\nPrimary request: Turn the exact final assembled gaming PC photograph into the same PC case completely empty inside. Preserve the exact camera angle, framing, chassis silhouette, exterior geometry, black studio background, yellow trim, reflections, lighting, shadows and perspective. Edit only the interior: remove motherboard, processor/pump, RAM, radiator fans, GPU and cables; replace them with a realistic empty black tray, mounting points, expansion slots and PSU shroud. Keep the side panel open. No text, logos or watermark.\nEdit target: public/assets/pc-v3/pc-final.webp\nGenerated with the built-in image generation tool on 2026-08-23; converted without geometry changes to 1122x1402 WebP for the website.",
+  "createdAt": "2026-08-23T20:00:00+03:00"
+}

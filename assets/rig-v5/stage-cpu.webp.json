@@ -1,0 +1,13 @@
+{
+  "prompt": "Use case: precise-object-edit\nAsset type: scroll-driven website PC assembly frame, stage 2\nInput images: Image 1 is the sole edit target and geometry anchor.\nPrimary request: Create a photorealistic intermediate assembly frame of exactly the same black gaming PC case from Image 1. The chassis stays fully stationary in exactly the same three-quarter camera angle, crop, scale, perspective, silhouette, feet, front panel, power-supply shroud, black studio background, floor reflection, lighting, shadows, yellow case accent and overall color grade. Remove the tempered-glass side panel so the interior is openly visible. Inside the case, install ONLY the motherboard in its correct real mounting position and a bare CPU correctly seated in the motherboard socket. The motherboard must be a realistic full-size black ATX board aligned naturally to the rear I/O and standoffs, matching the final image's motherboard geometry as closely as possible. The CPU should be visibly flush in its socket under the retention frame, with its realistic metal heat spreader exposed; no cooler or pump covers it.\nCritical invariants: keep the outer case, camera, framing, canvas aspect ratio, background, lighting and every chassis edge pixel-close to Image 1; change only the internal assembly state and remove the glass.\nThe installed motherboard must have empty RAM slots and empty PCIe slots.\nRemove completely: CPU block/pump, heatsink/cooler, radiator, all case and radiator fans, RAM modules, graphics card/GPU, liquid-cooling tubes, power/data cables, cable combs, loose wires, side glass and any floating parts.\nConstraints: physically believable component scale and mounting; clean open chassis; no text, labels, logos, watermark, extra props, hands, tools, dust or particles. Do not redesign the case. No parts may float or overlap incorrectly.",
+  "provenance": {
+    "generator": "OpenAI built-in image_gen",
+    "mode": "edit",
+    "editTarget": "public/assets/pc-v3/pc-final.webp",
+    "generatedSource": "C:/Users/Zov2025/.codex/generated_images/01a02fd1-8c79-7a71-ae0f-2846c84b66f6/exec-442c1a75-d057-48e1-a325-8fdd0d845ab0.png",
+    "workspaceSource": "source-assets/rig-v5/stage-cpu.png",
+    "output": "public/assets/rig-v5/stage-cpu.webp",
+    "conversion": "FFmpeg libwebp, scale=1122:1402:flags=lanczos, quality=92, compression_level=6",
+    "generatedAt": "2026-08-23T21:16:00+03:00"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "prompt": "Use case: precise-object-edit\nAsset type: photorealistic intermediate frame for a website scroll-driven PC assembly sequence\nInput images: Image 1 is the sole edit target and the exact visual anchor\nPrimary request: Create the completed cable-installation stage immediately before the side glass is attached. Keep the exact same black gaming PC case, three-quarter camera angle, lens, framing, silhouette, scale, black studio background, floor shadow, lighting, yellow accent color, and every installed component position as Image 1. The case must remain stationary and pixel-close to the edit target. Keep all hardware and all visible cables exactly installed as in Image 1: motherboard, CPU with square liquid-cooler pump block, two yellow-lit RAM sticks, exactly two vertically stacked yellow-ring rear fans, AIO coolant hoses, the same triple-fan GPU, thick right-side motherboard power cable bundle, lower-right GPU power cable bundle, and all connectors. Remove only the transparent side-glass panel completely, exposing the finished interior with no glass reflection or glass edge.\nStyle/medium: ultra-photorealistic premium PC product photography, physically plausible materials, cable routing, connectors, and component mounting\nComposition/framing: portrait canvas matching Image 1 exactly; do not crop, rotate, zoom, shift, redesign, or alter perspective\nLighting/mood: identical dramatic black studio lighting with restrained yellow highlights\nConstraints: change only the side glass; preserve chassis geometry, front panel, feet, screws, vents, motherboard, CPU pump, RAM, two rear fans, AIO hoses, GPU, both visible cable bundles, all shadows, and all component alignment; every part and cable must sit naturally in its real final mounting point; no floating parts; no extra parts; no text; no logo; no watermark\nAvoid: exploded view, components laid over the case, missing power cables, duplicated parts, distorted hardware, transparent ghost parts, different case, different camera, added RGB colors, side-glass reflection",
+  "provenance": {
+    "generator": "built-in image_gen",
+    "mode": "edit",
+    "useCase": "precise-object-edit",
+    "editTarget": "public/assets/pc-v3/pc-final.webp",
+    "editTargetAbsolute": "E:\\фриланс\\сайты\\META4PRO — основа v3\\public\\assets\\pc-v3\\pc-final.webp",
+    "generatedPng": "C:\\Users\\Zov2025\\.codex\\generated_images\\01a02fd1-dd2d-70d1-b5b3-0bb2387368ea\\exec-878bb335-1131-46d2-9fb6-645767019627.png",
+    "workspaceSourcePng": "source-assets/rig-v5/stage-cables.png",
+    "conversion": "ffmpeg libwebp, quality 94, compression_level 6, preset picture; no resize or crop",
+    "width": 1122,
+    "height": 1402
+  },
+  "createdAt": "2026-08-23T21:14:50.7123518+03:00"
+}
