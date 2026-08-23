@@ -3,14 +3,18 @@ import { galleryItems } from '../data/clubData';
 import useMediaQuery from '../hooks/useMediaQuery';
 
 const CircularGallery = lazy(() => import('./CircularGallery'));
+const stackItems = galleryItems.filter((item, index) => item.image.includes('gallery-') || index === 3).slice(0, 5);
 
-function PhotoStrip() {
+function PhotoStack({ reducedMotion = false }) {
   return (
-    <div className="photo-strip" aria-label="Фотографии клуба">
-      {galleryItems.map(item => (
-        <figure key={item.image}>
+    <div className={`photo-stack ${reducedMotion ? 'is-static' : ''}`} aria-label="Фотографии клуба">
+      {stackItems.map((item, index) => (
+        <figure key={item.image} style={{ '--stack-index': index }}>
           <img src={item.image} alt={item.text} width="1200" height="800" loading="lazy" decoding="async" />
-          <figcaption>{item.text}</figcaption>
+          <figcaption>
+            <span>{String(index + 1).padStart(2, '0')} / {String(stackItems.length).padStart(2, '0')}</span>
+            <strong>{item.text}</strong>
+          </figcaption>
         </figure>
       ))}
     </div>
@@ -48,25 +52,29 @@ export default function ClubGallery() {
   return (
     <section ref={sectionRef} className="club-section" id="club" aria-labelledby="club-title">
       <div className="club-heading">
-        <h2 id="club-title">ТЕМНО.<br /><span>БЫСТРО.</span><br /><span className="club-last"><i>ПО-</i><i>НАСТОЯЩЕМУ.</i></span></h2>
-        <p>Без стоковых киберспортсменов: здесь реальные комнаты, реальные места и свет клуба, в котором ты будешь играть.</p>
+        <h2 id="club-title">ВНУТРИ<br />META4PRO</h2>
+        <p>Живые кадры из клуба: общий зал, приватные комнаты и детали игровых сетапов.</p>
       </div>
 
       {useCircular ? (
         <div className="circular-shell" aria-label="Интерактивная галерея клуба">
-          <Suspense fallback={<PhotoStrip />}>
+          <div className="sr-only">
+            <p>Листайте галерею колесом мыши или клавишами со стрелками.</p>
+            <ul>{galleryItems.map(item => <li key={item.image}>{item.text}</li>)}</ul>
+          </div>
+          <Suspense fallback={<PhotoStack reducedMotion />}>
             <CircularGallery
               items={galleryItems}
               bend={1.15}
-              borderRadius={0.035}
+              borderRadius={0}
               scrollSpeed={1.35}
               scrollEase={0.075}
               textColor="#FFD400"
-              font='600 22px "Unbounded Variable"'
+              font='600 22px "Onest Variable"'
             />
           </Suspense>
         </div>
-      ) : <PhotoStrip />}
+      ) : <PhotoStack reducedMotion={reducedMotion} />}
     </section>
   );
 }

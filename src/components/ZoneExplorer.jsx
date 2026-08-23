@@ -22,14 +22,15 @@ export default function ZoneExplorer({ selectedIndex, onSelect }) {
 
   const chooseAndBook = () => {
     onSelect(selectedIndex);
-    document.querySelector('#booking')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelector('#booking')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
   };
 
   return (
     <section className="zones-section" id="zones" aria-labelledby="zones-title">
       <div className="section-heading zones-heading">
-        <h2 id="zones-title">ЧЕТЫРЕ РЕЖИМА.<br /><span>ОДИН ТВОЙ.</span></h2>
-        <p>От открытого зала на час до приватной комнаты для команды. Выбирай по задаче, а не по красивому названию.</p>
+        <h2 id="zones-title">ВЫБЕРИ<br />ЗОНУ</h2>
+        <p>Сравни цену, железо и формат: общий зал, арена или отдельная комната для команды.</p>
       </div>
 
       <div className="zone-workbench">
@@ -79,7 +80,7 @@ export default function ZoneExplorer({ selectedIndex, onSelect }) {
           <div className="zone-panel-footer">
             <p>{zone.gear}</p>
             <button className="button button-ink" type="button" onClick={chooseAndBook}>
-              Выбрать {zone.name} <ArrowUpRight aria-hidden="true" />
+              Забронировать {zone.name} <ArrowUpRight aria-hidden="true" />
             </button>
           </div>
         </article>

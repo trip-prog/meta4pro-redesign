@@ -1,35 +1,20 @@
 import { ArrowUpRight, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { club, zones } from '../data/clubData';
 
-export default function BookingSection({ selectedIndex, onSelect }) {
+export default function BookingSection({ selectedIndex }) {
   const zone = zones[selectedIndex];
   const mapsUrl = `https://yandex.ru/maps/?text=${encodeURIComponent(`${club.city}, ${club.address}`)}`;
+  const telegramMessage = encodeURIComponent(`Здравствуйте! Хочу забронировать место в зоне ${zone.name}. Подскажите свободное время.`);
+  const telegramUrl = `${club.telegram}?text=${telegramMessage}`;
 
   return (
     <section className="booking-section" id="booking" aria-labelledby="booking-title">
       <div className="booking-copy">
-        <h2 id="booking-title">ОДИН ТАП<br />ДО КАТКИ.</h2>
-        <p>Выбери режим — администратор подтвердит свободное место и поможет с бронью.</p>
+        <h2 id="booking-title">БРОНЬ<br />МЕСТА</h2>
+        <p>Напиши администратору выбранную зону и время. Он проверит свободные места и подтвердит бронь.</p>
       </div>
 
       <div className="booking-console">
-        <fieldset className="booking-zone-choice">
-          <legend>Твоя зона</legend>
-          <div>
-            {zones.map((item, index) => (
-              <button
-                key={item.id}
-                className={index === selectedIndex ? 'is-active' : ''}
-                type="button"
-                aria-pressed={index === selectedIndex}
-                onClick={() => onSelect(index)}
-              >
-                {item.name}
-              </button>
-            ))}
-          </div>
-        </fieldset>
-
         <div className="booking-summary" aria-live="polite">
           <div>
             <span>Выбрано</span>
@@ -41,15 +26,14 @@ export default function BookingSection({ selectedIndex, onSelect }) {
           </div>
         </div>
 
+        <a className="booking-change" href="#zones">Изменить зону</a>
+
         <div className="booking-actions">
-          <a className="booking-primary" href={club.phoneHref}>
+          <a className="booking-primary" href={telegramUrl} target="_blank" rel="noreferrer">
+            <MessageCircle aria-hidden="true" /> Написать в Telegram <ArrowUpRight aria-hidden="true" />
+          </a>
+          <a href={club.phoneHref}>
             <Phone aria-hidden="true" /> Позвонить <ArrowUpRight aria-hidden="true" />
-          </a>
-          <a href={club.telegram} target="_blank" rel="noreferrer">
-            <MessageCircle aria-hidden="true" /> Telegram <ArrowUpRight aria-hidden="true" />
-          </a>
-          <a href={club.originalSite} target="_blank" rel="noreferrer">
-            Актуальные тарифы <ArrowUpRight aria-hidden="true" />
           </a>
         </div>
       </div>

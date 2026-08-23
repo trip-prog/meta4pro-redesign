@@ -21,7 +21,9 @@ export default function LiquidEther({
   autoIntensity = 2.2,
   takeoverDuration = 0.25,
   autoResumeDelay = 1000,
-  autoRampDuration = 0.6
+  autoRampDuration = 0.6,
+  maxDpr = 2,
+  maxFps = 60
 }) {
   const mountRef = useRef(null);
   const webglRef = useRef(null);
@@ -85,7 +87,7 @@ export default function LiquidEther({
       }
       init(container) {
         this.container = container;
-        this.pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        this.pixelRatio = Math.min(window.devicePixelRatio || 1, maxDpr);
         this.resize();
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         this.renderer.autoClear = false;
@@ -942,6 +944,7 @@ export default function LiquidEther({
           rampDuration: props.autoRampDuration
         });
         this.init();
+        this.lastFrameAt = 0;
         this._loop = this.loop.bind(this);
         this._resize = this.resize.bind(this);
         window.addEventListener('resize', this._resize);
@@ -970,9 +973,13 @@ export default function LiquidEther({
         Common.update();
         this.output.update();
       }
-      loop() {
+      loop(timestamp = 0) {
         if (!this.running) return; // safety
-        this.render();
+        const frameInterval = 1000 / Math.max(1, maxFps);
+        if (!this.lastFrameAt || timestamp - this.lastFrameAt >= frameInterval) {
+          this.render();
+          this.lastFrameAt = timestamp;
+        }
         rafRef.current = requestAnimationFrame(this._loop);
       }
       start() {
@@ -1111,7 +1118,9 @@ export default function LiquidEther({
     autoIntensity,
     takeoverDuration,
     autoResumeDelay,
-    autoRampDuration
+    autoRampDuration,
+    maxDpr,
+    maxFps
   ]);
 
   useEffect(() => {

@@ -9,46 +9,58 @@ related_targets: ["src/styles.css","src/components/SiteHeader.jsx","src/componen
 
 - Primary target: `src/App.jsx`
 - Related targets: `src/styles.css`, `src/components/SiteHeader.jsx`, `src/components/HardwareHero.jsx`, `src/components/ZoneExplorer.jsx`, `src/components/ClubGallery.jsx`, `src/components/BookingSection.jsx`
-- Scope: full public landing page foundation
+- Scope: shipped public landing-page foundation
 - Mode: persuade
 
 ## Product job
 
-Convince a young player on a phone that META4PRO is a serious, current gaming club and get them to choose a zone or contact the club. Desktop should feel cinematic, while mobile must remain fast, legible, tactile, and complete without WebGL.
+Convince a young player on a phone that META4PRO is a serious current gaming club, help them compare one of four zones, and move them to a real contact action. Desktop expands the atmosphere without changing the mobile-first journey.
 
 ## Chosen direction
 
-**Live Match Lobby.** The page behaves like the seconds before a match: dark arena atmosphere, precise yellow signal, oversized condensed-feeling type, real club photography, and a single scroll-driven power-on moment. The approved first-surface comp is `.impeccable/mocks/decision/live-match-lobby-mobile.png`; desktop follows `.impeccable/mocks/decision/live-match-lobby-desktop.png`.
+**Live Match Lobby.** The approved SHIP world uses a dark arena, one precise yellow signal, real club photography and one scroll-driven hardware moment. The page stays young and distinctive without falling into generic neon gaming, glassmorphism or repeated novelty effects.
 
 ## Memorable moment
 
-The hero assembles one photorealistic gaming PC from nine independently generated and registered transparent layers: chassis, motherboard, CPU, RAM, cooler, GPU, fans, cables, and glass. The build resolves into the final machine and one restrained Electric Border action. This is the signature interaction; the rest of the page supports it instead of competing with it.
+The hero keeps one registered PC case fixed in a shared coordinate system. Seven transitions — motherboard, CPU, RAM, cooling, GPU, power and glass — lock into seven complete registered stage images and resolve into the real final PC. Touch-responsive Liquid Ether adds material motion behind the scene; the completed build reveals the single Electric Border pill.
 
 ## Component grammar
 
-- Controls use compact, tactical geometry: 12px corners for buttons and interactive controls.
-- Photography uses larger 14px frames and edge-to-edge crops.
-- One primary electric CTA per viewport; yellow is signal, not wallpaper.
-- Avoid generic floating cards, dashboard grids, neon-purple cyberpunk, fake booking forms, and repeated novelty effects.
-- Zone selection is an editorial list plus one focused photo/spec panel, not a grid of interchangeable cards.
+- Main buttons and interactive controls use 12px corners.
+- The floating mobile booking bar uses 16px corners.
+- The final Electric Border action is the only 999px pill.
+- Large photography, the desktop zone image and booking console keep square corners.
+- Yellow `#FFD400` is one signal for action, selection, progress or status, never wallpaper.
+- Zone selection is an editorial list plus one focused photo/spec panel, not interchangeable promo cards.
 
 ## Type and color
 
-- Display: Unbounded Variable, heavy and tightly tracked.
-- Body/UI: Onest Variable, direct and highly readable.
+- Logo and hero META4PRO wordmark only: Unbounded Variable, heavy and tightly tracked.
+- Section headings, body and all UI: Onest Variable.
 - Arena black: `#070706`
 - Signal yellow: `#FFD400`
 - Warm paper: `#F3F1E8`
 - Steel: `#84847D`
 
+## Responsive behavior
+
+- Mobile is the base composition and has been verified at 360px, 390px and 430px.
+- Mobile and touch use a vertical sticky photo stack; reduced motion turns it into a static vertical list.
+- Desktop has been verified with the two-column zone and booking layouts.
+- Circular Gallery replaces the stack only from 1000px with a fine pointer, WebGL and no reduced-motion preference.
+
 ## Asset and rendering inventory
 
-- Semantic HTML and React for navigation, zone selection, facts, booking contacts, and footer.
-- Raster/WebP for real club photography and the registered PC component stack.
-- WebGL Liquid Ether only on capable desktop pointers and only near the hero.
-- Circular Gallery only on capable desktop; mobile uses an accessible CSS scroll-snap photo strip.
-- Reduced-motion and touch users receive the complete content without dependent canvas effects.
+- Semantic HTML and React provide navigation, zone selection, facts, booking contacts and footer.
+- The hero uses one fixed registered case plus seven full registered intermediate stage images.
+- Liquid Ether remains available for touch at a lower performance budget and carries no essential information.
+- Real club photography remains available without canvas; capable desktop gets Circular Gallery.
+- The completed assembly uses one restrained Electric Border final pill.
 
-## Open product boundary
+## Conversion boundary
 
-The current foundation has honest phone, Telegram, and official-tariff links. A true booking workflow requires the club's booking API/provider and explicit approval before public launch. Live prices and contacts were checked against the current official site on 23.08.2026, but publication still requires owner confirmation.
+Booking is an honest contact handoff: the selected zone generates a prefilled Telegram draft, and a direct phone action is always available. There is no fake form, backend confirmation or claim that the booking is complete.
+
+## Verification state
+
+The approved SHIP composition has been checked at 360px, 390px, 430px and desktop. Future visual changes must preserve these widths, keyboard states and the reduced-motion path.

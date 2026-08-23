@@ -5,8 +5,7 @@ export const club = {
   city: 'Ростов-на-Дону',
   phone: '+7 (918) 555-00-90',
   phoneHref: 'tel:+79185550090',
-  telegram: 'https://t.me/Meta4pro1',
-  originalSite: 'https://meta4pro.ru/'
+  telegram: 'https://t.me/Meta4pro1'
 };
 
 export const zones = [

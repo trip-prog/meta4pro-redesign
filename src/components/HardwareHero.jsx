@@ -5,48 +5,70 @@ import ElectricBorder from './ElectricBorder';
 
 const LiquidEther = lazy(() => import('./LiquidEther'));
 
+const VIEWBOX = { width: 1122, height: 1402, centerX: 561, centerY: 701 };
+const ETHER_COLORS = ['#2f2700', '#d6ae00', '#ffd400'];
 const clamp = value => Math.min(1, Math.max(0, value));
 const easeOut = value => 1 - Math.pow(1 - value, 4);
 const asset = file => `${import.meta.env.BASE_URL}assets/${file}`;
 
 const parts = [
-  { key: 'case', file: 'case.webp', start: -0.08, end: 0.02, from: [0, 28, 0, 0.96] },
-  { key: 'motherboard', file: 'motherboard.webp', start: 0.08, end: 0.2, from: [42, -28, 7, 0.82] },
-  { key: 'cpu', file: 'cpu.webp', start: 0.18, end: 0.3, from: [-46, -38, -11, 1.18] },
-  { key: 'ram', file: 'ram.webp', start: 0.28, end: 0.4, from: [48, -34, 9, 1.08] },
-  { key: 'cooler', file: 'cooler.webp', start: 0.38, end: 0.5, from: [-45, -10, -8, 0.9] },
-  { key: 'gpu', file: 'gpu.webp', start: 0.48, end: 0.62, from: [46, 18, 6, 0.92] },
-  { key: 'fans', file: 'fans.webp', start: 0.6, end: 0.72, from: [-44, 28, -7, 1.08] },
-  { key: 'cables', file: 'cables.webp', start: 0.7, end: 0.82, from: [38, 36, 8, 0.95] },
-  { key: 'glass', file: 'glass.webp', start: 0.8, end: 0.9, from: [-48, 2, -8, 1.04] }
+  {
+    key: 'motherboard', file: 'motherboard.webp', start: 0.07, end: 0.19,
+    stage: 'rig-v5/stage-board.webp', dock: [0.576, 0.428, 195, 248], from: [820, -190, 9, 0.82]
+  },
+  {
+    key: 'cpu', file: 'cpu.webp', start: 0.19, end: 0.29,
+    stage: 'rig-v5/stage-cpu.webp', dock: [0.439, 0.559, 263, 183], from: [-760, -280, -18, 1.18]
+  },
+  {
+    key: 'ram', file: 'ram.webp', start: 0.29, end: 0.4,
+    stage: 'rig-v5/stage-ram.webp', dock: [0.351, 0.475, 379, 261], from: [720, -210, 11, 1.08]
+  },
+  {
+    key: 'cooler', file: 'cooler.webp', start: 0.4, end: 0.54,
+    stage: 'rig-v5/stage-cooler.webp', dock: [0.744, 0.526, 7, 209], from: [-820, 80, -9, 0.9]
+  },
+  {
+    key: 'gpu', file: 'gpu.webp', start: 0.54, end: 0.67,
+    stage: 'rig-v5/stage-gpu.webp', dock: [0.647, 0.591, 107, 416], from: [850, 170, 7, 0.88]
+  },
+  {
+    key: 'cables', file: 'cables.webp', start: 0.67, end: 0.8,
+    stage: 'rig-v5/stage-cables.webp', dock: [0.652, 0.643, 278, 234], from: [660, 430, 8, 0.94]
+  },
+  {
+    key: 'glass', file: 'glass.webp', start: 0.8, end: 0.93,
+    stage: 'pc-v3/pc-final.webp', dock: [0.965, 0.794, -83, 96], from: [-980, 10, -7, 1.04]
+  }
 ];
 
 const stages = [
-  ['КОРПУС', 'каркас системы'],
-  ['ПЛАТА', 'всё начинается здесь'],
-  ['ПРОЦЕССОР', 'Intel Core i5-14400F'],
-  ['ПАМЯТЬ', '16 ГБ DDR5'],
-  ['ОХЛАЖДЕНИЕ', 'частоты под контролем'],
-  ['ГРАФИКА', 'GeForce RTX 4060 Ti'],
-  ['ВОЗДУХ', 'ровный поток'],
-  ['КАБЕЛИ', 'питание подано'],
-  ['СТЕКЛО', 'система закрыта'],
-  ['READY', 'до 400 Гц в SIGMA']
+  { at: 0, title: 'КОРПУС', detail: 'неподвижная база' },
+  { at: 0.07, title: 'МАТЕРИНСКАЯ ПЛАТА', detail: 'садится на стойки' },
+  { at: 0.19, title: 'ПРОЦЕССОР', detail: 'фиксируется в сокете' },
+  { at: 0.29, title: 'ПАМЯТЬ', detail: 'защёлкивается в слотах' },
+  { at: 0.4, title: 'ОХЛАЖДЕНИЕ', detail: 'помпа и радиатор на месте' },
+  { at: 0.54, title: 'ВИДЕОКАРТА', detail: 'входит в PCIe' },
+  { at: 0.67, title: 'ПИТАНИЕ', detail: 'кабели уложены' },
+  { at: 0.8, title: 'СТЕКЛО', detail: 'контур закрыт' },
+  { at: 0.95, title: 'ГОТОВ', detail: 'можно выбирать место' }
 ];
+
+const dockTransform = ([scaleX, scaleY, x, y]) =>
+  `matrix(${scaleX} 0 0 ${scaleY} ${x} ${y})`;
 
 export default function HardwareHero() {
   const sectionRef = useRef(null);
   const copyRef = useRef(null);
-  const rigRef = useRef(null);
-  const finalRef = useRef(null);
   const finishRef = useRef(null);
   const railRef = useRef(null);
-  const partRefs = useRef({});
+  const flightRefs = useRef({});
+  const stageRefs = useRef({});
   const lastStage = useRef(-1);
   const [stage, setStage] = useState(0);
   const [nearViewport, setNearViewport] = useState(true);
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
-  const desktopPointer = useMediaQuery('(min-width: 1024px) and (hover: hover) and (pointer: fine)');
+  const compact = useMediaQuery('(max-width: 767px), (hover: none), (pointer: coarse)');
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -70,40 +92,50 @@ export default function HardwareHero() {
       const rect = section.getBoundingClientRect();
       const travel = Math.max(1, section.offsetHeight - window.innerHeight);
       const progress = reducedMotion ? 1 : clamp(-rect.top / travel);
-      const finalBlend = easeOut(clamp((progress - 0.84) / 0.13));
-      const compact = window.innerWidth < 720;
 
       parts.forEach(part => {
-        const element = partRefs.current[part.key];
-        if (!element) return;
+        const flight = flightRefs.current[part.key];
+        const stageFrame = stageRefs.current[part.key];
         const local = easeOut(clamp((progress - part.start) / (part.end - part.start)));
+        const lockBlend = easeOut(clamp((local - 0.8) / 0.2));
         const [x, y, rotate, scale] = part.from;
-        const distance = compact ? 0.74 : 1;
-        element.style.transform = `translate3d(${x * (1 - local) * distance}vw, ${y * (1 - local) * distance}vh, 0) rotate(${rotate * (1 - local)}deg) scale(${scale + (1 - scale) * local})`;
-        element.style.opacity = `${local * (1 - finalBlend)}`;
+        const approach = 1 - local;
+
+        if (flight) {
+          const transform = local >= 0.999
+            ? ''
+            : `translate(${x * approach} ${y * approach}) translate(${VIEWBOX.centerX} ${VIEWBOX.centerY}) rotate(${rotate * approach}) scale(${scale + (1 - scale) * local}) translate(${-VIEWBOX.centerX} ${-VIEWBOX.centerY})`;
+          if (transform) flight.setAttribute('transform', transform);
+          else flight.removeAttribute('transform');
+          flight.style.opacity = `${local * (1 - lockBlend)}`;
+        }
+
+        if (stageFrame) stageFrame.style.opacity = `${lockBlend}`;
       });
 
-      if (finalRef.current) {
-        finalRef.current.style.opacity = `${finalBlend}`;
-        finalRef.current.style.transform = `scale(${1.035 - finalBlend * 0.035})`;
-      }
       if (copyRef.current) {
-        const copyExit = easeOut(clamp((progress - 0.18) / 0.22));
-        copyRef.current.style.opacity = `${1 - copyExit * 0.88}`;
-        copyRef.current.style.transform = `translate3d(0, ${-copyExit * 38}px, 0)`;
+        const copyExit = easeOut(clamp((progress - 0.06) / 0.18));
+        copyRef.current.style.opacity = `${1 - copyExit}`;
+        copyRef.current.style.transform = `translate3d(0, ${-copyExit * 30}px, 0)`;
+        copyRef.current.style.pointerEvents = copyExit > 0.75 ? 'none' : 'auto';
       }
-      if (rigRef.current) {
-        rigRef.current.style.transform = `translate3d(0, ${Math.sin(progress * Math.PI) * -10}px, 0) scale(${0.96 + progress * 0.04})`;
-      }
-      if (railRef.current) railRef.current.style.transform = `scaleX(${Math.max(0.015, progress)})`;
+
+      if (railRef.current) railRef.current.style.transform = `scaleX(${Math.max(0.012, progress)})`;
+
       if (finishRef.current) {
-        const ready = easeOut(clamp((progress - 0.9) / 0.08));
+        const ready = easeOut(clamp((progress - 0.94) / 0.055));
         finishRef.current.style.opacity = `${ready}`;
-        finishRef.current.style.transform = `translate3d(0, ${(1 - ready) * 20}px, 0)`;
+        finishRef.current.style.transform = `translate3d(0, ${(1 - ready) * 18}px, 0)`;
         finishRef.current.style.pointerEvents = ready > 0.92 ? 'auto' : 'none';
       }
 
-      const nextStage = Math.min(stages.length - 1, Math.floor(progress * stages.length));
+      let nextStage = 0;
+      for (let index = stages.length - 1; index >= 0; index -= 1) {
+        if (progress >= stages[index].at) {
+          nextStage = index;
+          break;
+        }
+      }
       if (nextStage !== lastStage.current) {
         lastStage.current = nextStage;
         setStage(nextStage);
@@ -124,83 +156,92 @@ export default function HardwareHero() {
     };
   }, [reducedMotion]);
 
-  const setPartRef = key => element => {
-    partRefs.current[key] = element;
-  };
-
   return (
     <section ref={sectionRef} className="hardware-hero" aria-labelledby="hero-title">
       <div className="hero-sticky">
-        <div className="hero-photo" aria-hidden="true" />
+        <div className="hero-photo" style={{ backgroundImage: `url(${asset('gallery-night.webp')})` }} aria-hidden="true" />
         <div className="hero-ether" aria-hidden="true">
-          {desktopPointer && nearViewport && !reducedMotion && (
+          {nearViewport && !reducedMotion && (
             <Suspense fallback={null}>
               <LiquidEther
-                colors={['#FFD400', '#6D5D00', '#12120F']}
-                mouseForce={11}
-                cursorSize={68}
-                resolution={0.22}
-                BFECC={false}
-                isViscous={false}
-                iterationsPoisson={10}
+                colors={ETHER_COLORS}
+                mouseForce={compact ? 26 : 15}
+                cursorSize={compact ? 108 : 128}
+                resolution={compact ? 0.14 : 0.24}
+                maxDpr={compact ? 1 : 1.5}
+                maxFps={compact ? 30 : 60}
+                BFECC={!compact}
+                isViscous
+                viscous={compact ? 18 : 24}
+                iterationsViscous={compact ? 4 : 8}
+                iterationsPoisson={compact ? 5 : 10}
                 autoDemo
-                autoSpeed={0.18}
-                autoIntensity={0.86}
-                takeoverDuration={0.18}
-                autoResumeDelay={2600}
+                autoSpeed={compact ? 0.3 : 0.2}
+                autoIntensity={compact ? 2.6 : 1.45}
+                takeoverDuration={0.22}
+                autoResumeDelay={compact ? 260 : 1200}
               />
             </Suspense>
           )}
         </div>
 
         <div ref={copyRef} className="hero-copy">
-          <h1 id="hero-title">ИГРАЙ<br />НА СВОЕЙ<br /><span>ЧАСТОТЕ</span></h1>
-          <p className="hero-location">Ростов-на-Дону · 24/7</p>
-          <p className="hero-lead">36 игровых ПК, четыре режима и до 400 Гц рядом с ТРЦ «Горизонт».</p>
+          <h1 id="hero-title">META<span>4</span>PRO</h1>
+          <p className="hero-location">Компьютерный клуб в Ростове-на-Дону · 24/7</p>
+          <p className="hero-lead">36 игровых ПК, четыре зоны и мониторы до 400 Гц рядом с ТРЦ «Горизонт».</p>
           <div className="hero-actions">
             <a className="button button-signal" href="#zones">Выбрать зону <ArrowUpRight aria-hidden="true" /></a>
-            <a className="text-link" href="#club">Увидеть клуб <ArrowDown aria-hidden="true" /></a>
+            <a className="text-link" href="#club">Посмотреть клуб <ArrowDown aria-hidden="true" /></a>
           </div>
         </div>
 
-        <div ref={rigRef} className="rig-stage" role="img" aria-label="Игровой компьютер собирается из отдельных деталей">
+        <div className="rig-stage" role="img" aria-label="Игровой компьютер: корпус остаётся неподвижным, а комплектующие по очереди встают на свои места">
           <div className="rig-halo" aria-hidden="true" />
-          {parts.map((part, index) => (
-            <img
-              key={part.key}
-              ref={setPartRef(part.key)}
-              className={`rig-part rig-part-${part.key}`}
-              src={asset(`rig-v4-fixed/${part.file}`)}
-              alt=""
-              aria-hidden="true"
-              draggable="false"
-              loading={index < 3 ? 'eager' : 'lazy'}
-              decoding="async"
+          <svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`} aria-hidden="true" focusable="false">
+            <image
+              className="rig-case"
+              href={asset('rig-v5/case-empty-exact.webp')}
+              width={VIEWBOX.width}
+              height={VIEWBOX.height}
+              preserveAspectRatio="none"
             />
-          ))}
-          <img
-            ref={finalRef}
-            className="rig-final"
-            src={asset('pc-v3/pc-final.webp')}
-            alt=""
-            aria-hidden="true"
-            draggable="false"
-            loading="eager"
-            fetchPriority="high"
-          />
+
+            {parts.map(part => (
+              <g key={part.key}>
+                <g ref={element => { flightRefs.current[part.key] = element; }} className="rig-flight">
+                  <g transform={dockTransform(part.dock)}>
+                    <image
+                      href={asset(`rig-v4-fixed/${part.file}`)}
+                      width={VIEWBOX.width}
+                      height={VIEWBOX.height}
+                      preserveAspectRatio="none"
+                    />
+                  </g>
+                </g>
+                <image
+                  ref={element => { stageRefs.current[part.key] = element; }}
+                  className="rig-stage-frame"
+                  href={asset(part.stage)}
+                  width={VIEWBOX.width}
+                  height={VIEWBOX.height}
+                  preserveAspectRatio="none"
+                />
+              </g>
+            ))}
+          </svg>
         </div>
 
-        <div className="hero-status" aria-live="polite">
-          <span>{String(stage + 1).padStart(2, '0')} / {stages.length}</span>
-          <strong>{stages[stage][0]}</strong>
-          <small>{stages[stage][1]}</small>
+        <div className="hero-status">
+          <span>{String(stage + 1).padStart(2, '0')} / {String(stages.length).padStart(2, '0')}</span>
+          <strong>{stages[stage].title}</strong>
+          <small>{stages[stage].detail}</small>
         </div>
 
         <div className="hero-progress" aria-hidden="true"><i ref={railRef} /></div>
 
         <div ref={finishRef} className="hero-finish">
-          <ElectricBorder color="#FFD400" speed={0.7} chaos={0.055} borderRadius={12}>
-            <a className="finish-link" href="#zones">Система готова — выбрать место <ArrowUpRight aria-hidden="true" /></a>
+          <ElectricBorder color="#FFD400" speed={0.68} chaos={0.045} borderRadius={999}>
+            <a className="finish-link" href="#zones">Компьютер собран — выбрать зону <ArrowUpRight aria-hidden="true" /></a>
           </ElectricBorder>
         </div>
       </div>

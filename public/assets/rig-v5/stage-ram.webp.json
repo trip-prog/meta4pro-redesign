@@ -1,0 +1,12 @@
+{
+  "prompt": "Use case: precise-object-edit\nAsset type: intermediate frame for a photorealistic scroll-driven PC assembly sequence on a website\nInput images: Image 1 is the sole edit target and absolute visual anchor.\nPrimary request: Create the earlier assembly stage of this exact gaming PC. Keep the exact same black chassis, exact camera position and three-quarter perspective, framing, scale, canvas proportions, black studio background, floor contact, shadow, yellow accent light, materials, and overall photographic treatment pixel-close to Image 1. Inside the chassis, keep only the motherboard installed, the CPU seated in its socket, and exactly two vertical RAM sticks installed in their correct slots. The motherboard must remain correctly mounted in the exact same physical plane and position as in Image 1.\nRequired removals: remove the CPU pump/block, all liquid-cooling tubes, radiator, both rear cooling fans, graphics card, all visible power cables and cable bundles, and the glass side panel. The open side of the case must be physically clean and plausible, with empty PCIe area and empty fan mounts where removed parts were.\nStyle/medium: premium photorealistic studio product photography, real PC hardware, physically accurate geometry and mounting points.\nComposition/framing: preserve the exact 1122 x 1402 portrait composition and object registration of Image 1; do not crop, zoom, rotate, shift, or redesign the chassis.\nLighting/mood: preserve the original restrained black-and-yellow lighting and reflections, but no impossible glow from removed components.\nConstraints: change only the installed-component state described above; preserve every exterior case edge, foot, front panel, vent, floor shadow and background. No glass panel. No GPU. No cooling hardware. No visible loose cables. No text, labels, logos, watermark, extra parts, floating parts, or exploded-view layout. This must look like a real photograph of the same PC halfway through assembly, not a concept render.",
+  "createdAt": "2026-08-23T21:14:09.0202456+03:00",
+  "tool": "OpenAI Codex built-in imagegen",
+  "mode": "edit",
+  "editTarget": "public/assets/pc-v3/pc-final.webp",
+  "generatedSource": "C:/Users/Zov2025/.codex/generated_images/01a02fd1-af7f-7463-91e4-d7eb426d7658/exec-d7aeee99-cb42-48ba-95fa-ca1f686d958f.png",
+  "sourcePng": "source-assets/rig-v5/stage-ram.png",
+  "outputWebp": "public/assets/rig-v5/stage-ram.webp",
+  "dimensions": "1122x1402",
+  "conversion": "ffmpeg 8.1.2 libwebp; quality 92; compression_level 6; preset picture; yuv420p"
+}

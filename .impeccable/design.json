@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-23T19:30:48+03:00",
+  "generatedAt": "2026-08-23T22:30:00+03:00",
   "title": "Design System: META4PRO",
   "extensions": {
     "colorMeta": {
@@ -25,32 +25,37 @@
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Match Display",
-        "purpose": "Hero thesis only."
+        "displayName": "Brand Wordmark",
+        "purpose": "Unbounded only for the site logo and hero META4PRO wordmark."
       },
       "headline": {
         "displayName": "Section Headline",
-        "purpose": "Large section statements."
+        "purpose": "Onest for every section heading."
       },
       "body": {
         "displayName": "Fast Body",
-        "purpose": "Prices, specifications, descriptions and actions."
+        "purpose": "Onest for descriptions, prices, specifications and actions."
       },
       "label": {
         "displayName": "Technical Label",
-        "purpose": "Statuses, frequency and compact metadata."
+        "purpose": "Onest for statuses, frequency and compact metadata."
       }
     },
     "shadows": [
       {
         "name": "rig-depth",
-        "value": "0 36px 48px rgba(0,0,0,0.72)",
-        "purpose": "Only for the final PC product layer."
+        "value": "0 32px 48px rgba(0,0,0,0.7)",
+        "purpose": "Physical depth on registered PC stage frames."
+      },
+      {
+        "name": "photo-stack",
+        "value": "0 26px 56px rgba(0,0,0,0.42)",
+        "purpose": "Separates overlapping mobile sticky photographs."
       },
       {
         "name": "mobile-sticky",
         "value": "0 18px 42px rgba(0,0,0,0.4)",
-        "purpose": "Separates the fixed mobile booking action from page content."
+        "purpose": "Separates the floating mobile booking action from content."
       }
     ],
     "motion": [
@@ -63,13 +68,18 @@
         "name": "photo-in",
         "value": "360ms ease-out",
         "purpose": "Selected zone photo replacement."
+      },
+      {
+        "name": "sticky-exit",
+        "value": "320ms cubic-bezier(0.16,1,0.3,1)",
+        "purpose": "Floating booking bar exit when booking actions enter view."
       }
     ],
     "breakpoints": [
       { "name": "narrow", "value": "370px" },
+      { "name": "compact-hero", "value": "767px" },
       { "name": "desktop-layout", "value": "820px" },
-      { "name": "circular-gallery", "value": "1000px" },
-      { "name": "desktop-effects", "value": "1024px" }
+      { "name": "circular-gallery", "value": "1000px" }
     ]
   },
   "components": [
@@ -79,73 +89,85 @@
       "refersTo": "button-primary",
       "description": "Primary action on dark surfaces.",
       "html": "<button class=\"ds-btn-signal\">ВЫБРАТЬ ЗОНУ <span aria-hidden=\"true\">↗</span></button>",
-      "css": ".ds-btn-signal{min-height:52px;padding:0 17px;display:inline-flex;align-items:center;justify-content:space-between;gap:12px;border:0;border-radius:12px;background:var(--signal,#ffd400);color:var(--ink,#070706);font:740 13px 'Onest Variable',sans-serif;cursor:pointer;transition:background 160ms ease-out}.ds-btn-signal:hover{background:#ffe153}.ds-btn-signal:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}"
+      "css": ".ds-btn-signal{min-height:52px;padding:0 17px;display:inline-flex;align-items:center;justify-content:space-between;gap:12px;border:0;border-radius:12px;background:var(--signal,#ffd400);color:var(--ink,#070706);font:700 13px 'Onest Variable',sans-serif;cursor:pointer;transition:background 160ms ease-out}.ds-btn-signal:hover{background:#ffe153}.ds-btn-signal:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}.ds-btn-signal:active{transform:translateY(1px)}"
     },
     {
       "name": "Ink Button",
       "kind": "button",
       "refersTo": "button-ink",
       "description": "Primary action on paper surfaces.",
-      "html": "<button class=\"ds-btn-ink\">ВЫБРАТЬ GENERAL <span aria-hidden=\"true\">↗</span></button>",
-      "css": ".ds-btn-ink{min-height:52px;padding:0 17px;display:inline-flex;align-items:center;justify-content:space-between;gap:12px;border:0;border-radius:12px;background:var(--ink,#070706);color:var(--paper,#f3f1e8);font:740 13px 'Onest Variable',sans-serif;cursor:pointer;transition:background 160ms ease-out}.ds-btn-ink:hover{background:#262620}.ds-btn-ink:focus-visible{outline:3px solid var(--signal-deep,#9f8300);outline-offset:4px}"
+      "html": "<button class=\"ds-btn-ink\">ЗАБРОНИРОВАТЬ GENERAL <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-btn-ink{min-height:52px;padding:0 17px;display:inline-flex;align-items:center;justify-content:space-between;gap:12px;border:0;border-radius:12px;background:var(--ink,#070706);color:var(--paper,#f3f1e8);font:700 13px 'Onest Variable',sans-serif;cursor:pointer;transition:background 160ms ease-out}.ds-btn-ink:hover{background:#262620}.ds-btn-ink:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}.ds-btn-ink:active{transform:translateY(1px)}"
     },
     {
       "name": "Zone Tab",
       "kind": "chip",
       "refersTo": "zone-active",
-      "description": "Tactical selected state for choosing a club zone.",
-      "html": "<button class=\"ds-zone\" aria-selected=\"true\"><strong>GENERAL</strong><small>240 Гц</small><span>от <b>85</b> ₽/ч</span></button>",
-      "css": ".ds-zone{width:180px;min-height:104px;padding:14px;display:grid;align-content:space-between;gap:10px;border:1px solid var(--ink,#070706);border-radius:12px;background:var(--ink,#070706);color:var(--paper,#f3f1e8);font-family:'Onest Variable',sans-serif;text-align:left;cursor:pointer}.ds-zone strong{font-family:'Unbounded Variable',sans-serif;font-size:16px}.ds-zone small{color:#a8a79f}.ds-zone b{color:var(--signal,#ffd400);font-size:19px}.ds-zone:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}"
+      "description": "Mobile-first selected state for choosing a club zone.",
+      "html": "<button class=\"ds-zone\" aria-selected=\"true\"><span><strong>GENERAL</strong><small>Общий зал</small></span><span>240 Гц</span><span>от <b>85</b> ₽/ч</span></button>",
+      "css": ".ds-zone{width:180px;min-height:104px;padding:14px;display:grid;align-content:space-between;gap:10px;border:1px solid var(--ink,#070706);border-radius:12px;background:var(--ink,#070706);color:var(--paper,#f3f1e8);font-family:'Onest Variable',sans-serif;text-align:left;cursor:pointer}.ds-zone strong{display:block;font-size:16px}.ds-zone small{display:block;margin-top:4px;color:#a8a79f;font-size:11px}.ds-zone b{color:var(--signal,#ffd400);font-size:19px}.ds-zone:hover{border-color:var(--signal,#ffd400)}.ds-zone:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}"
     },
     {
       "name": "Mobile Booking Bar",
       "kind": "custom",
-      "refersTo": "button-primary",
+      "refersTo": "mobile-booking",
       "description": "Persistent mobile conversion surface above the safe area.",
-      "html": "<a class=\"ds-mobile-book\" href=\"#\"><span><small>GENERAL</small>от 85 ₽/ч</span><b>Забронировать ↗</b></a>",
-      "css": ".ds-mobile-book{min-height:58px;padding:0 15px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-radius:12px;background:var(--signal,#ffd400);color:var(--ink,#070706);box-shadow:0 18px 42px rgba(0,0,0,.4);font-family:'Onest Variable',sans-serif;text-decoration:none}.ds-mobile-book span{font-size:13px;font-weight:720}.ds-mobile-book small{display:block;margin-bottom:2px;font-size:8px;letter-spacing:.07em}.ds-mobile-book b{font-size:10px}.ds-mobile-book:focus-visible{outline:3px solid var(--paper,#f3f1e8);outline-offset:4px}"
+      "html": "<a class=\"ds-mobile-book\" href=\"#\"><span><small>GENERAL</small>от 85 ₽/ч</span><b>К брони ↗</b></a>",
+      "css": ".ds-mobile-book{min-height:58px;padding:0 15px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-radius:16px;background:var(--signal,#ffd400);color:var(--ink,#070706);box-shadow:0 18px 42px rgba(0,0,0,.4);font-family:'Onest Variable',sans-serif;text-decoration:none}.ds-mobile-book span{font-size:13px;font-weight:720}.ds-mobile-book small{display:block;margin-bottom:2px;font-size:10px;letter-spacing:.07em}.ds-mobile-book b{font-size:11px}.ds-mobile-book:hover{background:#ffe153}.ds-mobile-book:focus-visible{outline:3px solid var(--paper,#f3f1e8);outline-offset:4px}.ds-mobile-book:active{transform:translateY(1px)}"
     },
     {
-      "name": "Club Photo Frame",
+      "name": "Electric Final Pill",
+      "kind": "custom",
+      "refersTo": "final-cta",
+      "description": "The only pill action, revealed after the registered PC assembly completes.",
+      "html": "<div class=\"ds-electric\"><a class=\"ds-final-pill\" href=\"#\">Компьютер собран — выбрать зону <span aria-hidden=\"true\">↗</span></a></div>",
+      "css": ".ds-electric{padding:2px;border-radius:999px;background:linear-gradient(110deg,#806a00,#ffd400,#fff6cc,#ffd400);box-shadow:0 0 20px rgba(255,212,0,.24)}.ds-final-pill{min-height:58px;padding:0 17px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-radius:999px;background:var(--ink,#070706);color:var(--paper,#f3f1e8);font:700 12px 'Onest Variable',sans-serif;text-decoration:none}.ds-final-pill span{color:var(--signal,#ffd400)}.ds-final-pill:hover{background:#121210}.ds-final-pill:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}.ds-final-pill:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Sticky Club Photo",
       "kind": "card",
       "refersTo": "photo-frame",
-      "description": "Real club photography with one technical caption.",
-      "html": "<figure class=\"ds-photo\"><div role=\"img\" aria-label=\"Фото клуба\"></div><figcaption>НОЧНАЯ СМЕНА</figcaption></figure>",
-      "css": ".ds-photo{position:relative;width:300px;height:420px;margin:0;overflow:hidden;border-radius:14px;background:linear-gradient(145deg,#121210,#2a2a24);font-family:'Unbounded Variable',sans-serif}.ds-photo:after{content:'';position:absolute;inset:40% 0 0;background:linear-gradient(180deg,transparent,rgba(7,7,6,.88))}.ds-photo figcaption{position:absolute;z-index:1;left:18px;right:18px;bottom:18px;color:var(--signal,#ffd400);font-size:14px;font-weight:620;letter-spacing:-.03em}"
+      "description": "Square-cornered real club photograph from the vertical mobile stack.",
+      "html": "<figure class=\"ds-photo\"><div role=\"img\" aria-label=\"Фото клуба\"></div><figcaption><span>01 / 05</span><strong>НОЧНАЯ СМЕНА</strong></figcaption></figure>",
+      "css": ".ds-photo{position:relative;width:300px;height:420px;margin:0;overflow:hidden;border:1px solid rgba(243,241,232,.2);border-radius:0;background:linear-gradient(145deg,#121210,#2a2a24);box-shadow:0 26px 56px rgba(0,0,0,.42);font-family:'Onest Variable',sans-serif}.ds-photo:after{content:'';position:absolute;inset:36% 0 0;background:linear-gradient(180deg,transparent,rgba(7,7,6,.88))}.ds-photo figcaption{position:absolute;z-index:1;left:20px;right:20px;bottom:20px;display:flex;align-items:end;justify-content:space-between;gap:18px;color:var(--paper,#f3f1e8)}.ds-photo span{color:var(--signal,#ffd400);font-size:10px}.ds-photo strong{font-size:22px;text-align:right}.ds-photo:focus-within{outline:3px solid var(--signal,#ffd400);outline-offset:4px}"
     },
     {
-      "name": "Match Status",
+      "name": "Booking Contact Panel",
       "kind": "custom",
-      "description": "Compact factual status placed after a headline.",
-      "html": "<p class=\"ds-status\">РОСТОВ-НА-ДОНУ · 24/7</p>",
-      "css": ".ds-status{width:max-content;margin:0;border-left:3px solid var(--signal,#ffd400);padding-left:10px;color:var(--signal,#ffd400);font:760 10px/1.2 'Onest Variable',sans-serif;letter-spacing:.08em;text-transform:uppercase}"
+      "description": "Selected-zone summary with a prefilled Telegram draft and direct phone fallback.",
+      "html": "<section class=\"ds-booking\"><p><span>Выбрано</span><strong>GENERAL</strong></p><p><span>Стоимость</span><strong>от 85 ₽/ч</strong></p><a class=\"ds-booking-primary\" href=\"#\">Написать в Telegram ↗</a><a href=\"tel:+79185550090\">Позвонить ↗</a></section>",
+      "css": ".ds-booking{width:320px;padding:22px;background:var(--ink,#070706);color:var(--paper,#f3f1e8);font-family:'Onest Variable',sans-serif}.ds-booking p{min-height:64px;margin:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(243,241,232,.18)}.ds-booking span{color:#9f9e96;font-size:11px}.ds-booking strong{color:var(--signal,#ffd400)}.ds-booking a{min-height:54px;margin-top:8px;padding:0 15px;display:flex;align-items:center;justify-content:space-between;border:1px solid #3d3d38;border-radius:12px;color:inherit;text-decoration:none}.ds-booking .ds-booking-primary{margin-top:20px;border-color:var(--signal,#ffd400);background:var(--signal,#ffd400);color:var(--ink,#070706)}.ds-booking a:hover{border-color:var(--paper,#f3f1e8)}.ds-booking a:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}.ds-booking a:active{transform:translateY(1px)}"
     }
   ],
   "narrative": {
     "northStar": "Live Match Lobby",
-    "overview": "META4PRO выглядит как момент перед стартом матча: глубокая тёмная арена, точный жёлтый сигнал, крупная типографика и реальное железо. Главный выразительный приём — одна аппаратная сцена, где компьютер собирается при прокрутке; остальные поверхности помогают сравнить зоны и перейти к бронированию.",
+    "overview": "META4PRO выглядит как момент перед стартом матча: глубокая тёмная арена, точный жёлтый сигнал, крупная типографика и реальное железо. Система энергичная, но не типично «геймерская»: реальные фотографии и характеристики важнее декоративного шума.\n\nГлавный выразительный приём — mobile-first hero со сборкой компьютера и отзывчивым к касанию Liquid Ether. Остальные поверхности спокойнее: они помогают сравнить четыре зоны, увидеть клуб и перейти к честному контакту с администратором.",
     "keyCharacteristics": [
       "Мобильная версия является основной, desktop расширяет тот же мир.",
       "Чёрный создаёт атмосферу, тёплая бумага даёт контрастный информационный ритм.",
       "Жёлтый обозначает действие, выбранное состояние или важный статус.",
-      "Реальные фотографии клуба и узнаваемые детали ПК — обязательная основа доверия."
+      "Реальные фотографии клуба и зарегистрированные стадии сборки ПК — основа доверия."
     ],
     "rules": [
       { "name": "The One Signal Rule", "body": "На одном экране жёлтый должен оставаться редким сигналом, а не фоновым украшением.", "section": "colors" },
-      { "name": "The Headline Carries It Rule", "body": "Не ставить kicker или eyebrow над заголовком; статус располагается после тезиса либо в отдельном функциональном рельсе.", "section": "typography" },
-      { "name": "The Flat-by-Default Rule", "body": "Тень появляется только там, где объясняет реальное наложение или фиксированное состояние.", "section": "elevation" }
+      { "name": "The Brand-Only Display Rule", "body": "Не использовать Unbounded в заголовках секций, карточках, подписях или элементах управления.", "section": "typography" },
+      { "name": "The Headline Carries It Rule", "body": "Не ставить kicker или eyebrow над заголовком; статус располагается после тезиса либо в функциональном рельсе.", "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "Тень появляется только там, где объясняет реальное наложение или фиксированное состояние.", "section": "elevation" },
+      { "name": "The One Pill Rule", "body": "Полная pill-форма принадлежит финальному Electric Border CTA и не размножается по странице.", "section": "shapes" }
     ],
     "dos": [
       "Do использовать реальные фото клуба и реальные характеристики.",
-      "Do проверять каждый новый экран на ширинах 360–430px.",
-      "Do оставлять один главный электрический акцент в пределах viewport.",
-      "Do давать WebGL только способным desktop-устройствам и сохранять полноценный CSS fallback."
+      "Do проверять новые изменения минимум на ширинах 360px, 390px, 430px и на desktop.",
+      "Do оставлять один главный жёлтый сигнал в пределах viewport.",
+      "Do сохранять touch-реакцию Liquid Ether и полноценный reduced-motion fallback.",
+      "Do вести бронирование через Telegram-черновик и прямой телефон, пока нет backend."
     ],
     "donts": [
       "Don't строить страницу из одинаковых карточек «иконка + заголовок + текст».",
       "Don't использовать фиолетово-синий неон, голограммы, glassmorphism или игровых персонажей.",
-      "Don't ставить kicker/eyebrow над заголовком.",
-      "Don't имитировать форму бронирования без рабочего backend."
+      "Don't использовать Unbounded вне логотипа и hero wordmark.",
+      "Don't заменять вертикальную mobile photo stack горизонтальной лентой.",
+      "Don't имитировать форму или подтверждение бронирования без рабочего backend."
     ]
   }
 }

@@ -24,10 +24,7 @@ function autoBind(instance) {
   });
 }
 
-const DEFAULT_FONT = 'bold 30px Figtree';
-// Figtree is not guaranteed to be available on the host page, so the component
-// loads it on demand whenever the default font is used.
-const DEFAULT_FONT_URL = 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap';
+const DEFAULT_FONT = '600 22px "Onest Variable"';
 
 function deriveFontFamilyFromUrl(url) {
   const fileName = (url.split('/').pop() || 'custom-font').split('?')[0];
@@ -83,9 +80,7 @@ async function loadCustomFont(fontUrl) {
 // file) and returns a canvas-ready font string that keeps the size/weight from
 // `font` but swaps in the freshly loaded family. Falls back to `font` on error.
 async function resolveFont(font, fontUrl) {
-  // Use the bundled Figtree stylesheet when the caller relies on the default
-  // font, otherwise honor the explicit `fontUrl`.
-  const effectiveUrl = fontUrl || (font === DEFAULT_FONT ? DEFAULT_FONT_URL : null);
+  const effectiveUrl = fontUrl || null;
   if (!effectiveUrl) {
     // A custom family was supplied without a URL – make sure it is ready (in
     // case the host page declares it) before we draw it to the canvas,
@@ -124,7 +119,7 @@ function getFontSize(font) {
   return match ? parseInt(match[1], 10) : 30;
 }
 
-function createTextTexture(gl, text, font = 'bold 30px monospace', color = 'black') {
+function createTextTexture(gl, text, font = DEFAULT_FONT, color = 'black') {
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
   context.font = font;
@@ -145,7 +140,7 @@ function createTextTexture(gl, text, font = 'bold 30px monospace', color = 'blac
 }
 
 class Title {
-  constructor({ gl, plane, renderer, text, textColor = '#545050', font = '30px sans-serif' }) {
+  constructor({ gl, plane, renderer, text, textColor = '#545050', font = DEFAULT_FONT }) {
     autoBind(this);
     this.gl = gl;
     this.plane = plane;
@@ -389,7 +384,7 @@ class App {
       bend,
       textColor = '#ffffff',
       borderRadius = 0,
-      font = 'bold 30px Figtree',
+      font = DEFAULT_FONT,
       scrollSpeed = 2,
       scrollEase = 0.05
     } = {}
@@ -601,7 +596,7 @@ export default function CircularGallery({
   bend = 3,
   textColor = '#ffffff',
   borderRadius = 0.05,
-  font = 'bold 30px Figtree',
+  font = DEFAULT_FONT,
   fontUrl,
   scrollSpeed = 2,
   scrollEase = 0.05
@@ -635,7 +630,7 @@ export default function CircularGallery({
       ref={containerRef}
       tabIndex={0}
       role="region"
-      aria-label="Circular image gallery. Use left and right arrow keys to navigate."
+      aria-label="Галерея клуба. Используйте клавиши со стрелками влево и вправо."
     />
   );
 }
