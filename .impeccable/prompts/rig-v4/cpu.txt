@@ -1,0 +1,10 @@
+Use case: product-mockup
+Asset type: transparent compositing layer for a scroll-built gaming PC on a website
+Input images: Image 1 is the exact assembled-PC reference and defines the canvas, camera, perspective, crop, lighting, object scale and final registration; Image 2 is the old CPU product shot and defines the component.
+Primary request: create ONLY one realistic desktop CPU package, positioned in the exact CPU-socket location of the motherboard inside Image 1, at physically correct installed scale and matching the same perspective. The CPU may show its silver heat spreader and thin green substrate, but nothing else around it.
+Scene/backdrop: perfectly flat solid chroma magenta #FF00FF filling every background pixel.
+Style/medium: premium photorealistic macro product rendering composited into the wide PC canvas; brushed silver metal and green substrate.
+Composition/framing: portrait 4:5; use the same fixed canvas as Image 1; the CPU is deliberately small and located at the socket coordinates rather than centered or enlarged.
+Lighting/mood: match Image 1's studio key light and warm yellow rim; no floor shadow.
+Constraints: exactly one CPU only; no motherboard, no socket frame, no case, no cooler, no RAM, no text, no brand mark, no watermark; background must be uniform #FF00FF with no gradient, texture or vignette; edges clean and separable.
+Avoid: giant centered CPU, black background, transparent checkerboard, floating perspective inconsistent with Image 1.

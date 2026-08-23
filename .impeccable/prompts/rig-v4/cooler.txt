@@ -1,0 +1,9 @@
+Use case: compositing
+Asset type: isolated raster layer for a scroll-driven PC assembly on a website
+Input images: Image 1 is the assembled PC reference and fixes camera angle, coordinate system, scale, materials and warm-yellow lighting. Image 2 is the product-shape reference for this component.
+Primary request: Generate one complete black 240mm AIO CPU cooler assembly: a compact square pump block with a thin warm-yellow outline, two braided hoses, and two black radiator fans with subtle warm-yellow rings as the only visible object. It must visually match Image 1 and be ready to overlay at 100% canvas size.
+Scene/backdrop: perfectly uniform flat chroma-key magenta #FF00FF from edge to edge.
+Composition/framing: portrait 4:5 canvas. Arrange it exactly as it appears when installed in the reference PC: two radiator fans stacked vertically along the upper-left interior, pump block at x=41%, y=38%, hoses curved naturally between them. The assembly occupies the upper-left/middle region but remains one isolated complete component.
+Style/medium: true photorealistic premium product photography, physically plausible hardware, crisp real materials, correct connectors and geometry.
+Lighting/mood: same low-key studio lighting and warm-yellow accent glow as Image 1. Do not illuminate or gradient the magenta background.
+Constraints: only this isolated component; no case, no motherboard, no desk, no floor, no extra hardware, no labels, no brand logos, no text, no watermark. Hard clean silhouette. No cast shadow, no reflection, no vignette, no haze. Background must be exactly solid #FF00FF everywhere outside the component. Preserve placement and scale so full-canvas layers align with Image 1.

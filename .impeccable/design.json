@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-23T19:30:48+03:00",
+  "title": "Design System: META4PRO",
+  "extensions": {
+    "colorMeta": {
+      "arena-black": {
+        "role": "neutral",
+        "displayName": "Arena Black",
+        "canonical": "#070706",
+        "tonalRamp": ["#070706", "#151512", "#2a2a24", "#48483f", "#707066", "#9b9b91", "#cac9c0", "#f3f1e8"]
+      },
+      "signal-yellow": {
+        "role": "primary",
+        "displayName": "Signal Yellow",
+        "canonical": "#ffd400",
+        "tonalRamp": ["#2c2400", "#584900", "#806a00", "#9f8300", "#c7a600", "#ffd400", "#ffe66d", "#fff6cc"]
+      },
+      "warm-paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#f3f1e8",
+        "tonalRamp": ["#25241f", "#47463f", "#6c6a61", "#929087", "#b8b6ad", "#d0cec5", "#e4e1d8", "#f3f1e8"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Match Display",
+        "purpose": "Hero thesis only."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Large section statements."
+      },
+      "body": {
+        "displayName": "Fast Body",
+        "purpose": "Prices, specifications, descriptions and actions."
+      },
+      "label": {
+        "displayName": "Technical Label",
+        "purpose": "Statuses, frequency and compact metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "rig-depth",
+        "value": "0 36px 48px rgba(0,0,0,0.72)",
+        "purpose": "Only for the final PC product layer."
+      },
+      {
+        "name": "mobile-sticky",
+        "value": "0 18px 42px rgba(0,0,0,0.4)",
+        "purpose": "Separates the fixed mobile booking action from page content."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "160ms ease-out",
+        "purpose": "Zone and navigation state changes."
+      },
+      {
+        "name": "photo-in",
+        "value": "360ms ease-out",
+        "purpose": "Selected zone photo replacement."
+      }
+    ],
+    "breakpoints": [
+      { "name": "narrow", "value": "370px" },
+      { "name": "desktop-layout", "value": "820px" },
+      { "name": "circular-gallery", "value": "1000px" },
+      { "name": "desktop-effects", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action on dark surfaces.",
+      "html": "<button class=\"ds-btn-signal\">ВЫБРАТЬ ЗОНУ <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-btn-signal{min-height:52px;padding:0 17px;display:inline-flex;align-items:center;justify-content:space-between;gap:12px;border:0;border-radius:12px;background:var(--signal,#ffd400);color:var(--ink,#070706);font:740 13px 'Onest Variable',sans-serif;cursor:pointer;transition:background 160ms ease-out}.ds-btn-signal:hover{background:#ffe153}.ds-btn-signal:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}"
+    },
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Primary action on paper surfaces.",
+      "html": "<button class=\"ds-btn-ink\">ВЫБРАТЬ GENERAL <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-btn-ink{min-height:52px;padding:0 17px;display:inline-flex;align-items:center;justify-content:space-between;gap:12px;border:0;border-radius:12px;background:var(--ink,#070706);color:var(--paper,#f3f1e8);font:740 13px 'Onest Variable',sans-serif;cursor:pointer;transition:background 160ms ease-out}.ds-btn-ink:hover{background:#262620}.ds-btn-ink:focus-visible{outline:3px solid var(--signal-deep,#9f8300);outline-offset:4px}"
+    },
+    {
+      "name": "Zone Tab",
+      "kind": "chip",
+      "refersTo": "zone-active",
+      "description": "Tactical selected state for choosing a club zone.",
+      "html": "<button class=\"ds-zone\" aria-selected=\"true\"><strong>GENERAL</strong><small>240 Гц</small><span>от <b>85</b> ₽/ч</span></button>",
+      "css": ".ds-zone{width:180px;min-height:104px;padding:14px;display:grid;align-content:space-between;gap:10px;border:1px solid var(--ink,#070706);border-radius:12px;background:var(--ink,#070706);color:var(--paper,#f3f1e8);font-family:'Onest Variable',sans-serif;text-align:left;cursor:pointer}.ds-zone strong{font-family:'Unbounded Variable',sans-serif;font-size:16px}.ds-zone small{color:#a8a79f}.ds-zone b{color:var(--signal,#ffd400);font-size:19px}.ds-zone:focus-visible{outline:3px solid var(--signal,#ffd400);outline-offset:4px}"
+    },
+    {
+      "name": "Mobile Booking Bar",
+      "kind": "custom",
+      "refersTo": "button-primary",
+      "description": "Persistent mobile conversion surface above the safe area.",
+      "html": "<a class=\"ds-mobile-book\" href=\"#\"><span><small>GENERAL</small>от 85 ₽/ч</span><b>Забронировать ↗</b></a>",
+      "css": ".ds-mobile-book{min-height:58px;padding:0 15px;display:flex;align-items:center;justify-content:space-between;gap:14px;border-radius:12px;background:var(--signal,#ffd400);color:var(--ink,#070706);box-shadow:0 18px 42px rgba(0,0,0,.4);font-family:'Onest Variable',sans-serif;text-decoration:none}.ds-mobile-book span{font-size:13px;font-weight:720}.ds-mobile-book small{display:block;margin-bottom:2px;font-size:8px;letter-spacing:.07em}.ds-mobile-book b{font-size:10px}.ds-mobile-book:focus-visible{outline:3px solid var(--paper,#f3f1e8);outline-offset:4px}"
+    },
+    {
+      "name": "Club Photo Frame",
+      "kind": "card",
+      "refersTo": "photo-frame",
+      "description": "Real club photography with one technical caption.",
+      "html": "<figure class=\"ds-photo\"><div role=\"img\" aria-label=\"Фото клуба\"></div><figcaption>НОЧНАЯ СМЕНА</figcaption></figure>",
+      "css": ".ds-photo{position:relative;width:300px;height:420px;margin:0;overflow:hidden;border-radius:14px;background:linear-gradient(145deg,#121210,#2a2a24);font-family:'Unbounded Variable',sans-serif}.ds-photo:after{content:'';position:absolute;inset:40% 0 0;background:linear-gradient(180deg,transparent,rgba(7,7,6,.88))}.ds-photo figcaption{position:absolute;z-index:1;left:18px;right:18px;bottom:18px;color:var(--signal,#ffd400);font-size:14px;font-weight:620;letter-spacing:-.03em}"
+    },
+    {
+      "name": "Match Status",
+      "kind": "custom",
+      "description": "Compact factual status placed after a headline.",
+      "html": "<p class=\"ds-status\">РОСТОВ-НА-ДОНУ · 24/7</p>",
+      "css": ".ds-status{width:max-content;margin:0;border-left:3px solid var(--signal,#ffd400);padding-left:10px;color:var(--signal,#ffd400);font:760 10px/1.2 'Onest Variable',sans-serif;letter-spacing:.08em;text-transform:uppercase}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Live Match Lobby",
+    "overview": "META4PRO выглядит как момент перед стартом матча: глубокая тёмная арена, точный жёлтый сигнал, крупная типографика и реальное железо. Главный выразительный приём — одна аппаратная сцена, где компьютер собирается при прокрутке; остальные поверхности помогают сравнить зоны и перейти к бронированию.",
+    "keyCharacteristics": [
+      "Мобильная версия является основной, desktop расширяет тот же мир.",
+      "Чёрный создаёт атмосферу, тёплая бумага даёт контрастный информационный ритм.",
+      "Жёлтый обозначает действие, выбранное состояние или важный статус.",
+      "Реальные фотографии клуба и узнаваемые детали ПК — обязательная основа доверия."
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "На одном экране жёлтый должен оставаться редким сигналом, а не фоновым украшением.", "section": "colors" },
+      { "name": "The Headline Carries It Rule", "body": "Не ставить kicker или eyebrow над заголовком; статус располагается после тезиса либо в отдельном функциональном рельсе.", "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "Тень появляется только там, где объясняет реальное наложение или фиксированное состояние.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do использовать реальные фото клуба и реальные характеристики.",
+      "Do проверять каждый новый экран на ширинах 360–430px.",
+      "Do оставлять один главный электрический акцент в пределах viewport.",
+      "Do давать WebGL только способным desktop-устройствам и сохранять полноценный CSS fallback."
+    ],
+    "donts": [
+      "Don't строить страницу из одинаковых карточек «иконка + заголовок + текст».",
+      "Don't использовать фиолетово-синий неон, голограммы, glassmorphism или игровых персонажей.",
+      "Don't ставить kicker/eyebrow над заголовком.",
+      "Don't имитировать форму бронирования без рабочего backend."
+    ]
+  }
+}
