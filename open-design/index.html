@@ -21,28 +21,25 @@
       --muted: oklch(0.657 0.014 251.6);
       --border: oklch(0.306 0.021 254.1);
       --accent: oklch(0.813 0.167 82);
-      --accent-soft: color-mix(in oklch, var(--accent) 18%, transparent);
+      --accent-soft: color-mix(in oklch, var(--accent) 10%, transparent);
       --fg-soft: color-mix(in oklch, var(--fg) 7%, transparent);
       --font-display: "Sofia Sans Condensed", "Arial Narrow", sans-serif;
-      --font-body: "Segoe UI", system-ui, sans-serif;
+      --font-body: "Sofia Sans Condensed", "Arial Narrow", sans-serif;
       --font-mono: "Cascadia Mono", "JetBrains Mono", Consolas, monospace;
       --container: 1240px;
       --gutter: clamp(18px, 4vw, 48px);
       --radius: 8px;
       --radius-lg: 12px;
       --scroll-lean: 0deg;
-      --field-x: 50vw;
-      --field-y: 42vh;
-      --pressure: 0;
-      --speed: 0;
       --scroll-shift: 0px;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { color-scheme: dark; -webkit-text-size-adjust: 100%; scroll-behavior: auto; }
+    html { color-scheme: dark; -webkit-text-size-adjust: 100%; scroll-behavior: auto; overflow-x: hidden; overflow-x: clip; }
     body {
       margin: 0;
       min-width: 320px;
+      overflow-x: hidden;
       overflow-x: clip;
       background: var(--bg);
       color: var(--fg);
@@ -51,21 +48,7 @@
       line-height: 1.5;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
-      touch-action: pan-y;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      z-index: 0;
-      top: 0;
-      bottom: 0;
-      left: var(--field-x);
-      width: 1px;
-      pointer-events: none;
-      background: radial-gradient(circle 180px at 50% var(--field-y), var(--accent), transparent);
-      opacity: calc(.06 + var(--pressure) * .16);
-      transform: scale(calc(1 + var(--speed) * 2), calc(.18 + var(--pressure) * .82));
-      transition: opacity .18s ease;
+      touch-action: auto;
     }
     img, svg, canvas { display: block; max-width: 100%; }
     button, input { font: inherit; }
@@ -81,7 +64,7 @@
     ::selection { background: var(--accent); color: var(--bg); }
 
     .container { width: min(100%, var(--container)); margin-inline: auto; padding-inline: var(--gutter); }
-    .section { position: relative; padding-block: clamp(84px, 12vw, 164px); border-top: 1px solid var(--border); }
+    .section { position: relative; padding-block: clamp(76px, 10vw, 136px); border-top: 1px solid var(--border); }
     .lead { max-width: 56ch; color: var(--muted); font-size: clamp(17px, 2vw, 21px); }
     .meta, .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -115,6 +98,7 @@
       z-index: 50;
       background: var(--bg);
       border-bottom: 1px solid var(--border);
+      padding-top: env(safe-area-inset-top);
     }
     .topnav-main { min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
     .logo { display: inline-flex; align-items: baseline; gap: 7px; font: 800 19px/1 var(--font-display); letter-spacing: -.04em; }
@@ -158,14 +142,14 @@
     .nav-dot { order: -1; width: 5px; height: 5px; flex: 0 0 auto; border: 1px solid currentColor; border-radius: 50%; }
     .nav-link[aria-current="true"] .nav-dot { background: var(--accent); border-color: var(--accent); }
 
-    .hero { min-height: 100svh; padding: 56px 0 0; border-top: 0; display: grid; }
+    .hero { min-height: 100vh; min-height: 100svh; padding: calc(56px + env(safe-area-inset-top)) 0 0; border-top: 0; display: grid; }
     .hero .container { max-width: none; padding: 0; }
-    .hero-split { position: relative; min-height: calc(100svh - 56px); display: grid; overflow: hidden; }
+    .hero-split { position: relative; min-height: calc(100vh - 56px - env(safe-area-inset-top)); min-height: calc(100svh - 56px - env(safe-area-inset-top)); display: grid; overflow: hidden; }
     .hero-copy { position: relative; z-index: 6; grid-area: 1 / 1; align-self: end; width: min(680px, 58vw); padding: clamp(24px, 5vw, 72px); pointer-events: none; }
     .hero-copy a { pointer-events: auto; }
     .hero-copy h1 span { display: block; }
     .hero-copy h1 span:nth-child(2) { margin-left: .26em; }
-    .hero-copy h1 span:nth-child(3) { margin-left: .07em; color: var(--accent); }
+    .hero-copy h1 span:nth-child(3) { margin-left: .07em; }
     .hero-copy .lead { margin-top: 18px; max-width: 47ch; color: var(--fg); }
     .hero-actions { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
     .arena-score { position: absolute; z-index: 6; top: 22px; left: 22px; right: 92px; display: grid; grid-template-columns: 1fr auto auto; border-top: 1px solid var(--border); pointer-events: none; }
@@ -181,7 +165,7 @@
       border-radius: 0;
       background: var(--surface);
       isolation: isolate;
-      touch-action: pan-y;
+      touch-action: pan-y pinch-zoom;
       --local-x: 65%;
       --local-y: 38%;
       --local-pressure: 0;
@@ -195,11 +179,10 @@
     .arena-window::before { inset: 0; background: linear-gradient(to top, var(--bg) 0%, color-mix(in oklch, var(--bg) 42%, transparent) 52%, color-mix(in oklch, var(--bg) 18%, transparent)); }
     .arena-window::after { inset: 16px; border: 1px solid color-mix(in oklch, var(--fg) 12%, transparent); }
     .arena-window img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.025); }
-    .arena-base { filter: grayscale(.85) saturate(.35) contrast(1.18) brightness(.34); }
-    .arena-reveal { z-index: 1; filter: saturate(.82) contrast(1.12) brightness(.82); -webkit-mask-image: radial-gradient(circle calc(95px + var(--local-pressure) * 180px) at var(--local-x) var(--local-y), var(--fg) 0 42%, transparent 78%); mask-image: radial-gradient(circle calc(95px + var(--local-pressure) * 180px) at var(--local-x) var(--local-y), var(--fg) 0 42%, transparent 78%); }
-    #pressure-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; }
-    .arena-hud { position: absolute; right: 26px; bottom: 24px; z-index: 4; width: 220px; display: grid; gap: 14px; pointer-events: none; }
-    .arena-hud strong { font: 700 clamp(16px, 2vw, 24px)/1 var(--font-display); }
+    .arena-base { filter: grayscale(.76) saturate(.42) contrast(1.14) brightness(.46); }
+    .arena-reveal { z-index: 1; filter: saturate(.7) contrast(1.08) brightness(.72); -webkit-mask-image: radial-gradient(circle calc(95px + var(--local-pressure) * 180px) at var(--local-x) var(--local-y), var(--fg) 0 42%, transparent 78%); mask-image: radial-gradient(circle calc(95px + var(--local-pressure) * 180px) at var(--local-x) var(--local-y), var(--fg) 0 42%, transparent 78%); }
+    #pressure-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 3; opacity: .68; }
+    .arena-hud { position: absolute; right: 26px; bottom: 24px; z-index: 4; width: 150px; pointer-events: none; }
     .arena-hud span { display: block; margin-top: 5px; color: var(--muted); font: 500 10px/1.25 var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
     .hold-meter { width: 94px; height: 5px; border: 1px solid var(--border); }
     .hold-meter i { display: block; height: 100%; width: 100%; background: var(--accent); transform: scaleX(var(--hold, 0)); transform-origin: left; transition: transform .12s linear; }
@@ -207,12 +190,12 @@
     .section-head { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr); gap: 36px; align-items: end; margin-bottom: clamp(52px, 9vw, 104px); }
     .section-head .lead { justify-self: end; }
 
-    .zone-stage-wrap { position: relative; }
+    .zone-stage-wrap { position: relative; overflow-x: hidden; overflow-x: clip; }
     .zone-stage {
       position: relative;
       height: clamp(500px, 68vw, 680px);
       perspective: 1400px;
-      touch-action: pan-y;
+      touch-action: pan-y pinch-zoom;
       user-select: none;
     }
     .zone-card {
@@ -229,7 +212,7 @@
       transition: transform .58s cubic-bezier(.2,.8,.2,1), opacity .4s ease, filter .4s ease, border-color .3s ease;
       will-change: transform;
     }
-    .zone-card[data-active="true"] { border-color: var(--accent); }
+    .zone-card[data-active="true"] { border-color: color-mix(in oklch, var(--fg) 48%, var(--border)); }
     .zone-stage[data-holding="true"] .zone-card[data-active="true"] { transform: translateX(-50%) translateZ(28px) scale(1.015) !important; }
     .zone-stage[data-holding="true"] .zone-card[data-active="true"] .zone-media img { filter: saturate(.9) contrast(1.12) brightness(.78); transform: scale(1.025); }
     .zone-media { position: absolute; inset: 0; }
@@ -241,7 +224,7 @@
     .zone-specs span { color: var(--muted); font-size: 13px; }
     .zone-specs b { display: block; color: var(--fg); font-family: var(--font-mono); font-size: 13px; }
     .pixel-mask { position: absolute; inset: 0; z-index: 5; overflow: hidden; pointer-events: none; }
-    .pixel-mask::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--accent); box-shadow: 0 0 28px color-mix(in oklch, var(--accent) 58%, transparent); transform: translateY(-50%) scaleX(0); }
+    .pixel-mask::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--fg); opacity: .24; transform: translateY(-50%) scaleX(0); }
     .pixel-mask.is-swapping::before { animation: pressure-sweep .5s cubic-bezier(.2,.8,.2,1) both; }
     @keyframes pressure-sweep { 0% { transform: translateY(-50%) scaleX(0); } 46% { transform: translateY(-50%) scaleX(1); } 100% { transform: translateY(260px) scaleX(0); } }
     .zone-controls { margin-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
@@ -249,8 +232,6 @@
     .round-control:hover, .round-control:active { border-color: var(--fg); background: var(--fg-soft); }
     .zone-count { color: var(--muted); font: 600 12px/1 var(--font-mono); }
     .zone-count b { color: var(--fg); }
-    .drag-hint { color: var(--muted); font: 500 10px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
-
     .spec-route { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: clamp(44px, 9vw, 128px); }
     .spec-route h2 { position: sticky; top: 136px; }
     .spec-list { border-top: 1px solid var(--fg); }
@@ -259,11 +240,27 @@
     .spec-row strong { font-family: var(--font-display); font-size: 20px; }
     .spec-row p { color: var(--muted); font-size: 14px; }
 
+    .rental-block { margin-top: clamp(72px, 10vw, 128px); padding-top: clamp(40px, 6vw, 72px); border-top: 1px solid var(--fg); }
+    .rental-head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 32px; align-items: end; margin-bottom: 36px; }
+    .rental-head .lead { justify-self: end; }
+    .device-groups { border-top: 1px solid var(--border); }
+    .device-group { border-bottom: 1px solid var(--border); }
+    .device-group summary { min-height: 76px; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 18px; cursor: pointer; list-style: none; }
+    .device-group summary::-webkit-details-marker { display: none; }
+    .device-group summary strong { font-family: var(--font-display); font-size: clamp(23px, 3vw, 34px); text-transform: uppercase; }
+    .device-group summary small { color: var(--muted); font: 600 11px/1 var(--font-mono); }
+    .device-group summary::after { content: ""; width: 18px; height: 18px; background: linear-gradient(var(--muted), var(--muted)) center / 12px 1px no-repeat, linear-gradient(var(--muted), var(--muted)) center / 1px 12px no-repeat; transition: transform .2s ease; }
+    .device-group[open] summary::after { transform: rotate(45deg); }
+    .device-list { padding: 0 0 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+    .device-item { min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid color-mix(in oklch, var(--border) 72%, transparent); }
+    .device-item b { font-size: 14px; font-weight: 650; }
+    .device-price { flex: 0 0 auto; color: var(--fg); font: 700 12px/1 var(--font-mono); }
+    .rental-link { margin-top: 24px; }
+
     .price-race { border-top: 1px solid var(--fg); }
     .price-head, .price-row { display: grid; grid-template-columns: 1.25fr repeat(4, minmax(108px, .7fr)); gap: 14px; align-items: center; }
     .price-head { padding: 0 18px 14px; color: var(--muted); font: 600 10px/1 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
     .price-row { position: relative; min-height: 126px; padding: 28px 18px; border-top: 1px solid var(--border); overflow: hidden; transition: background .18s ease; }
-    .price-row::after { content: ""; position: absolute; left: 18px; bottom: 0; width: calc(var(--hz, .6) * 100% - 36px); height: 2px; background: var(--accent); transform-origin: left; transform: scaleX(calc(.72 + var(--pressure) * .28)); opacity: .72; }
     .price-row:hover, .price-row:active { background: var(--fg-soft); }
     .price-zone strong { display: block; font-family: var(--font-display); font-size: clamp(25px, 3vw, 36px); text-transform: uppercase; }
     .price-zone small { color: var(--muted); }
@@ -297,20 +294,20 @@
     @media (max-width: 920px) {
       :root { --gutter: 20px; }
       .topnav-main { min-height: 56px; }
-      .call-link { font-size: 0; }
-      .call-link::after { content: "Позвонить"; font-size: 11px; }
-      .match-rail { top: auto; left: 12px; right: 12px; bottom: max(10px, env(safe-area-inset-bottom)); flex-direction: row; align-items: stretch; gap: 4px; transform: none; background: var(--bg); border: 1px solid var(--border); border-radius: 999px; padding: 4px; overscroll-behavior-x: contain; }
-      .nav-link { flex: 1 1 0; width: auto; min-width: 44px; justify-content: center; padding-inline: 10px; border: 0; background: transparent; transform: none; }
-      .nav-link:hover, .nav-link:active, .nav-link[aria-current="true"] { flex-grow: 1.7; background: var(--surface); transform: none; }
-      .nav-link span { display: none; }
-      .nav-link[aria-current="true"] span { display: inline; max-width: 64px; opacity: 1; }
-      .hero-copy { width: min(100%, 600px); padding: 26px 20px 34px; }
-      .hero-copy h1 { font-size: clamp(50px, 14vw, 72px); }
+      .call-link { flex: 0 0 auto; font-size: clamp(10px, 2.7vw, 12px); white-space: nowrap; }
+      .match-rail { top: auto; left: 12px; right: 12px; bottom: max(10px, env(safe-area-inset-bottom)); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: stretch; gap: 2px; transform: none; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 4px; overscroll-behavior-x: contain; }
+      .nav-link { width: auto; min-width: 0; justify-content: center; padding-inline: 4px; border: 0; background: transparent; transform: none; font-size: 9px; letter-spacing: .02em; }
+      .nav-link:hover, .nav-link:active, .nav-link[aria-current="true"] { background: var(--surface); transform: none; }
+      .nav-link span, .nav-link[aria-current="true"] span { display: inline; max-width: none; opacity: 1; }
+      .nav-dot { display: none; }
+      .hero-copy { width: min(100%, 600px); padding: 26px 20px calc(108px + env(safe-area-inset-bottom)); }
+      .hero-copy h1 { max-width: 100%; font-size: clamp(42px, 11.8vw, 58px); overflow-wrap: anywhere; }
       .hero-copy h1 span:nth-child(2) { margin-left: .14em; }
       .hero-copy .lead { max-width: 35ch; font-size: 16px; }
       .arena-score { top: 16px; left: 16px; right: 16px; }
       .arena-score span { font-size: 9px; }
       .arena-window::after { inset: 10px; }
+      #pressure-canvas { opacity: .46; }
       .section-head { grid-template-columns: 1fr; align-items: start; }
       .section-head .lead { justify-self: start; }
       .zone-stage { height: min(146vw, 620px); }
@@ -318,6 +315,8 @@
       .zone-info { grid-template-columns: 1fr; }
       .spec-route { grid-template-columns: 1fr; }
       .spec-route h2 { position: static; }
+      .rental-head { grid-template-columns: 1fr; align-items: start; }
+      .rental-head .lead { justify-self: start; }
       .price-head { display: none; }
       .price-row { grid-template-columns: 1fr 1fr; gap: 18px 24px; }
       .price-zone { grid-column: 1 / -1; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
@@ -330,23 +329,26 @@
     }
 
     @media (max-width: 520px) {
-      .section { padding-block: 88px; }
-      .hero-split { min-height: calc(100svh - 56px); }
+      .section { padding-block: 76px; }
+      .hero-split { min-height: calc(100vh - 56px - env(safe-area-inset-top)); min-height: calc(100svh - 56px - env(safe-area-inset-top)); }
       .hero-actions { gap: 10px; }
       .hero-actions .btn, .hero-actions .text-link { min-height: 44px; font-size: 13px; }
       .arena-hud { display: none; }
       .arena-score span:nth-child(2) { display: none; }
-      .zone-stage { height: 560px; }
+      .zone-stage { height: 540px; }
       .zone-info { padding: 22px; }
       .zone-specs { grid-template-columns: 1fr 1fr; }
       .spec-row { grid-template-columns: 58px 1fr; }
       .spec-row p { grid-column: 2; }
+      .device-group summary { min-height: 68px; gap: 12px; }
+      .device-group summary small { font-size: 9px; }
+      .device-list { grid-template-columns: 1fr; }
       .advantages { grid-template-columns: 1fr; }
       .advantage:nth-child(1), .advantage:nth-child(2), .advantage:nth-child(3), .advantage:nth-child(4) { min-height: 132px; border-inline-end: 0; border-bottom: 1px solid var(--border); }
       .advantage:last-child { border-bottom: 0; }
       .booking-actions { flex-direction: column; align-items: stretch; }
       .foot-inner { display: grid; }
-      .pagefoot { padding-bottom: 90px; }
+      .pagefoot { padding-bottom: calc(90px + env(safe-area-inset-bottom)); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -359,7 +361,7 @@
 <body>
   <header class="topnav" data-od-id="topnav">
     <div class="container topnav-main">
-      <a class="logo" href="#hero" data-od-id="logo">META4PRO <small>LIVE CLUB</small></a>
+      <a class="logo" href="#hero" data-od-id="logo">META4PRO <small>ROSTOV</small></a>
       <a class="call-link" href="tel:+79185550090" data-od-id="header-phone">+7 (918) 555-00-90</a>
     </div>
     <nav class="match-rail" aria-label="Разделы сайта" data-od-id="match-navigation">
@@ -375,20 +377,19 @@
     <section class="section hero" id="hero" data-od-id="hero">
       <div class="container hero-split">
         <div class="hero-copy">
-          <h1 data-od-id="hero-title"><span>Нажми.</span><span>Поле ответит.</span><span>Матч начался.</span></h1>
-          <p class="lead">Живой компьютерный клуб у ТРЦ «Горизонт»: четыре игровые зоны, мониторы до 400 Гц и место для команды.</p>
+          <h1 data-od-id="hero-title"><span>Соло.</span><span>С друзьями.</span><span>Командой.</span></h1>
+          <p class="lead">36 игровых ПК и четыре зоны — от открытого зала до приватной Sigma Room. Работаем круглосуточно у ТРЦ «Горизонт».</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="tel:+79185550090" data-od-id="hero-booking-cta">Позвонить и забронировать</a>
             <a class="text-link js-scroll" href="#zones" data-od-id="hero-zones-link">Смотреть игровые зоны →</a>
           </div>
         </div>
-        <div class="arena-window" id="pressure-field" data-od-id="pressure-field" aria-label="Интерактивное поле матча. Двигайте указателем или пальцем, удерживайте для усиления.">
+        <div class="arena-window" id="pressure-field" data-od-id="pressure-field" aria-label="Интерактивное фото игровой арены META4PRO">
           <img class="arena-base" src="assets/zone-arena.jpg" alt="Настоящий общий вид игровой арены META4PRO" width="1600" height="1067" fetchpriority="high">
           <img class="arena-reveal" src="assets/zone-arena.jpg" alt="" width="1600" height="1067" aria-hidden="true">
           <canvas id="pressure-canvas" aria-hidden="true"></canvas>
-          <div class="arena-score" aria-hidden="true"><span>Нагибина 43/4 · 24/7</span><span>36 игровых ПК</span><span>до 400 Гц</span></div>
+          <div class="arena-score" aria-hidden="true"><span>Нагибина 43/4</span><span>36 игровых ПК</span><span>24/7</span></div>
           <div class="arena-hud">
-            <div><strong>ПОЛЕ НАПРЯЖЕНИЯ</strong><span>Двигай · удерживай · отпускай</span></div>
             <div><span>Давление команды</span><div class="hold-meter"><i id="hold-fill"></i></div></div>
           </div>
         </div>
@@ -398,33 +399,32 @@
     <section class="section" id="zones" data-od-id="zones">
       <div class="container">
         <header class="section-head">
-          <div><h2 data-od-id="zones-title">Выбери свой уровень давления.</h2></div>
-          <p class="lead">Тяни карточки пальцем или курсором. Удерживай выбранную зону, чтобы вывести фото из режима ожидания.</p>
+          <div><h2 data-od-id="zones-title">Четыре зоны. Выбирай свою.</h2></div>
+          <p class="lead">Открытые залы для соло и компании, закрытые комнаты — для команды и спокойной сессии.</p>
         </header>
 
         <div class="zone-stage-wrap">
           <div class="zone-stage" id="zone-stage" data-od-id="zone-carousel" aria-roledescription="карусель" aria-label="Игровые зоны META4PRO">
             <article class="zone-card" data-index="0" data-active="true" data-od-id="zone-card-general" role="group" aria-roledescription="слайд" aria-label="Общий зал">
               <div class="zone-media"><img src="assets/zone-general.jpg" alt="Общий зал META4PRO — восемь игровых мест" width="1600" height="1067" loading="lazy" decoding="async"></div>
-              <div class="zone-info"><div><p class="zone-kicker">8 мест · открытый зал</p><h3>Общий зал</h3></div><div class="zone-specs"><span><b>RTX 3060 Ti</b>видеокарта</span><span><b>240 Гц IPS</b>монитор</span><span><b>16 ГБ DDR4</b>память</span><span><b>от 85 ₽/ч</b>почасово</span></div></div>
+              <div class="zone-info"><div><p class="zone-kicker">8 мест · открытый зал</p><h3>Общий зал</h3></div><div class="zone-specs"><span><b>i5-12400F / Ryzen 5</b>процессор</span><span><b>RTX 3060 Ti</b>видеокарта</span><span><b>16 ГБ DDR4 + SSD</b>память и диск</span><span><b>G102 · G413 · H6</b>периферия</span></div></div>
             </article>
             <article class="zone-card" data-index="1" data-active="false" data-od-id="zone-card-arena" role="group" aria-roledescription="слайд" aria-label="Арена">
               <div class="zone-media"><img src="assets/zone-arena.jpg" alt="Арена META4PRO — шестнадцать игровых мест" width="1600" height="1067" loading="lazy" decoding="async"></div>
-              <div class="zone-info"><div><p class="zone-kicker">16 мест · открытый зал</p><h3>Арена</h3></div><div class="zone-specs"><span><b>RTX 4060 / 3060 Ti</b>видеокарта</span><span><b>240 Гц IPS</b>монитор</span><span><b>HyperX Cloud II</b>звук</span><span><b>от 105 ₽/ч</b>почасово</span></div></div>
+              <div class="zone-info"><div><p class="zone-kicker">16 мест · открытый зал</p><h3>Арена</h3></div><div class="zone-specs"><span><b>i5-12400F</b>процессор</span><span><b>RTX 4060 / 3060 Ti</b>видеокарта</span><span><b>16 ГБ DDR4 + SSD</b>память и диск</span><span><b>X6 / AJ159P · HyperX</b>периферия</span></div></div>
             </article>
             <article class="zone-card" data-index="2" data-active="false" data-od-id="zone-card-bootcamp" role="group" aria-roledescription="слайд" aria-label="Bootcamp">
               <div class="zone-media"><img src="assets/zone-bootcamp.jpg" alt="Закрытый Bootcamp META4PRO на шесть человек" width="1600" height="1067" loading="lazy" decoding="async"></div>
-              <div class="zone-info"><div><p class="zone-kicker">6 мест · закрытая комната</p><h3>Bootcamp</h3></div><div class="zone-specs"><span><b>RTX 4060 Ti</b>видеокарта</span><span><b>320 Гц IPS</b>монитор</span><span><b>i5-14400F</b>процессор</span><span><b>от 135 ₽/ч</b>почасово</span></div></div>
+              <div class="zone-info"><div><p class="zone-kicker">6 мест · закрытая комната</p><h3>Bootcamp</h3></div><div class="zone-specs"><span><b>i5-14400F</b>процессор</span><span><b>RTX 4060 Ti</b>видеокарта</span><span><b>16 ГБ DDR4 + SSD</b>память и диск</span><span><b>X6 · G413 · Cloud II</b>периферия</span></div></div>
             </article>
             <article class="zone-card" data-index="3" data-active="false" data-od-id="zone-card-sigma" role="group" aria-roledescription="слайд" aria-label="Sigma Room">
               <div class="zone-media"><img src="assets/zone-sigma.jpg" alt="Закрытая Sigma Room META4PRO на шесть человек" width="1600" height="1067" loading="lazy" decoding="async"></div>
-              <div class="zone-info"><div><p class="zone-kicker">6 мест · приватная зона</p><h3>Sigma Room</h3></div><div class="zone-specs"><span><b>RTX 4060 Ti</b>видеокарта</span><span><b>400 Гц IPS</b>монитор</span><span><b>16 ГБ DDR5</b>память</span><span><b>от 189 ₽/ч</b>почасово</span></div></div>
+              <div class="zone-info"><div><p class="zone-kicker">6 мест · приватная зона</p><h3>Sigma Room</h3></div><div class="zone-specs"><span><b>i5-14400F</b>процессор</span><span><b>RTX 4060 Ti · DDR5</b>графика и память</span><span><b>Superlight 2</b>мышь</span><span><b>400 Гц · Cloud II</b>экран и звук</span></div></div>
             </article>
             <div class="pixel-mask" id="pixel-mask" aria-hidden="true"></div>
           </div>
           <div class="zone-controls">
             <div><button class="round-control" id="zone-prev" type="button" aria-label="Предыдущая зона" data-od-id="zone-prev">←</button></div>
-            <span class="drag-hint">← свайп · удержание →</span>
             <div style="display:flex; align-items:center; gap:14px;"><span class="zone-count" aria-live="polite"><b id="zone-current">01</b> / 04</span><button class="round-control" id="zone-next" type="button" aria-label="Следующая зона" data-od-id="zone-next">→</button></div>
           </div>
           <p class="sr-only" id="zone-announcer" aria-live="polite">Выбран Общий зал</p>
@@ -433,14 +433,62 @@
     </section>
 
     <section class="section" id="equipment" data-od-id="equipment">
-      <div class="container spec-route">
-        <div><h2 data-od-id="equipment-title">Видишь, за что платишь.</h2></div>
-        <div class="spec-list" data-od-id="equipment-list">
-          <div class="spec-row"><span class="meta">GPU</span><strong>RTX 3060 Ti — 4060 Ti</strong><p>Конфигурация зависит от зоны: от стабильной общей игры до запаса Sigma Room.</p></div>
-          <div class="spec-row"><span class="meta">CPU</span><strong>i5-12400F — i5-14400F</strong><p>В общем зале также используются системы на Ryzen 5 5600.</p></div>
-          <div class="spec-row"><span class="meta">DISPLAY</span><strong>240 / 320 / 400 Гц IPS</strong><p>Больше герцовки — в закрытых комнатах Bootcamp и Sigma Room.</p></div>
-          <div class="spec-row"><span class="meta">GEAR</span><strong>Logitech · HyperX · Attack Shark</strong><p>В Sigma Room — Logitech G Pro X Superlight 2 и HyperX Cloud II.</p></div>
-          <div class="spec-row"><span class="meta">NET</span><strong>Гигабит · два провайдера</strong><p>Гигабитный интернет от двух независимых провайдеров.</p></div>
+      <div class="container">
+        <div class="spec-route">
+          <div><h2 data-od-id="equipment-title">Железо и периферия.</h2></div>
+          <div class="spec-list" data-od-id="equipment-list">
+            <div class="spec-row"><span class="meta">GPU</span><strong>RTX 3060 Ti — 4060 Ti</strong><p>Конкретная видеокарта зависит от выбранной зоны.</p></div>
+            <div class="spec-row"><span class="meta">CPU</span><strong>i5-12400F — i5-14400F</strong><p>В Общем зале также есть конфигурации на Ryzen 5 5600.</p></div>
+            <div class="spec-row"><span class="meta">RAM</span><strong>16 ГБ · DDR4 / DDR5</strong><p>SSD установлен во всех игровых компьютерах.</p></div>
+            <div class="spec-row"><span class="meta">DISPLAY</span><strong>240 / 320 / 400 Гц IPS</strong><p>320 Гц в Bootcamp, 400 Гц в Sigma Room.</p></div>
+            <div class="spec-row"><span class="meta">GEAR</span><strong>Logitech · HyperX · Attack Shark</strong><p>Мыши, клавиатуры и гарнитуры подобраны отдельно для каждой зоны.</p></div>
+            <div class="spec-row"><span class="meta">NET</span><strong>Гигабит · два провайдера</strong><p>Два независимых канала связи для стабильной игры.</p></div>
+          </div>
+        </div>
+
+        <div class="rental-block" data-od-id="device-rental">
+          <header class="rental-head">
+            <h2 data-od-id="rental-title">Аренда девайсов.</h2>
+            <p class="lead">Мышь, клавиатуру, наушники или аксессуар можно взять прямо на игровую сессию.</p>
+          </header>
+          <div class="device-groups">
+            <details class="device-group" data-od-id="rental-mice">
+              <summary><strong>Мыши</strong><small>5 моделей · 50–100 ₽</small></summary>
+              <div class="device-list">
+                <div class="device-item"><b>Lunacy One</b><span class="device-price">100 ₽</span></div>
+                <div class="device-item"><b>Logitech G Pro X Superlight 2 SE</b><span class="device-price">100 ₽</span></div>
+                <div class="device-item"><b>IO by Red Square Airox SE</b><span class="device-price">50 ₽</span></div>
+                <div class="device-item"><b>Mchose A5 V3</b><span class="device-price">50 ₽</span></div>
+                <div class="device-item"><b>LAMZU Atlantis V2 Nordic MCU 4K</b><span class="device-price">100 ₽</span></div>
+              </div>
+            </details>
+            <details class="device-group" data-od-id="rental-keyboards">
+              <summary><strong>Клавиатуры</strong><small>4 модели · 50–100 ₽</small></summary>
+              <div class="device-list">
+                <div class="device-item"><b>Dark Project KD87A LTD</b><span class="device-price">100 ₽</span></div>
+                <div class="device-item"><b>Ajazz AK980</b><span class="device-price">75 ₽</span></div>
+                <div class="device-item"><b>Ajazz AK820 Pro</b><span class="device-price">50 ₽</span></div>
+                <div class="device-item"><b>IO by Red Square Type 68 SE</b><span class="device-price">50 ₽</span></div>
+              </div>
+            </details>
+            <details class="device-group" data-od-id="rental-headsets">
+              <summary><strong>Наушники</strong><small>4 модели · 50–100 ₽</small></summary>
+              <div class="device-list">
+                <div class="device-item"><b>Lunacy Louder</b><span class="device-price">100 ₽</span></div>
+                <div class="device-item"><b>Logitech G Pro X 2 Lightspeed</b><span class="device-price">100 ₽</span></div>
+                <div class="device-item"><b>IO by Red Square Graphite 2 Pro</b><span class="device-price">50 ₽</span></div>
+                <div class="device-item"><b>Logitech G435</b><span class="device-price">50 ₽</span></div>
+              </div>
+            </details>
+            <details class="device-group" data-od-id="rental-accessories">
+              <summary><strong>Аксессуары</strong><small>2 модели · 50–75 ₽</small></summary>
+              <div class="device-list">
+                <div class="device-item"><b>Стримпад Ajazz AKP153R</b><span class="device-price">75 ₽</span></div>
+                <div class="device-item"><b>Коврик ARDOR GAMING Glass</b><span class="device-price">50 ₽</span></div>
+              </div>
+            </details>
+          </div>
+          <a class="text-link rental-link" href="tel:+79185550090">Уточнить наличие у администратора →</a>
         </div>
       </div>
     </section>
@@ -448,17 +496,16 @@
     <section class="section" id="prices" data-od-id="prices">
       <div class="container">
         <header class="section-head">
-          <div><h2 data-od-id="prices-title">Плати за нужный темп.</h2></div>
-          <p class="lead">Почасовой вход, пакеты с бонусным часом или полная игровая ночь с 21:00 до 05:00.</p>
+          <div><h2 data-od-id="prices-title">Цены.</h2></div>
+          <p class="lead">Почасово, пакеты с бонусным часом или ночь с 21:00 до 05:00.</p>
         </header>
         <div class="price-race" data-od-id="price-list">
           <div class="price-head" aria-hidden="true"><span>Зона</span><span>Час</span><span>3+1 часа</span><span>5+1 часов</span><span>Ночь</span></div>
-          <div class="price-row" style="--hz:.6" data-od-id="price-general"><div class="price-zone"><strong>Общий зал</strong><small>8 компьютеров · 240 Гц</small></div><div class="price-cell"><small>Час</small>85 ₽</div><div class="price-cell"><small>3+1</small>229 ₽</div><div class="price-cell"><small>5+1</small>359 ₽</div><div class="price-cell"><small>Ночь</small>299 ₽</div></div>
-          <div class="price-row" style="--hz:.6" data-od-id="price-arena"><div class="price-zone"><strong>Арена</strong><small>16 компьютеров · 240 Гц</small></div><div class="price-cell"><small>Час</small>105 ₽</div><div class="price-cell"><small>3+1</small>299 ₽</div><div class="price-cell"><small>5+1</small>459 ₽</div><div class="price-cell"><small>Ночь</small>399 ₽</div></div>
-          <div class="price-row" style="--hz:.8" data-od-id="price-bootcamp"><div class="price-zone"><strong>Bootcamp</strong><small>6 компьютеров · 320 Гц</small></div><div class="price-cell"><small>Час</small>135 ₽</div><div class="price-cell"><small>3+1</small>359 ₽</div><div class="price-cell"><small>5+1</small>549 ₽</div><div class="price-cell"><small>Ночь</small>549 ₽</div></div>
-          <div class="price-row" style="--hz:1" data-od-id="price-sigma"><div class="price-zone"><strong>Sigma Room</strong><small>6 компьютеров · 400 Гц</small></div><div class="price-cell"><small>Час</small>189 ₽</div><div class="price-cell"><small>3+1</small>499 ₽</div><div class="price-cell"><small>5+1</small>679 ₽</div><div class="price-cell"><small>Ночь</small>749 ₽</div></div>
+          <div class="price-row" data-od-id="price-general"><div class="price-zone"><strong>Общий зал</strong><small>8 мест · i5 / Ryzen 5 · RTX 3060 Ti</small></div><div class="price-cell"><small>Час</small>85 ₽</div><div class="price-cell"><small>3+1</small>229 ₽</div><div class="price-cell"><small>5+1</small>359 ₽</div><div class="price-cell"><small>Ночь</small>299 ₽</div></div>
+          <div class="price-row" data-od-id="price-arena"><div class="price-zone"><strong>Арена</strong><small>16 мест · i5-12400F · RTX 4060 / 3060 Ti</small></div><div class="price-cell"><small>Час</small>105 ₽</div><div class="price-cell"><small>3+1</small>299 ₽</div><div class="price-cell"><small>5+1</small>459 ₽</div><div class="price-cell"><small>Ночь</small>399 ₽</div></div>
+          <div class="price-row" data-od-id="price-bootcamp"><div class="price-zone"><strong>Bootcamp</strong><small>закрытая комната · i5-14400F · RTX 4060 Ti</small></div><div class="price-cell"><small>Час</small>135 ₽</div><div class="price-cell"><small>3+1</small>359 ₽</div><div class="price-cell"><small>5+1</small>549 ₽</div><div class="price-cell"><small>Ночь</small>549 ₽</div></div>
+          <div class="price-row" data-od-id="price-sigma"><div class="price-zone"><strong>Sigma Room</strong><small>приватная комната · DDR5 · RTX 4060 Ti</small></div><div class="price-cell"><small>Час</small>189 ₽</div><div class="price-cell"><small>3+1</small>499 ₽</div><div class="price-cell"><small>5+1</small>679 ₽</div><div class="price-cell"><small>Ночь</small>749 ₽</div></div>
         </div>
-        <p class="meta" style="margin-top:14px; color:var(--muted);">Тарифы по данным клуба на 24.08.2026. Ночь: 21:00–05:00.</p>
         <div class="advantages" data-od-id="advantages">
           <div class="advantage" data-od-id="advantage-bonus"><b>500 ₽</b><p>Приветственный бонус новым гостям при первом посещении.</p></div>
           <div class="advantage" data-od-id="advantage-students"><b>−20%</b><p>Скидка студентам и курсантам по документу.</p></div>
@@ -470,7 +517,7 @@
 
     <section class="section booking" id="booking" data-od-id="booking">
       <div class="container">
-        <h2 data-od-id="booking-title">Собери команду. Мы держим место.</h2>
+        <h2 data-od-id="booking-title">Забронируй место.</h2>
         <p class="lead">Позвони администратору или напиши в Telegram — поможем выбрать зону и несколько мест рядом.</p>
         <div class="booking-actions">
           <a class="btn btn-primary" href="tel:+79185550090" data-od-id="booking-call">Позвонить +7 (918) 555-00-90</a>
@@ -486,40 +533,18 @@
   </main>
 
   <footer class="pagefoot" data-od-id="footer">
-    <div class="container foot-inner"><span>© META4PRO · 2026</span><span>Фото: реальные помещения клуба · Цены проверены 24.08.2026</span></div>
+    <div class="container foot-inner"><span>© META4PRO · 2026</span><span>Ростов-на-Дону · Нагибина, 43/4 · 24/7</span></div>
   </footer>
 
   <script>
     (() => {
       const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       const lowPower = innerWidth < 600 || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+      const wideMotion = !reduced && matchMedia('(min-width: 921px)').matches;
       const sections = [...document.querySelectorAll('main > section[id]')];
       const links = [...document.querySelectorAll('.nav-link')];
       const rail = document.querySelector('.match-rail');
       const root = document.documentElement;
-      const gesture = { x: innerWidth / 2, y: innerHeight * .42, time: performance.now(), down: false };
-      let gestureSettle = 0;
-
-      function updateGesture(event) {
-        const now = performance.now();
-        const distance = Math.hypot(event.clientX - gesture.x, event.clientY - gesture.y);
-        const speed = reduced ? 0 : Math.min(1, distance / Math.max(12, now - gesture.time));
-        gesture.x = event.clientX; gesture.y = event.clientY; gesture.time = now;
-        root.style.setProperty('--field-x', `${gesture.x}px`);
-        root.style.setProperty('--field-y', `${gesture.y}px`);
-        root.style.setProperty('--speed', speed.toFixed(3));
-        root.style.setProperty('--pressure', gesture.down ? '1' : (speed * .32).toFixed(3));
-        clearTimeout(gestureSettle);
-        gestureSettle = setTimeout(() => {
-          if (!gesture.down) root.style.setProperty('--pressure', '0');
-          root.style.setProperty('--speed', '0');
-        }, 110);
-      }
-      document.addEventListener('pointermove', updateGesture, { passive: true });
-      document.addEventListener('pointerdown', event => { gesture.down = true; updateGesture(event); }, { passive: true });
-      document.addEventListener('pointerup', event => { gesture.down = false; updateGesture(event); root.style.setProperty('--pressure', '0'); }, { passive: true });
-      document.addEventListener('pointercancel', () => { gesture.down = false; root.style.setProperty('--pressure', '0'); }, { passive: true });
-
       function goTo(hash) {
         const target = document.querySelector(hash);
         if (!target) return;
@@ -550,7 +575,7 @@
       addEventListener('scroll', () => {
         const now = performance.now();
         const dy = scrollY - lastScroll;
-        const speed = reduced ? 0 : Math.max(-1, Math.min(1, dy / Math.max(16, now - lastTime)));
+        const speed = wideMotion ? Math.max(-1, Math.min(1, dy / Math.max(16, now - lastTime))) : 0;
         scrollImpulse = speed;
         root.style.setProperty('--scroll-lean', `${speed * 1.2}deg`);
         root.style.setProperty('--scroll-shift', `${speed * -14}px`);
@@ -584,7 +609,7 @@
         canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
         canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        const count = lowPower ? 38 : 84;
+        const count = lowPower ? 24 : 64;
         particles = Array.from({ length: count }, (_, i) => ({
           x: (i * 73 % count) / count * width,
           y: ((i * 41) % count) / count * height,
@@ -631,17 +656,17 @@
             x += dx / dist * force; y += dy / dist * force;
           }
           const hot = pointer.active && dist < radius;
-          ctx.globalAlpha = hot ? .84 : .22;
+          ctx.globalAlpha = hot ? .58 : .13;
           ctx.fillStyle = hot ? accent : fg;
           ctx.fillRect(x, y, particle.size + (hot ? pointer.speed * .04 : 0), particle.size);
           if (hot && index % 3 === 0) {
-            ctx.globalAlpha = .22;
+            ctx.globalAlpha = .12;
             ctx.strokeStyle = accent;
             ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(pointer.x, pointer.y); ctx.stroke();
           }
         });
         if (pointer.active) {
-          ctx.globalAlpha = .52 + hold * .34;
+          ctx.globalAlpha = .36 + hold * .25;
           ctx.strokeStyle = accent;
           ctx.lineWidth = 1 + hold * 2;
           ctx.beginPath(); ctx.arc(pointer.x, pointer.y, 18 + hold * 38 + Math.sin(t * 5) * 2, 0, Math.PI * 2); ctx.stroke();
@@ -670,7 +695,7 @@
       const mask = document.getElementById('pixel-mask');
       const counter = document.getElementById('zone-current');
       const zoneAnnouncer = document.getElementById('zone-announcer');
-      let current = 0, dragStart = 0, dragY = 0, dragDelta = 0, dragging = false;
+      let current = 0, dragStart = 0, dragY = 0, dragDelta = 0, dragging = false, activePointer = null;
       let holdTimer = 0;
       function clearZoneHold() { clearTimeout(holdTimer); stage.dataset.holding = 'false'; }
       function renderZones(animate = false) {
@@ -698,25 +723,33 @@
       document.getElementById('zone-next').addEventListener('click', () => stepZone(1));
       cards.forEach((card, index) => card.addEventListener('click', () => { if (!dragging && index !== current) { current = index; renderZones(true); } }));
       stage.addEventListener('pointerdown', event => {
+        if (activePointer !== null) return;
+        activePointer = event.pointerId;
         dragStart = event.clientX; dragY = event.clientY; dragging = false;
         clearZoneHold();
         holdTimer = setTimeout(() => { if (!dragging) stage.dataset.holding = 'true'; }, 280);
-        stage.setPointerCapture?.(event.pointerId);
       });
       stage.addEventListener('pointermove', event => {
-        if (!stage.hasPointerCapture?.(event.pointerId)) return;
+        if (event.pointerId !== activePointer) return;
         const dx = event.clientX - dragStart, dy = event.clientY - dragY;
         if (Math.abs(dx) > 8 || Math.abs(dy) > 8) clearZoneHold();
-        if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) { dragging = true; dragDelta = Math.max(-110, Math.min(110, dx)); renderZones(false); }
+        if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+          dragging = true;
+          if (!stage.hasPointerCapture?.(event.pointerId)) stage.setPointerCapture?.(event.pointerId);
+          dragDelta = Math.max(-110, Math.min(110, dx));
+          renderZones(false);
+        }
       }, { passive: true });
       function endDrag(event) {
+        if (event.pointerId !== activePointer) return;
         clearZoneHold();
         if (Math.abs(dragDelta) > 54) stepZone(dragDelta < 0 ? 1 : -1); else { dragDelta = 0; renderZones(false); }
         setTimeout(() => { dragging = false; }, 0);
-        stage.releasePointerCapture?.(event.pointerId);
+        if (stage.hasPointerCapture?.(event.pointerId)) stage.releasePointerCapture?.(event.pointerId);
+        activePointer = null;
       }
       stage.addEventListener('pointerup', endDrag);
-      stage.addEventListener('pointercancel', event => { clearZoneHold(); dragDelta = 0; dragging = false; renderZones(false); stage.releasePointerCapture?.(event.pointerId); });
+      stage.addEventListener('pointercancel', event => { if (event.pointerId !== activePointer) return; clearZoneHold(); dragDelta = 0; dragging = false; renderZones(false); if (stage.hasPointerCapture?.(event.pointerId)) stage.releasePointerCapture?.(event.pointerId); activePointer = null; });
       stage.addEventListener('keydown', event => {
         if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') event.preventDefault();
         if (event.key === 'ArrowLeft') stepZone(-1);
