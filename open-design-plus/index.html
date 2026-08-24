@@ -270,61 +270,59 @@
     .club-fact span { max-width: 23ch; font-weight: 650; line-height: 1.25; }
 
     .rental-block { margin: 0; padding: 0; }
-    .rental-head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 32px; align-items: end; margin-bottom: 36px; }
+    .rental-head { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 32px; align-items: end; margin-bottom: 40px; }
     .rental-head .lead { justify-self: end; }
-    .device-groups { display: grid; gap: 10px; }
+    .device-groups { display: grid; gap: 12px; }
     .device-group { overflow: hidden; border-radius: var(--radius-lg); background: var(--surface); }
-    .device-group summary { min-height: 76px; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 18px; padding: 0 22px; cursor: pointer; list-style: none; transition: color .18s ease, background .18s ease; }
+    .device-group summary { min-height: 156px; display: grid; grid-template-columns: 210px minmax(0, 1fr) auto 22px; align-items: center; gap: clamp(18px, 3vw, 38px); padding: 12px 28px 12px 14px; cursor: pointer; list-style: none; transition: color .18s ease, background .18s ease; }
     .device-group summary::-webkit-details-marker { display: none; }
-    .device-group summary strong { font-family: var(--font-display); font-size: clamp(23px, 3vw, 34px); text-transform: uppercase; }
-    .device-group summary small { color: currentColor; opacity: .62; font: 600 11px/1 var(--font-mono); }
-    .device-group summary::after { content: ""; width: 18px; height: 18px; background: linear-gradient(currentColor, currentColor) center / 12px 1px no-repeat, linear-gradient(currentColor, currentColor) center / 1px 12px no-repeat; transition: transform .2s ease; }
+    .device-art { height: 132px; display: grid; place-items: center; overflow: hidden; }
+    .device-art img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 18px 24px rgb(0 0 0 / .28)); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+    .device-group summary:hover .device-art img, .device-group[open] .device-art img { transform: translateY(-4px) rotate(-2deg) scale(1.035); }
+    .device-summary-copy { display: grid; gap: 9px; }
+    .device-summary-copy strong { font-family: var(--font-display); font-size: clamp(30px, 4vw, 48px); line-height: .9; text-transform: uppercase; }
+    .device-summary-copy small { color: currentColor; opacity: .62; font: 650 12px/1 var(--font-mono); text-transform: uppercase; }
+    .device-from { color: var(--accent); font: 800 clamp(26px, 3vw, 38px)/1 var(--font-display); white-space: nowrap; text-transform: uppercase; }
+    .device-group summary::after { content: ""; grid-column: 4; width: 18px; height: 18px; background: linear-gradient(currentColor, currentColor) center / 12px 1px no-repeat, linear-gradient(currentColor, currentColor) center / 1px 12px no-repeat; transition: transform .2s ease; }
     .device-group summary:hover, .device-group summary:active, .device-group[open] summary { color: var(--bg); background: var(--accent); }
+    .device-group summary:hover .device-from, .device-group summary:active .device-from, .device-group[open] .device-from { color: var(--bg); }
     .device-group[open] summary::after { transform: rotate(45deg); }
-    .device-list { padding: 12px 22px 22px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
-    .device-item { min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .device-item b { font-size: 14px; font-weight: 650; }
-    .device-price { flex: 0 0 auto; display: inline-flex; align-items: baseline; gap: 7px; color: var(--fg); font: 700 12px/1 var(--font-mono); }
+    .device-list { padding: 8px 28px 28px 238px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+    .device-item { min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid color-mix(in oklch, var(--muted) 24%, transparent); }
+    .device-item b { font-size: 15px; font-weight: 650; }
+    .device-price { flex: 0 0 auto; display: inline-flex; align-items: baseline; gap: 7px; color: var(--fg); font: 750 14px/1 var(--font-mono); }
     .device-price del { color: var(--muted); font-weight: 500; text-decoration-thickness: 1px; }
-    .rental-link { margin-top: 24px; }
+    .rental-link { margin-top: 26px; }
 
     .price-race { display: grid; gap: 10px; }
-    .price-head, .price-row { display: grid; grid-template-columns: 1.25fr repeat(4, minmax(108px, .7fr)); gap: 14px; align-items: center; }
-    .price-head { padding: 0 18px 14px; color: var(--muted); font: 600 10px/1 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; }
-    .price-row { position: relative; min-height: 126px; padding: 28px 18px; overflow: hidden; border-radius: var(--radius-lg); background: var(--surface); transition: color .18s ease, background .18s ease, transform .18s ease; }
+    .price-head, .price-row { display: grid; grid-template-columns: minmax(270px, 1.35fr) repeat(4, minmax(116px, .72fr)); gap: 16px; align-items: center; }
+    .price-head { padding: 0 24px 12px; color: var(--muted); font: 650 12px/1 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+    .price-head span:not(:first-child) { text-align: center; }
+    .price-row { position: relative; min-height: 118px; padding: 24px; overflow: hidden; border-radius: var(--radius-lg); background: var(--surface); transition: color .18s ease, background .18s ease, transform .18s ease; }
     .price-row:hover, .price-row:active { color: var(--bg); background: var(--accent); transform: translateY(-2px); }
-    .price-zone strong { display: block; color: var(--accent); font-family: var(--font-display); font-size: clamp(25px, 3vw, 36px); text-transform: uppercase; }
-    .price-zone small { color: var(--muted); }
-    .price-cell { font: 700 14px/1.25 var(--font-mono); }
-    .price-cell small { display: none; margin-bottom: 5px; color: var(--muted); font: 500 9px/1 var(--font-mono); text-transform: uppercase; }
+    .price-zone strong { display: block; color: var(--accent); font-family: var(--font-display); font-size: clamp(30px, 3vw, 40px); line-height: .92; text-transform: uppercase; }
+    .price-zone small { display: block; margin-top: 9px; color: var(--muted); font-size: 13px; }
+    .price-cell { text-align: center; white-space: nowrap; font: 800 clamp(22px, 2vw, 30px)/1 var(--font-mono); font-variant-numeric: tabular-nums; }
+    .price-cell small { display: none; margin-bottom: 7px; color: var(--muted); font: 600 10px/1 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
     .price-row:hover .price-zone strong, .price-row:active .price-zone strong { color: var(--bg); }
     .price-row:hover .price-zone small, .price-row:active .price-zone small, .price-row:hover .price-cell small, .price-row:active .price-cell small { color: color-mix(in oklch, var(--bg) 74%, var(--accent)); }
 
     .promos { padding-top: 0; }
-    .promo-board { display: grid; gap: 12px; }
-    .promo-welcome { min-height: 210px; display: grid; grid-template-columns: minmax(180px, .42fr) 1fr; gap: 32px; align-items: center; padding: clamp(26px, 4vw, 46px); border-radius: var(--radius-lg); color: var(--bg); background: var(--accent); }
-    .promo-welcome > strong { font: 850 clamp(64px, 9vw, 124px)/.78 var(--font-display); letter-spacing: -.04em; }
-    .promo-welcome h3 { font-size: clamp(30px, 4vw, 48px); }
-    .promo-welcome p { margin-top: 10px; max-width: 38ch; font-size: 16px; font-weight: 600; }
-    .promo-field { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); gap: 12px; }
-    .promo-main, .promo-item { border-radius: var(--radius-lg); }
-    .promo-main { min-height: 520px; display: flex; flex-direction: column; justify-content: space-between; gap: 54px; padding: clamp(28px, 5vw, 58px); color: var(--bg); background: var(--fg); }
-    .promo-main strong { color: var(--accent); font: 850 clamp(78px, 13vw, 178px)/.72 var(--font-display); letter-spacing: -.04em; }
-    .promo-main h3 { max-width: 10ch; font-size: clamp(36px, 6vw, 72px); }
-    .promo-main p { margin-top: 18px; max-width: 36ch; font-size: 18px; font-weight: 600; }
-    .promo-stack { display: grid; gap: 12px; }
-    .promo-item { min-height: 164px; display: grid; grid-template-columns: minmax(100px, .34fr) 1fr; gap: 24px; align-items: center; padding: clamp(24px, 3vw, 36px); background: var(--surface); }
-    .promo-item:nth-child(2) { color: var(--bg); background: var(--fg); }
-    .promo-item > strong { color: var(--accent); font: 800 clamp(34px, 5vw, 62px)/.82 var(--font-display); letter-spacing: -.03em; }
-    .promo-item:nth-child(2) > strong { color: var(--bg); }
-    .promo-item h3 { font-size: clamp(27px, 3vw, 38px); }
-    .promo-item p { margin-top: 8px; color: var(--muted); font-size: 14px; }
-    .promo-item:nth-child(2) p { color: var(--bg); opacity: .68; }
-    .promo-discounts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .promo-discount { min-height: 154px; display: grid; grid-template-columns: minmax(110px, .3fr) 1fr; gap: 24px; align-items: center; padding: clamp(24px, 3vw, 36px); border-radius: var(--radius-lg); background: var(--surface); }
-    .promo-discount strong { color: var(--accent); font: 800 clamp(40px, 5vw, 66px)/.82 var(--font-display); letter-spacing: -.03em; }
-    .promo-discount h3 { font-size: clamp(24px, 3vw, 34px); }
-    .promo-discount p { margin-top: 7px; color: var(--muted); font-size: 14px; }
+    .promo-board { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; }
+    .promo-card { grid-column: span 3; min-height: 216px; display: flex; flex-direction: column; justify-content: space-between; gap: 30px; padding: clamp(24px, 3vw, 38px); border-radius: var(--radius-lg); background: var(--surface); }
+    .promo-card > strong { color: var(--accent); font: 850 clamp(50px, 6vw, 82px)/.78 var(--font-display); letter-spacing: -.035em; white-space: nowrap; }
+    .promo-card h3 { font-size: clamp(25px, 3vw, 38px); }
+    .promo-card p { margin-top: 9px; max-width: 36ch; color: var(--muted); font-size: 15px; }
+    .promo-card--welcome, .promo-card--friend { grid-column: span 6; min-height: 318px; }
+    .promo-card--welcome { color: var(--bg); background: var(--fg); }
+    .promo-card--welcome p { color: color-mix(in oklch, var(--bg) 68%, var(--fg)); }
+    .promo-card--friend > strong { font-size: clamp(78px, 11vw, 146px); }
+    .promo-card--taxi { color: var(--bg); background: var(--fg); }
+    .promo-card--taxi > strong { color: var(--bg); }
+    .promo-card--taxi p { color: color-mix(in oklch, var(--bg) 68%, var(--fg)); }
+    .promo-card--discount { color: var(--bg); background: var(--accent); }
+    .promo-card--discount > strong { color: var(--bg); }
+    .promo-card--discount p { color: color-mix(in oklch, var(--bg) 72%, var(--accent)); }
     .promo-note { margin-top: 18px; max-width: 72ch; color: var(--muted); font-size: 13px; }
 
     .voices { padding-top: 0; }
@@ -401,13 +399,16 @@
       .club-fact:first-child { grid-column: 1 / -1; }
       .rental-head { grid-template-columns: 1fr; align-items: start; }
       .rental-head .lead { justify-self: start; }
+      .device-group summary { grid-template-columns: 160px minmax(0, 1fr) auto 22px; }
+      .device-list { padding-left: 28px; }
       .price-head { display: none; }
-      .price-row { grid-template-columns: 1fr 1fr; gap: 18px 24px; }
-      .price-zone { grid-column: 1 / -1; padding-bottom: 10px; }
+      .price-row { grid-template-columns: 1fr 1fr; gap: 0; padding: 24px; }
+      .price-zone { grid-column: 1 / -1; padding-bottom: 18px; }
+      .price-cell { padding: 16px 8px; border-top: 1px solid color-mix(in oklch, var(--muted) 24%, transparent); }
+      .price-cell:nth-child(3), .price-cell:nth-child(5) { border-left: 1px solid color-mix(in oklch, var(--muted) 24%, transparent); }
       .price-cell small { display: block; }
-      .promo-welcome { grid-template-columns: minmax(150px, .34fr) 1fr; }
-      .promo-field { grid-template-columns: 1fr; }
-      .promo-main { min-height: 440px; }
+      .promo-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .promo-card, .promo-card--welcome, .promo-card--friend { grid-column: span 1; }
       .review-grid { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
       .review-grid::-webkit-scrollbar { display: none; }
       .review-card { flex: 0 0 min(78vw, 520px); min-height: 320px; scroll-snap-align: center; }
@@ -438,16 +439,25 @@
       .club-facts { grid-template-columns: 1fr 1fr; }
       .club-fact, .club-fact:first-child { min-height: 150px; padding: 22px; }
       .club-fact:first-child { min-height: 190px; }
-      .device-group summary { min-height: 68px; gap: 12px; }
-      .device-group summary small { font-size: 9px; }
-      .device-list { grid-template-columns: 1fr; }
-      .promo-welcome { grid-template-columns: 1fr; gap: 20px; min-height: 250px; padding: 28px 22px; }
-      .promo-welcome > strong { font-size: clamp(72px, 24vw, 108px); }
-      .promo-main { min-height: 390px; padding: 28px 22px; }
-      .promo-main strong { font-size: clamp(76px, 27vw, 118px); }
-      .promo-item { grid-template-columns: 86px 1fr; gap: 18px; padding: 24px 20px; }
-      .promo-discounts { grid-template-columns: 1fr; }
-      .promo-discount { grid-template-columns: 96px 1fr; gap: 18px; padding: 24px 20px; }
+      .device-group summary { min-height: 118px; grid-template-columns: 82px minmax(0, 1fr) 20px; grid-template-rows: auto auto; gap: 7px 14px; padding: 10px 18px 10px 10px; }
+      .device-art { grid-column: 1; grid-row: 1 / span 2; height: 92px; }
+      .device-summary-copy { grid-column: 2; grid-row: 1; gap: 6px; }
+      .device-summary-copy strong { font-size: clamp(25px, 8vw, 34px); }
+      .device-summary-copy small { font-size: 9px; }
+      .device-from { grid-column: 2; grid-row: 2; align-self: start; font-size: 23px; }
+      .device-group summary::after { grid-column: 3; grid-row: 1 / span 2; }
+      .device-list { grid-template-columns: 1fr; padding: 8px 18px 22px; }
+      .device-item b { font-size: 13px; }
+      .device-price { font-size: 12px; }
+      .price-row { padding: 22px 18px; }
+      .price-zone strong { font-size: 34px; }
+      .price-cell { font-size: 24px; }
+      .promo-card, .promo-card--welcome, .promo-card--friend { min-height: 178px; padding: 22px 20px; }
+      .promo-card--welcome, .promo-card--friend { grid-column: 1 / -1; min-height: 230px; }
+      .promo-card > strong { font-size: clamp(46px, 15vw, 62px); }
+      .promo-card--friend > strong { font-size: clamp(76px, 24vw, 104px); }
+      .promo-card h3 { font-size: clamp(22px, 7vw, 30px); }
+      .promo-card p { font-size: 13px; }
       .review-card { flex-basis: calc(100vw - 52px); min-height: 300px; }
       .faq-item summary { min-height: 72px; padding: 17px 18px; }
       .faq-answer { padding: 18px 18px 22px; }
@@ -577,12 +587,12 @@
       <div class="container">
         <div class="rental-block" data-od-id="device-rental">
           <header class="rental-head">
-            <h2 data-od-id="rental-title">Аренда девайсов.</h2>
-            <p class="lead">Попробуй топовый девайс прямо на сессии. Сейчас на весь каталог действует скидка 50%.</p>
+            <h2 data-od-id="rental-title">Девайсы в аренду.</h2>
+            <p class="lead">Мыши, клавиатуры, наушники и аксессуары можно взять на время игры. Сейчас действует скидка 50%.</p>
           </header>
           <div class="device-groups">
             <details class="device-group" data-od-id="rental-mice">
-              <summary><strong>Мыши</strong><small>5 моделей · 50–100 ₽</small></summary>
+              <summary><span class="device-art" aria-hidden="true"><img src="assets/device-mouse.webp" alt="" width="1200" height="800" loading="lazy" decoding="async"></span><span class="device-summary-copy"><strong>Мыши</strong><small>5 моделей</small></span><span class="device-from">от 50 ₽</span></summary>
               <div class="device-list">
                 <div class="device-item"><b>Lunacy One</b><span class="device-price"><del>200 ₽</del>100 ₽</span></div>
                 <div class="device-item"><b>Logitech G Pro X Superlight 2 SE</b><span class="device-price"><del>200 ₽</del>100 ₽</span></div>
@@ -592,7 +602,7 @@
               </div>
             </details>
             <details class="device-group" data-od-id="rental-keyboards">
-              <summary><strong>Клавиатуры</strong><small>4 модели · 50–100 ₽</small></summary>
+              <summary><span class="device-art" aria-hidden="true"><img src="assets/device-keyboard.webp" alt="" width="1200" height="800" loading="lazy" decoding="async"></span><span class="device-summary-copy"><strong>Клавиатуры</strong><small>4 модели</small></span><span class="device-from">от 50 ₽</span></summary>
               <div class="device-list">
                 <div class="device-item"><b>Dark Project KD87A LTD</b><span class="device-price"><del>200 ₽</del>100 ₽</span></div>
                 <div class="device-item"><b>Ajazz AK980</b><span class="device-price"><del>150 ₽</del>75 ₽</span></div>
@@ -601,7 +611,7 @@
               </div>
             </details>
             <details class="device-group" data-od-id="rental-headsets">
-              <summary><strong>Наушники</strong><small>4 модели · 50–100 ₽</small></summary>
+              <summary><span class="device-art" aria-hidden="true"><img src="assets/device-headset.webp" alt="" width="900" height="930" loading="lazy" decoding="async"></span><span class="device-summary-copy"><strong>Наушники</strong><small>4 модели</small></span><span class="device-from">от 50 ₽</span></summary>
               <div class="device-list">
                 <div class="device-item"><b>Lunacy Louder</b><span class="device-price"><del>200 ₽</del>100 ₽</span></div>
                 <div class="device-item"><b>Logitech G Pro X 2 Lightspeed</b><span class="device-price"><del>200 ₽</del>100 ₽</span></div>
@@ -610,14 +620,14 @@
               </div>
             </details>
             <details class="device-group" data-od-id="rental-accessories">
-              <summary><strong>Аксессуары</strong><small>2 модели · 50–75 ₽</small></summary>
+              <summary><span class="device-art" aria-hidden="true"><img src="assets/device-accessories.webp" alt="" width="1200" height="800" loading="lazy" decoding="async"></span><span class="device-summary-copy"><strong>Аксессуары</strong><small>2 позиции</small></span><span class="device-from">от 50 ₽</span></summary>
               <div class="device-list">
                 <div class="device-item"><b>Стримпад Ajazz AKP153R</b><span class="device-price"><del>150 ₽</del>75 ₽</span></div>
                 <div class="device-item"><b>Коврик ARDOR GAMING Glass</b><span class="device-price"><del>100 ₽</del>50 ₽</span></div>
               </div>
             </details>
           </div>
-          <a class="text-link rental-link" href="tel:+79185550090">Уточнить наличие у администратора →</a>
+          <a class="text-link rental-link" href="tel:+79185550090">Уточнить наличие →</a>
         </div>
       </div>
     </section>
@@ -644,24 +654,12 @@
           <div><h2>Бонусы и скидки.</h2></div>
         </header>
         <div class="promo-board">
-          <article class="promo-welcome">
-            <strong>500 ₽</strong>
-            <div><h3>Новым гостям</h3><p>Бонус на игровой баланс при первом посещении.</p></div>
-          </article>
-          <div class="promo-field">
-            <article class="promo-main">
-              <strong>100%</strong>
-              <div><h3>За друга</h3><p>Приведи нового гостя — начислим сумму его пополнения на твой баланс.</p></div>
-            </article>
-            <div class="promo-stack">
-              <article class="promo-item"><strong>×2</strong><div><h3>Сейф</h3><p>Угадай код и удвой пополнение от 600 ₽.</p></div></article>
-              <article class="promo-item"><strong>400&nbsp;₽</strong><div><h3>Такси до клуба</h3><p>Вернём до 400 ₽ за поездку на игровой баланс при пополнении от 500 ₽.</p></div></article>
-            </div>
-          </div>
-          <div class="promo-discounts">
-            <article class="promo-discount"><strong>−25%</strong><div><h3>Школьникам</h3><p>По дневнику.</p></div></article>
-            <article class="promo-discount"><strong>−20%</strong><div><h3>Студентам и курсантам</h3><p>При предъявлении документа.</p></div></article>
-          </div>
+          <article class="promo-card promo-card--welcome"><strong>500 ₽</strong><div><h3>Новым гостям</h3><p>Бонус на баланс при первом посещении.</p></div></article>
+          <article class="promo-card promo-card--friend"><strong>100%</strong><div><h3>За друга</h3><p>Начислим сумму его пополнения на твой баланс.</p></div></article>
+          <article class="promo-card promo-card--safe"><strong>×2</strong><div><h3>Сейф</h3><p>Угадай код и удвой пополнение от 600 ₽.</p></div></article>
+          <article class="promo-card promo-card--taxi"><strong>400 ₽</strong><div><h3>Такси до клуба</h3><p>Вернём до 400 ₽ за поездку при пополнении от 500 ₽.</p></div></article>
+          <article class="promo-card promo-card--discount"><strong>−25%</strong><div><h3>Школьникам</h3><p>По дневнику.</p></div></article>
+          <article class="promo-card promo-card--discount"><strong>−20%</strong><div><h3>Студентам</h3><p>И курсантам — по документу.</p></div></article>
         </div>
         <p class="promo-note">Условия акций могут меняться. Перед визитом уточни детали у администратора по телефону или в Telegram.</p>
       </div>
