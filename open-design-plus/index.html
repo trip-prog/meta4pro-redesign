@@ -262,7 +262,7 @@
     .gallery-tools { margin-top: 20px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
     .gallery-tools p { max-width: 54ch; color: var(--muted); }
     .gallery-controls { flex: 0 0 auto; display: flex; gap: 10px; }
-    .club-facts { margin-top: clamp(44px, 7vw, 80px); display: grid; grid-template-columns: 1.25fr .75fr .75fr .9fr; overflow: hidden; border-radius: var(--radius-lg); color: var(--bg); background: var(--accent); }
+    .club-facts { margin-top: clamp(44px, 7vw, 80px); display: grid; grid-template-columns: 1.25fr .75fr .9fr; overflow: hidden; border-radius: var(--radius-lg); color: var(--bg); background: var(--accent); }
     .club-fact { min-height: 176px; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; padding: clamp(22px, 3vw, 34px); }
     .club-fact:first-child { min-height: 224px; background: var(--fg); }
     .club-fact strong { font: 800 clamp(36px, 5vw, 70px)/.82 var(--font-display); letter-spacing: -.03em; text-transform: uppercase; }
@@ -300,22 +300,16 @@
     .price-row:hover .price-zone strong, .price-row:active .price-zone strong { color: var(--bg); }
     .price-row:hover .price-zone small, .price-row:active .price-zone small, .price-row:hover .price-cell small, .price-row:active .price-cell small { color: color-mix(in oklch, var(--bg) 74%, var(--accent)); }
 
-    .advantages { margin-top: clamp(56px, 10vw, 112px); display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-    .advantage { min-height: 174px; padding: 24px; border-radius: var(--radius-lg); background: var(--surface); }
-    .advantage:nth-child(1) { grid-column: span 3; }
-    .advantage:nth-child(2) { grid-column: span 1; }
-    .advantage:nth-child(3) { grid-column: span 2; }
-    .advantage:nth-child(4) { grid-column: 3 / -1; }
-    .advantage:first-child { color: var(--bg); background: var(--accent); }
-    .advantage:first-child p { color: color-mix(in oklch, var(--bg) 74%, var(--accent)); }
-    .advantage b { display: block; margin-bottom: 20px; font: 800 clamp(30px, 5vw, 64px)/.85 var(--font-display); text-transform: uppercase; }
-    .advantage p { color: var(--muted); font-size: 14px; }
-
     .promos { padding-top: 0; }
+    .promo-board { display: grid; gap: 12px; }
+    .promo-welcome { min-height: 210px; display: grid; grid-template-columns: minmax(180px, .42fr) 1fr; gap: 32px; align-items: center; padding: clamp(26px, 4vw, 46px); border-radius: var(--radius-lg); color: var(--bg); background: var(--accent); }
+    .promo-welcome > strong { font: 850 clamp(64px, 9vw, 124px)/.78 var(--font-display); letter-spacing: -.04em; }
+    .promo-welcome h3 { font-size: clamp(30px, 4vw, 48px); }
+    .promo-welcome p { margin-top: 10px; max-width: 38ch; font-size: 16px; font-weight: 600; }
     .promo-field { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); gap: 12px; }
     .promo-main, .promo-item { border-radius: var(--radius-lg); }
-    .promo-main { min-height: 520px; display: flex; flex-direction: column; justify-content: space-between; gap: 54px; padding: clamp(28px, 5vw, 58px); color: var(--bg); background: var(--accent); }
-    .promo-main strong { font: 850 clamp(78px, 13vw, 178px)/.72 var(--font-display); letter-spacing: -.04em; }
+    .promo-main { min-height: 520px; display: flex; flex-direction: column; justify-content: space-between; gap: 54px; padding: clamp(28px, 5vw, 58px); color: var(--bg); background: var(--fg); }
+    .promo-main strong { color: var(--accent); font: 850 clamp(78px, 13vw, 178px)/.72 var(--font-display); letter-spacing: -.04em; }
     .promo-main h3 { max-width: 10ch; font-size: clamp(36px, 6vw, 72px); }
     .promo-main p { margin-top: 18px; max-width: 36ch; font-size: 18px; font-weight: 600; }
     .promo-stack { display: grid; gap: 12px; }
@@ -326,17 +320,20 @@
     .promo-item h3 { font-size: clamp(27px, 3vw, 38px); }
     .promo-item p { margin-top: 8px; color: var(--muted); font-size: 14px; }
     .promo-item:nth-child(2) p { color: var(--bg); opacity: .68; }
+    .promo-discounts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .promo-discount { min-height: 154px; display: grid; grid-template-columns: minmax(110px, .3fr) 1fr; gap: 24px; align-items: center; padding: clamp(24px, 3vw, 36px); border-radius: var(--radius-lg); background: var(--surface); }
+    .promo-discount strong { color: var(--accent); font: 800 clamp(40px, 5vw, 66px)/.82 var(--font-display); letter-spacing: -.03em; }
+    .promo-discount h3 { font-size: clamp(24px, 3vw, 34px); }
+    .promo-discount p { margin-top: 7px; color: var(--muted); font-size: 14px; }
     .promo-note { margin-top: 18px; max-width: 72ch; color: var(--muted); font-size: 13px; }
 
     .voices { padding-top: 0; }
-    .review-grid { display: grid; grid-template-columns: 1.2fr .9fr .9fr; gap: 12px; }
-    .review-card { min-height: 360px; display: flex; flex-direction: column; justify-content: space-between; gap: 36px; margin: 0; padding: clamp(26px, 4vw, 44px); border-radius: var(--radius-lg); background: var(--surface); }
-    .review-card:first-child { min-height: 430px; color: var(--bg); background: var(--accent); }
-    .review-card blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(23px, 3vw, 37px); font-weight: 650; line-height: 1.08; }
+    .review-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .review-card { min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; gap: 36px; margin: 0; padding: clamp(26px, 4vw, 44px); border-radius: var(--radius-lg); color: var(--bg); background: var(--accent); }
+    .review-card blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(22px, 2vw, 30px); font-weight: 650; line-height: 1.08; }
     .review-card footer { display: flex; justify-content: space-between; gap: 18px; align-items: end; }
     .review-card footer strong { font-size: 15px; }
-    .review-card footer a { min-height: 44px; display: inline-flex; align-items: center; color: var(--accent); font: 700 10px/1 var(--font-mono); text-transform: uppercase; }
-    .review-card:first-child footer a { color: var(--bg); }
+    .review-card footer a { min-height: 44px; display: inline-flex; align-items: center; color: var(--bg); font: 700 10px/1 var(--font-mono); text-transform: uppercase; }
     .review-card footer a:hover, .review-card footer a:active { text-decoration: underline; text-underline-offset: 4px; }
 
     .faq { padding-top: 0; }
@@ -408,13 +405,12 @@
       .price-row { grid-template-columns: 1fr 1fr; gap: 18px 24px; }
       .price-zone { grid-column: 1 / -1; padding-bottom: 10px; }
       .price-cell small { display: block; }
-      .advantages { grid-template-columns: repeat(2, 1fr); }
-      .advantage:nth-child(1), .advantage:nth-child(2), .advantage:nth-child(3), .advantage:nth-child(4) { grid-column: auto; }
+      .promo-welcome { grid-template-columns: minmax(150px, .34fr) 1fr; }
       .promo-field { grid-template-columns: 1fr; }
       .promo-main { min-height: 440px; }
       .review-grid { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
       .review-grid::-webkit-scrollbar { display: none; }
-      .review-card, .review-card:first-child { flex: 0 0 min(78vw, 520px); min-height: 360px; scroll-snap-align: center; }
+      .review-card { flex: 0 0 min(78vw, 520px); min-height: 320px; scroll-snap-align: center; }
       .faq-layout { grid-template-columns: 1fr; }
       .faq-intro { position: static; }
       .booking .container { grid-template-columns: 1fr; }
@@ -445,12 +441,14 @@
       .device-group summary { min-height: 68px; gap: 12px; }
       .device-group summary small { font-size: 9px; }
       .device-list { grid-template-columns: 1fr; }
-      .advantages { grid-template-columns: 1fr; }
-      .advantage:nth-child(1), .advantage:nth-child(2), .advantage:nth-child(3), .advantage:nth-child(4) { min-height: 132px; }
+      .promo-welcome { grid-template-columns: 1fr; gap: 20px; min-height: 250px; padding: 28px 22px; }
+      .promo-welcome > strong { font-size: clamp(72px, 24vw, 108px); }
       .promo-main { min-height: 390px; padding: 28px 22px; }
       .promo-main strong { font-size: clamp(76px, 27vw, 118px); }
       .promo-item { grid-template-columns: 86px 1fr; gap: 18px; padding: 24px 20px; }
-      .review-card, .review-card:first-child { flex-basis: calc(100vw - 52px); min-height: 340px; }
+      .promo-discounts { grid-template-columns: 1fr; }
+      .promo-discount { grid-template-columns: 96px 1fr; gap: 18px; padding: 24px 20px; }
+      .review-card { flex-basis: calc(100vw - 52px); min-height: 300px; }
       .faq-item summary { min-height: 72px; padding: 17px 18px; }
       .faq-answer { padding: 18px 18px 22px; }
       .booking-actions { flex-direction: column; align-items: stretch; }
@@ -550,29 +548,27 @@
     <section class="section club-life" id="club" data-nav-section="zones" data-od-id="club-life">
       <div class="container">
         <header class="section-head">
-          <div><h2>Вот как здесь выглядит.</h2></div>
-          <p class="lead">Игровые места, закрытые комнаты, стойка и пространство между матчами. Всё в одном клубе.</p>
+          <div><h2>Внутри клуба.</h2></div>
+          <p class="lead">Общий зал, Арена, отдельные комнаты и бар.</p>
         </header>
         <div class="gallery-shell">
           <div class="gallery-track" id="club-gallery" tabindex="0" aria-label="Фотографии клуба META4PRO">
-            <figure class="gallery-shot"><img src="assets/gallery-01.jpg" alt="Гость играет за компьютером META4PRO" width="1200" height="800" loading="lazy" decoding="async"><figcaption><b>Можно зайти одному</b><span>Игровое место</span></figcaption></figure>
-            <figure class="gallery-shot is-narrow"><img src="assets/gallery-02.jpeg" alt="Фирменные игровые кресла и компьютеры META4PRO" width="1600" height="1067" loading="lazy" decoding="async"><figcaption><b>Кресло, стол, свой экран</b><span>Игровое место</span></figcaption></figure>
-            <figure class="gallery-shot"><img src="assets/gallery-04.jpg" alt="Ряд полностью оборудованных игровых мест META4PRO" width="1280" height="854" loading="lazy" decoding="async"><figcaption><b>Или собрать всю пати</b><span>Места рядом</span></figcaption></figure>
-            <figure class="gallery-shot"><img src="assets/gallery-05.jpg" alt="Закрытая игровая комната META4PRO" width="1280" height="853" loading="lazy" decoding="async"><figcaption><b>Закрыть дверь и играть</b><span>Приватная комната</span></figcaption></figure>
-            <figure class="gallery-shot is-narrow"><img src="assets/gallery-07.jpg" alt="Игровой зал META4PRO во время сессии" width="1280" height="853" loading="lazy" decoding="async"><figcaption><b>Клуб живёт всю ночь</b><span>24 / 7</span></figcaption></figure>
-            <figure class="gallery-shot"><img src="assets/gallery-09.jpg" alt="Стойка и зона отдыха META4PRO" width="1280" height="854" loading="lazy" decoding="async"><figcaption><b>Перерыв тоже часть игры</b><span>Стойка и бар</span></figcaption></figure>
-            <figure class="gallery-shot is-narrow"><img src="assets/gallery-10.jpg" alt="Напитки и снеки в баре META4PRO" width="1280" height="854" loading="lazy" decoding="async"><figcaption><b>Снеки на месте</b><span>Бар клуба</span></figcaption></figure>
+            <figure class="gallery-shot is-narrow"><img src="assets/gallery-02.jpeg" alt="Фирменные игровые кресла и компьютеры META4PRO" width="1600" height="1067" loading="lazy" decoding="async"><figcaption><b>Игровые места</b><span>Компьютеры и девайсы</span></figcaption></figure>
+            <figure class="gallery-shot"><img src="assets/gallery-04.jpg" alt="Ряд полностью оборудованных игровых мест META4PRO" width="1280" height="854" loading="lazy" decoding="async"><figcaption><b>Общий зал</b><span>8 игровых мест</span></figcaption></figure>
+            <figure class="gallery-shot"><img src="assets/gallery-05.jpg" alt="Закрытая игровая комната META4PRO" width="1280" height="853" loading="lazy" decoding="async"><figcaption><b>Bootcamp</b><span>Закрытая комната</span></figcaption></figure>
+            <figure class="gallery-shot is-narrow"><img src="assets/gallery-07.jpg" alt="Игровой зал META4PRO во время сессии" width="1280" height="853" loading="lazy" decoding="async"><figcaption><b>Клуб ночью</b><span>Работаем круглосуточно</span></figcaption></figure>
+            <figure class="gallery-shot"><img src="assets/gallery-09.jpg" alt="Стойка и зона отдыха META4PRO" width="1280" height="854" loading="lazy" decoding="async"><figcaption><b>Бар и зона отдыха</b><span>Внутри клуба</span></figcaption></figure>
+            <figure class="gallery-shot is-narrow"><img src="assets/gallery-10.jpg" alt="Напитки и снеки в баре META4PRO" width="1280" height="854" loading="lazy" decoding="async"><figcaption><b>Напитки и снеки</b><span>Бар</span></figcaption></figure>
           </div>
           <div class="gallery-tools">
-            <p>Листай пальцем или стрелками. В клубе есть шкафчики, бар и гигабитный интернет от двух провайдеров.</p>
+            <p>В клубе есть шкафчики и бар.</p>
             <div class="gallery-controls"><button class="round-control" id="gallery-prev" type="button" aria-label="Предыдущая фотография" aria-controls="club-gallery">←</button><button class="round-control" id="gallery-next" type="button" aria-label="Следующая фотография" aria-controls="club-gallery">→</button></div>
           </div>
         </div>
         <div class="club-facts" aria-label="Что есть в META4PRO">
           <div class="club-fact"><strong>Своя комната.</strong><span>Bootcamp и Sigma Room: по шесть мест без посторонних.</span></div>
           <div class="club-fact"><strong>36</strong><span>игровых компьютеров в четырёх зонах</span></div>
-          <div class="club-fact"><strong>16 ГБ</strong><span>оперативной памяти и SSD во всех зонах</span></div>
-          <div class="club-fact"><strong>24/7</strong><span>работаем круглосуточно у ТРЦ «Горизонт»</span></div>
+          <div class="club-fact"><strong>24/7</strong><span>работаем круглосуточно</span></div>
         </div>
       </div>
     </section>
@@ -639,29 +635,32 @@
           <div class="price-row" data-od-id="price-bootcamp"><div class="price-zone"><strong>Bootcamp</strong><small>закрытая комната · i5-14400F · RTX 4060 Ti</small></div><div class="price-cell"><small>Час</small>135 ₽</div><div class="price-cell"><small>3+1</small>359 ₽</div><div class="price-cell"><small>5+1</small>549 ₽</div><div class="price-cell"><small>Ночь</small>549 ₽</div></div>
           <div class="price-row" data-od-id="price-sigma"><div class="price-zone"><strong>Sigma Room</strong><small>приватная комната · DDR5 · RTX 4060 Ti</small></div><div class="price-cell"><small>Час</small>189 ₽</div><div class="price-cell"><small>3+1</small>499 ₽</div><div class="price-cell"><small>5+1</small>679 ₽</div><div class="price-cell"><small>Ночь</small>749 ₽</div></div>
         </div>
-        <div class="advantages" data-od-id="advantages">
-          <div class="advantage" data-od-id="advantage-bonus"><b>500 ₽</b><p>Приветственный бонус новым гостям при первом посещении.</p></div>
-          <div class="advantage" data-od-id="advantage-students"><b>−20%</b><p>Скидка студентам и курсантам по документу.</p></div>
-          <div class="advantage" data-od-id="advantage-school"><b>−25%</b><p>Скидка школьникам по дневнику.</p></div>
-          <div class="advantage" data-od-id="advantage-comfort"><b>2 комнаты</b><p>Bootcamp и Sigma Room, по шесть мест без посторонних.</p></div>
-        </div>
       </div>
     </section>
 
     <section class="section promos" id="offers" data-nav-section="prices" data-od-id="offers">
       <div class="container">
         <header class="section-head">
-          <div><h2>Есть ещё бонусы.</h2></div>
-          <p class="lead">Приводи друзей, пополняй баланс и возвращай часть поездки игровыми бонусами.</p>
+          <div><h2>Бонусы и скидки.</h2></div>
         </header>
-        <div class="promo-field">
-          <article class="promo-main">
-            <strong>100%</strong>
-            <div><h3>Бонус за друга.</h3><p>Приведи нового гостя и получи на баланс сумму его пополнения.</p></div>
+        <div class="promo-board">
+          <article class="promo-welcome">
+            <strong>500 ₽</strong>
+            <div><h3>Новым гостям</h3><p>Бонус на игровой баланс при первом посещении.</p></div>
           </article>
-          <div class="promo-stack">
-            <article class="promo-item"><strong>×2</strong><div><h3>Сейф</h3><p>Угадай код и удвой пополнение от 600 ₽.</p></div></article>
-            <article class="promo-item"><strong>400 ₽</strong><div><h3>Такси до клуба</h3><p>Вернём до 400 ₽ за поездку на игровой баланс при пополнении от 500 ₽.</p></div></article>
+          <div class="promo-field">
+            <article class="promo-main">
+              <strong>100%</strong>
+              <div><h3>За друга</h3><p>Приведи нового гостя — начислим сумму его пополнения на твой баланс.</p></div>
+            </article>
+            <div class="promo-stack">
+              <article class="promo-item"><strong>×2</strong><div><h3>Сейф</h3><p>Угадай код и удвой пополнение от 600 ₽.</p></div></article>
+              <article class="promo-item"><strong>400&nbsp;₽</strong><div><h3>Такси до клуба</h3><p>Вернём до 400 ₽ за поездку на игровой баланс при пополнении от 500 ₽.</p></div></article>
+            </div>
+          </div>
+          <div class="promo-discounts">
+            <article class="promo-discount"><strong>−25%</strong><div><h3>Школьникам</h3><p>По дневнику.</p></div></article>
+            <article class="promo-discount"><strong>−20%</strong><div><h3>Студентам и курсантам</h3><p>При предъявлении документа.</p></div></article>
           </div>
         </div>
         <p class="promo-note">Условия акций могут меняться. Перед визитом уточни детали у администратора по телефону или в Telegram.</p>
@@ -672,12 +671,15 @@
       <div class="container">
         <header class="section-head">
           <div><h2>Гости говорят прямо.</h2></div>
-          <p class="lead">Отзывы о железе, атмосфере и сотрудниках клуба. Каждый со ссылкой на площадку.</p>
+          <p class="lead">Отзывы с Google Карт, Яндекс Карт, 2ГИС и VK.</p>
         </header>
         <div class="review-grid">
           <figure class="review-card"><blockquote>«Железо мощное, посадка комфортная. Админы разбираются в своём деле, есть шкафчики для вещей».</blockquote><footer><strong>ctak4</strong><a href="https://g.page/Meta4Pro?share=" target="_blank" rel="noopener">Google Карты ↗</a></footer></figure>
           <figure class="review-card"><blockquote>«Уютная обстановка, хорошее железо и сотрудники, которые общаются с игроками на одной волне».</blockquote><footer><strong>Аикоо Сан</strong><a href="https://yandex.ru/maps/-/CCUqYMCv8C" target="_blank" rel="noopener">Яндекс Карты ↗</a></footer></figure>
           <figure class="review-card"><blockquote>«Удобные кресла, всё чисто. Железо отличное — рекомендую».</blockquote><footer><strong>Иван Надточиев</strong><a href="https://go.2gis.com/m5bzt" target="_blank" rel="noopener">2ГИС ↗</a></footer></figure>
+          <figure class="review-card"><blockquote>«Крутое место! Хорошая атмосфера, отличные компьютеры и персонал, который разбирается в играх».</blockquote><footer><strong>Влад</strong><a href="https://yandex.ru/maps/-/CCUqYMCv8C" target="_blank" rel="noopener">Яндекс Карты ↗</a></footer></figure>
+          <figure class="review-card"><blockquote>«Всё на высшем уровне: атмосфера, вежливый персонал, топовые девайсы, турниры и акции».</blockquote><footer><strong>Миша Колодко</strong><a href="https://vk.com/meta4pro" target="_blank" rel="noopener">VK ↗</a></footer></figure>
+          <figure class="review-card"><blockquote>«Топовое железо, есть снеки, сотрудники всегда помогут и всё расскажут».</blockquote><footer><strong>Александр Новосёлов</strong><a href="https://go.2gis.com/m5bzt" target="_blank" rel="noopener">2ГИС ↗</a></footer></figure>
         </div>
       </div>
     </section>
