@@ -36,10 +36,10 @@ The memorable moment is the first viewport: the real Arena photo stays legible w
 | Hero headline | Huge condensed white/yellow type overlapping the scene | Semantic HTML/CSS |
 | Real club scene | Full-bleed Arena photograph | Existing `zone-arena.webp` |
 | Acrylic 4 and chrome | Large dimensional objects with black, gold and white highlights, transparency and pointer/touch parallax | Produced transparent raster assets + CSS transforms |
-| Lightning and diagonal tape | Oversized sharp yellow energy shapes | Authored SVG/CSS plus produced raster where depth is required |
+| Lightning accents | Sharp gold energy objects; broad diagonal bands are excluded by user feedback | Produced raster plus pointer/touch parallax |
 | Reactive atmosphere | Gold/amber ribbons, warm-white highlights and yellow impulses following pointer/touch | Canvas, reduced-motion fallback |
 | Four zones | Large photographic portals with live selection and specifications | Semantic React + existing zone photos |
-| Club atmosphere | Uneven real-photo collage, not an equal carousel | Semantic HTML/CSS + existing gallery photos |
+| Club atmosphere | Swipeable rail of eight unequal real-photo plates | Native HTML/CSS scroll-snap + existing gallery photos |
 | Prices | Dominant yellow field, large tariff values and tabs | Semantic HTML/CSS |
 | Rental | Oversized floating device products with readable rental prices | Existing transparent device images + HTML/CSS |
 | Bonuses | Uneven poster bento with dimensional safe/taxi/friend props | Semantic HTML/CSS + produced prop raster |

@@ -2,11 +2,11 @@
 name: "META4PRO"
 description: "Black Gold Voltage — mobile-first campaign with real club photography, compressed type and reactive gold material."
 colors:
-  campaign-black: "#050506"
-  campaign-black-soft: "#0d0d11"
-  campaign-black-raised: "#17151d"
-  warm-white: "#f7f5f1"
-  muted-metal: "#aaa5b0"
+  campaign-black: "#010100"
+  campaign-black-soft: "#090804"
+  campaign-black-raised: "#181714"
+  warm-white: "#fefefe"
+  muted-metal: "#c6c1b3"
   signal-yellow: "#fdcd05"
   signal-lemon: "#fff200"
   signal-amber: "#ce9100"
@@ -189,7 +189,7 @@ META4PRO выглядит как живая рекламная кампания 
 
 ## Layout
 
-Система mobile-first: один вертикальный поток, поля страницы `clamp(18px, 5vw, 72px)` и максимальная ширина сцены 1500px. Hero заполняет первый экран реальной фотографией ARENA; заголовок, акриловая `4`, lightning, fact plate и бронь образуют одну наложенную композицию. Ниже семь авторских сцен меняют плотность: порталы зон, фото-коллаж, жёлтая таблица цен, аренда, неровное bonus field, горизонтальный review rail и финальная бронь.
+Система mobile-first: один вертикальный поток, поля страницы `clamp(18px, 5vw, 72px)` и максимальная ширина сцены 1500px. Hero заполняет первый экран реальной фотографией ARENA; заголовок, акриловая `4`, lightning, fact plate и бронь образуют одну наложенную композицию. Ниже семь авторских сцен меняют плотность: порталы зон, свайп-галерея реальных фото, жёлтая таблица цен, аренда, неровное bonus field, горизонтальный review rail и финальная бронь.
 
 Ширины 360–430px являются основным контрольным диапазоном. При 700px Canvas повышает плотность только для точного указателя; с 720px раскрываются desktop-навигация и широкие композиции, с 1100px — асимметричное редакционное расширение. Контент и порядок действий не меняются между устройствами.
 
@@ -238,9 +238,9 @@ META4PRO выглядит как живая рекламная кампания 
 - **Device tabs:** горизонтальный scroll-snap rail на mobile и жёлтая нижняя линия активной категории.
 - **Price rows:** чёрно-жёлтая split plate с крупным Onest-числом.
 
-### Real-photo collage and reviews
+### Real-photo rail and reviews
 
-- **Collage:** три реальные фотографии разного масштаба и наклона плюс отдельный 24/7 plate.
+- **Gallery:** восемь реальных фотографий в нативном scroll-snap rail с разным масштабом plate и отдельным 24/7 акцентом.
 - **Reviews:** горизонтальный scroll-snap rail из жёлтых quote plates; источник остаётся ссылкой.
 
 ### Acrylic objects and atmosphere

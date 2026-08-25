@@ -50,6 +50,11 @@
   mix-blend-mode: screen;
 }
 
+@media (pointer: coarse) {
+  .atmosphere-fx::before { filter: none; }
+  .atmosphere-fx__canvas { mix-blend-mode: normal; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .atmosphere-fx__canvas { opacity: 0.86; }
   .atmosphere-fx::before { filter: blur(28px); }

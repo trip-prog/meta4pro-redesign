@@ -104,25 +104,25 @@ const faq = [
   ['Есть ночные игровые сессии?', 'Да. Клуб работает круглосуточно, ночной пакет действует с 21:00 до 05:00.']
 ];
 
-function AcrylicFour({ className = '' }) {
+function AcrylicFour({ className = '', eager = false }) {
   return (
     <div className={`campaign-four ${className}`} aria-hidden="true">
-      <img src={asset('campaign/meta4pro-acrylic-4-gold.png')} alt="" width="1161" height="1354" decoding="async" />
+      <img src={asset('campaign/meta4pro-acrylic-4-gold.webp')} alt="" width="900" height="1050" loading={eager ? 'eager' : 'lazy'} decoding="async" />
     </div>
   );
 }
 
-function Bolt({ className = '' }) {
+function Bolt({ className = '', eager = false }) {
   return (
-    <img className={`campaign-bolt ${className}`} src={asset('campaign/meta4pro-lightning-gold.png')} alt="" width="947" height="1661" decoding="async" aria-hidden="true" />
+    <img className={`campaign-bolt ${className}`} src={asset('campaign/meta4pro-lightning-gold.webp')} alt="" width="420" height="736" loading={eager ? 'eager' : 'lazy'} decoding="async" aria-hidden="true" />
   );
 }
 
-function ChromeBlob({ className = '' }) {
-  return <img className={`campaign-chrome ${className}`} src={asset('campaign/meta4pro-chrome-blob-gold.png')} alt="" width="1536" height="1024" decoding="async" aria-hidden="true" />;
+function ChromeBlob({ className = '', eager = false }) {
+  return <img className={`campaign-chrome ${className}`} src={asset('campaign/meta4pro-chrome-blob-gold.webp')} alt="" width="720" height="480" loading={eager ? 'eager' : 'lazy'} decoding="async" aria-hidden="true" />;
 }
 
-const bonusPropStyle = { backgroundImage: `url("${asset('campaign/meta4pro-bonus-props-gold.png')}")` };
+const bonusPropStyle = { backgroundImage: `url("${asset('campaign/meta4pro-bonus-props-gold.webp')}")` };
 
 function keyboardTabs(event, index, length, setIndex) {
   const next = {
@@ -146,7 +146,6 @@ export default function CampaignApp() {
   const [activeZone, setActiveZone] = useState(0);
   const [activeTariff, setActiveTariff] = useState(0);
   const [activeDevice, setActiveDevice] = useState(0);
-  const [safeOpen, setSafeOpen] = useState(false);
 
   const selectedZone = zones[activeZone];
   const selectedTariff = tariffs[activeTariff];
@@ -157,6 +156,7 @@ export default function CampaignApp() {
   const reactToPointer = useCallback(event => {
     const root = rootRef.current;
     if (!root || typeof window === 'undefined') return;
+    if (event.type === 'pointermove' && event.pointerType !== 'mouse') return;
     const x = Math.max(-0.5, Math.min(0.5, event.clientX / Math.max(window.innerWidth, 1) - 0.5));
     const y = Math.max(-0.5, Math.min(0.5, event.clientY / Math.max(window.innerHeight, 1) - 0.5));
     root.style.setProperty('--pointer-x', x.toFixed(3));
@@ -207,13 +207,13 @@ export default function CampaignApp() {
 
       <main id="campaign-main">
         <section className="campaign-hero" aria-labelledby="campaign-hero-title">
-          <img className="campaign-hero-photo" src={zones[1].image} alt="Игровой зал ARENA в META4PRO" width="1600" height="1067" />
+          <img className="campaign-hero-photo" src={zones[1].image} alt="Игровой зал ARENA в META4PRO" width="1600" height="1068" fetchPriority="high" />
           <div className="campaign-hero-shade" aria-hidden="true" />
           <AtmosphereFX className="campaign-hero-fx" />
-          <Bolt className="campaign-hero-bolt" />
-          <Bolt className="campaign-hero-bolt-secondary" />
-          <ChromeBlob className="campaign-chrome--hero" />
-          <ChromeBlob className="campaign-chrome--hero-secondary" />
+          <Bolt className="campaign-hero-bolt" eager />
+          <Bolt className="campaign-hero-bolt-secondary" eager />
+          <ChromeBlob className="campaign-chrome--hero" eager />
+          <ChromeBlob className="campaign-chrome--hero-secondary" eager />
 
           <div className="campaign-hero-copy">
             <h1 className="campaign-display" id="campaign-hero-title">
@@ -223,7 +223,7 @@ export default function CampaignApp() {
             <p>Четыре формата игры — от общего зала до приватной SIGMA. На Нагибина, круглосуточно.</p>
           </div>
 
-          <AcrylicFour className="campaign-four--hero" />
+          <AcrylicFour className="campaign-four--hero" eager />
 
           <div className="campaign-hero-actions">
             <div className="campaign-facts campaign-plate" aria-label="36 игровых компьютеров, 4 зоны, клуб работает круглосуточно">
@@ -256,12 +256,12 @@ export default function CampaignApp() {
                     aria-controls={`campaign-zone-${zone.id}`}
                     onClick={() => setActiveZone(index)}
                   >
-                    <img src={zone.image} alt="" width="1600" height="1067" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+                    <img src={zone.image} alt="" width="1600" height={index < 2 ? '1068' : '1066'} loading="lazy" decoding="async" />
                     <span className="campaign-zone-name">{zone.name}</span>
                     <span className="campaign-zone-price"><small>от</small>{zone.price}<small>₽/ч</small></span>
                   </button>
 
-                  <div className="campaign-zone-specs" id={`campaign-zone-${zone.id}`} hidden={!selected}>
+                  <div className={selected ? 'campaign-zone-specs is-open' : 'campaign-zone-specs'} id={`campaign-zone-${zone.id}`} aria-hidden={!selected}>
                     <span><small>{zone.seats}</small><strong>{zone.room}</strong></span>
                     <span><small>Процессор</small><strong>{zone.cpu}</strong></span>
                     <span><small>Графика</small><strong>{zone.gpu}</strong></span>
@@ -274,25 +274,22 @@ export default function CampaignApp() {
             })}
           </div>
 
-          <a className="campaign-cta campaign-plate campaign-zones-cta" href="#prices">Сравнить цены <ArrowDown aria-hidden="true" /></a>
         </section>
 
         <section className="campaign-atmosphere campaign-section" aria-labelledby="campaign-atmosphere-title">
           <Bolt className="campaign-atmosphere-bolt" />
           <h2 className="campaign-display" id="campaign-atmosphere-title"><span>ВНУТРИ</span><span>META4PRO</span></h2>
 
-          <div className="campaign-collage">
-            <figure className="campaign-collage-main">
-              <img src={galleryItems[2].image} alt="Игроки в META4PRO" width="1600" height="1067" loading="lazy" decoding="async" />
-            </figure>
-            <figure className="campaign-collage-side campaign-plate">
-              <img src={galleryItems[4].image} alt="Игровые места META4PRO" width="1600" height="1067" loading="lazy" decoding="async" />
-            </figure>
-            <figure className="campaign-collage-bar">
-              <img src={galleryItems[6].image} alt="Бар META4PRO" width="1600" height="1067" loading="lazy" decoding="async" />
-            </figure>
-            <div className="campaign-clock campaign-plate"><strong>24/7</strong><span>работаем круглосуточно</span></div>
+          <div className="campaign-gallery-rail" tabIndex="0" aria-label="Фотографии клуба META4PRO">
+            {galleryItems.map((item, index) => (
+              <figure className={`campaign-gallery-card campaign-gallery-card--${index % 3} campaign-plate`} key={`${item.image}-${index}`}>
+                <img src={item.image} alt={item.text} width="1600" height="1067" loading="lazy" decoding="async" />
+                <figcaption>{item.text}</figcaption>
+              </figure>
+            ))}
           </div>
+
+          <div className="campaign-clock campaign-plate"><strong>24/7</strong><span>работаем круглосуточно</span></div>
 
           <div className="campaign-benefits">
             <div className="campaign-benefit campaign-plate"><strong>Своя комната</strong><span>BOOTCAMP и SIGMA — по шесть мест без посторонних</span></div>
@@ -372,7 +369,7 @@ export default function CampaignApp() {
 
           <div className="campaign-device-stage campaign-plate" id="campaign-device-panel" role="tabpanel" aria-labelledby={`campaign-device-${selectedDevice.id}`} tabIndex="0">
             <div className="campaign-device-visual">
-              <img src={selectedDevice.image} alt={`${selectedDevice.title} в аренду`} width="1200" height="800" decoding="async" />
+              <img src={selectedDevice.image} alt={`${selectedDevice.title} в аренду`} width="1200" height="800" loading="lazy" decoding="async" />
               <strong><small>от</small>{selectedDevice.from}<small>₽</small></strong>
             </div>
             <ul>
@@ -405,16 +402,11 @@ export default function CampaignApp() {
               <strong>100%</strong>
               <div><h3>За друга</h3><p>Начислим сумму его пополнения на твой баланс.</p></div>
             </article>
-            <button
-              className="campaign-bonus campaign-bonus--safe campaign-plate"
-              type="button"
-              aria-expanded={safeOpen}
-              onClick={() => setSafeOpen(value => !value)}
-            >
+            <article className="campaign-bonus campaign-bonus--safe campaign-plate">
               <span className="campaign-bonus-prop campaign-bonus-prop--safe" style={bonusPropStyle} aria-hidden="true" />
-              <strong>{safeOpen ? 'от 600 ₽' : '×2'}</strong>
-              <div><h3>Сейф</h3><p>{safeOpen ? 'Угадай код сейфа и удвой сумму пополнения.' : 'Открыть условия'}</p></div>
-            </button>
+              <strong>от 600 ₽</strong>
+              <div><h3>Сейф</h3><p>Угадай код сейфа и удвой сумму пополнения.</p></div>
+            </article>
             <article className="campaign-bonus campaign-bonus--taxi campaign-plate">
               <span className="campaign-bonus-prop campaign-bonus-prop--taxi" style={bonusPropStyle} aria-hidden="true" />
               <strong>400 ₽</strong>

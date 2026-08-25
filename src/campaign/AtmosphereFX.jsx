@@ -14,6 +14,7 @@ export default function AtmosphereFX({ className = '' }) {
     if (!root || !canvas || !context) return undefined;
 
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const lowPower = (navigator.hardwareConcurrency || 4) <= 4 || Boolean(navigator.deviceMemory && navigator.deviceMemory <= 4);
     const pointer = { x: 0, y: 0, energy: 0, active: false, lastImpulse: 0 };
     let width = 1;
     let height = 1;
@@ -36,8 +37,8 @@ export default function AtmosphereFX({ className = '' }) {
     const random = (min, max) => min + Math.random() * (max - min);
 
     function buildScene() {
-      const ribbonCount = mobile ? 3 : 5;
-      const blobCount = mobile ? 4 : 7;
+      const ribbonCount = mobile ? 2 : 5;
+      const blobCount = mobile ? (lowPower ? 2 : 3) : 7;
 
       ribbons = Array.from({ length: ribbonCount }, (_, index) => {
         const gradient = context.createLinearGradient(-width * 0.1, 0, width * 1.1, 0);
@@ -83,7 +84,7 @@ export default function AtmosphereFX({ className = '' }) {
       height = Math.max(1, rect.height);
       mobile = width < 700 || matchMedia('(pointer: coarse)').matches;
       const dprByArea = Math.sqrt(2_200_000 / (width * height));
-      dpr = Math.max(0.75, Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.5, dprByArea));
+      dpr = Math.max(0.75, Math.min(window.devicePixelRatio || 1, mobile ? (lowPower ? 0.75 : 0.9) : 1.5, dprByArea));
       canvas.width = Math.max(1, Math.round(width * dpr));
       canvas.height = Math.max(1, Math.round(height * dpr));
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -92,7 +93,7 @@ export default function AtmosphereFX({ className = '' }) {
     }
 
     function drawRibbon(ribbon, seconds) {
-      const points = mobile ? 18 : 28;
+      const points = mobile ? (lowPower ? 10 : 14) : 28;
       context.beginPath();
       for (let index = 0; index <= points; index += 1) {
         const progress = index / points;
@@ -116,11 +117,11 @@ export default function AtmosphereFX({ className = '' }) {
       context.lineCap = 'round';
       context.lineJoin = 'round';
       context.shadowColor = '#ffb400';
-      context.shadowBlur = mobile ? 15 : 24;
+      context.shadowBlur = mobile ? (lowPower ? 5 : 9) : 24;
       context.stroke();
       context.globalAlpha = 0.72;
       context.lineWidth = Math.max(1.2, ribbon.width * 0.075);
-      context.shadowBlur = 10;
+      context.shadowBlur = mobile ? 5 : 10;
       context.strokeStyle = '#fff7d6';
       context.stroke();
       context.restore();
@@ -198,7 +199,7 @@ export default function AtmosphereFX({ className = '' }) {
       context.strokeStyle = '#ffb800';
       context.lineWidth = mobile ? (bolt.strong ? 10 : 7) : (bolt.strong ? 13 : 11);
       context.shadowColor = '#ffc400';
-      context.shadowBlur = mobile ? (bolt.strong ? 24 : 18) : 28;
+      context.shadowBlur = mobile ? (lowPower ? 8 : (bolt.strong ? 16 : 12)) : 28;
       context.stroke();
       context.globalAlpha = alpha;
       context.strokeStyle = '#fff7d6';
@@ -221,7 +222,7 @@ export default function AtmosphereFX({ className = '' }) {
       context.globalAlpha = Math.pow(1 - progress, 2) * 0.82;
       context.strokeStyle = '#ffc400';
       context.shadowColor = '#ffb800';
-      context.shadowBlur = impulse.strong && mobile ? 20 : 14;
+      context.shadowBlur = mobile ? (lowPower ? 7 : 12) : 14;
       context.lineWidth = impulse.strong && mobile ? 2.2 : 1.5;
       context.beginPath();
       context.arc(impulse.x, impulse.y, 10 + progress * (mobile ? 64 : 92), 0, TAU);
@@ -235,7 +236,7 @@ export default function AtmosphereFX({ className = '' }) {
         context.globalAlpha = sparkFade * 0.94;
         context.strokeStyle = '#fff4c7';
         context.shadowColor = '#ffc400';
-        context.shadowBlur = mobile ? 12 : 10;
+        context.shadowBlur = mobile ? (lowPower ? 6 : 9) : 10;
         context.lineWidth = mobile ? 1.8 : 1.4;
         context.lineCap = 'round';
         context.beginPath();
@@ -298,7 +299,7 @@ export default function AtmosphereFX({ className = '' }) {
 
     function loop(now) {
       if (!running || destroyed) return;
-      const frameInterval = 1000 / (mobile ? 30 : 45);
+      const frameInterval = 1000 / (mobile ? (lowPower ? 18 : 24) : 45);
       if (now - lastDraw >= frameInterval) {
         lastDraw = now;
         draw(now);
@@ -335,7 +336,7 @@ export default function AtmosphereFX({ className = '' }) {
     function onPointerMove(event) {
       if (reducedMotion || !visible || !localPoint(event)) return;
       const now = performance.now();
-      if (now - pointer.lastImpulse > 180 && event.pointerType !== 'mouse') {
+      if (now - pointer.lastImpulse > (lowPower ? 280 : 220) && event.pointerType !== 'mouse') {
         addImpulse(pointer.x, pointer.y, now);
         pointer.lastImpulse = now;
       }
