@@ -1209,8 +1209,70 @@ svg {
   --plate-fill:
     linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent 28% 70%, rgba(111, 73, 0, 0.42)),
     linear-gradient(130deg, rgba(255, 242, 0, 0.96), rgba(253, 205, 5, 0.82) 58%, rgba(206, 145, 0, 0.92));
-  min-height: 310px;
+  align-content: end;
+  min-height: 360px;
+  padding: 84px 44% 28px 24px;
   color: var(--campaign-black);
+}
+
+.campaign-bonus--welcome > strong {
+  white-space: nowrap;
+}
+
+.campaign-bonus > .campaign-bonus-welcome-brand {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-family: "Unbounded Variable", "Unbounded", sans-serif;
+  font-size: clamp(0.82rem, 3.7vw, 1.08rem);
+  font-weight: 780;
+  letter-spacing: -0.035em;
+}
+
+.campaign-bonus-welcome-brand img {
+  width: 30px;
+  height: 30px;
+}
+
+.campaign-bonus-welcome-brand b {
+  color: #fff;
+}
+
+.campaign-bonus > .campaign-bonus-welcome-emblem {
+  position: absolute;
+  z-index: 1;
+  top: 52%;
+  right: -3%;
+  display: grid;
+  place-items: center;
+  width: min(43%, 300px);
+  aspect-ratio: 1;
+  clip-path: polygon(17% 0, 83% 0, 100% 17%, 100% 83%, 83% 100%, 17% 100%, 0 83%, 0 17%);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), #fff200 15%, #e7ab00 54%, #6f4900);
+  filter: drop-shadow(0 24px 24px rgba(54, 31, 0, 0.5)) drop-shadow(0 0 12px rgba(255, 242, 0, 0.52));
+  transform: translateY(-50%) rotate(-7deg);
+}
+
+.campaign-bonus-welcome-emblem::before {
+  position: absolute;
+  z-index: -1;
+  inset: 3px;
+  clip-path: inherit;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.3), transparent 30%),
+    linear-gradient(135deg, rgba(24, 23, 20, 0.9), rgba(111, 73, 0, 0.72));
+  content: "";
+}
+
+.campaign-bonus-welcome-emblem img {
+  width: 68%;
+  height: 68%;
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.58));
+  transform: rotate(7deg);
 }
 
 .campaign-bonus--friend {
@@ -1252,13 +1314,6 @@ svg {
   will-change: transform;
 }
 
-.campaign-bonus-prop--welcome {
-  right: -4%;
-  bottom: -46%;
-  width: 48%;
-  opacity: 0.28;
-}
-
 .campaign-bonus-prop--friend {
   top: 5%;
   right: -3%;
@@ -1279,10 +1334,12 @@ svg {
 
 .campaign-bonus-prop--school,
 .campaign-bonus-prop--student {
-  right: -4%;
-  bottom: -2%;
-  width: 46%;
-  opacity: 0.9;
+  right: -1%;
+  bottom: 0;
+  width: 48%;
+  height: 96%;
+  object-position: center;
+  opacity: 1;
 }
 
 .campaign-bonus--friend > div,
@@ -1315,7 +1372,7 @@ svg {
 .campaign-bonus--school {
   --bonus-rotate: 0.45deg;
   --plate-fill: linear-gradient(140deg, #161207, #070604);
-  padding-right: 34%;
+  padding-right: 43%;
 }
 
 .campaign-bonus--school > strong {
@@ -1329,7 +1386,7 @@ svg {
 .campaign-bonus--student {
   --bonus-rotate: -0.35deg;
   --plate-fill: linear-gradient(140deg, #171208, #080706);
-  padding-right: 34%;
+  padding-right: 43%;
 }
 
 .campaign-bonus--student > strong {
@@ -1833,8 +1890,8 @@ svg {
 
   .campaign-bonus--welcome {
     grid-column: 1 / 13;
-    grid-template-columns: minmax(300px, 0.8fr) minmax(300px, 1.2fr);
-    align-items: center;
+    min-height: 420px;
+    padding: 96px clamp(310px, 42%, 470px) 38px 38px;
   }
 
   .campaign-bonus--friend {
@@ -1849,21 +1906,25 @@ svg {
 
   .campaign-bonus--taxi {
     grid-column: 1 / 6;
-    min-height: 330px;
+    grid-row: 3 / 5;
+    min-height: 530px;
   }
 
   .campaign-bonus--school {
-    grid-column: 6 / 10;
-    min-height: 330px;
+    grid-column: 6 / 13;
+    grid-row: 3;
+    min-height: 260px;
   }
 
   .campaign-bonus--student {
-    grid-column: 10 / 13;
-    min-height: 330px;
+    grid-column: 6 / 13;
+    grid-row: 4;
+    min-height: 260px;
   }
 
+  .campaign-bonus--school > strong,
   .campaign-bonus--student > strong {
-    font-size: clamp(5.25rem, 7vw, 7rem);
+    font-size: clamp(4.4rem, 7vw, 7rem);
   }
 
   .campaign-review {

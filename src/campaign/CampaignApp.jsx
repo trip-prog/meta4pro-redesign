@@ -125,8 +125,8 @@ const bonusAssets = {
   friend: asset('campaign/bonus-friend-gold.webp'),
   safe: asset('campaign/bonus-safe-gold.webp'),
   taxi: asset('campaign/bonus-taxi-gold.webp'),
-  school: asset('campaign/bonus-school-gold.webp'),
-  student: asset('campaign/bonus-student-gold.webp')
+  school: asset('campaign/bonus-school-backpack-gold.webp'),
+  student: asset('campaign/bonus-student-cap-gold.webp')
 };
 
 function keyboardTabs(event, index, length, setIndex) {
@@ -428,7 +428,13 @@ export default function CampaignApp() {
 
           <div className="campaign-bonus-field">
             <article className="campaign-bonus campaign-bonus--welcome campaign-plate">
-              <img className="campaign-bonus-prop campaign-bonus-prop--welcome" src={asset('campaign/meta4pro-acrylic-4-gold.webp')} alt="" width="900" height="1050" loading="lazy" decoding="async" />
+              <div className="campaign-bonus-welcome-brand" aria-hidden="true">
+                <img src={asset('favicon.svg')} alt="" width="32" height="32" />
+                <span>META<b>4</b>PRO</span>
+              </div>
+              <div className="campaign-bonus-welcome-emblem" aria-hidden="true">
+                <img src={asset('favicon.svg')} alt="" width="160" height="160" loading="lazy" decoding="async" />
+              </div>
               <strong>500 ₽</strong>
               <div><h3>Новым гостям</h3><p>Бонус на игровой баланс при первом посещении.</p></div>
             </article>
