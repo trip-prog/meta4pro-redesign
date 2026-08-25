@@ -184,10 +184,19 @@ svg {
 
 .campaign-plate::after {
   position: absolute;
-  z-index: -1;
-  inset: 2px;
+  z-index: 3;
+  inset: 0;
   clip-path: inherit;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 26%, transparent 76%, rgba(253, 205, 5, 0.1));
+  background:
+    linear-gradient(135deg, transparent 44%, var(--campaign-lemon) 46% 54%, transparent 56%) top left / var(--campaign-cut) var(--campaign-cut) no-repeat,
+    linear-gradient(45deg, transparent 44%, var(--campaign-lemon) 46% 54%, transparent 56%) top right / var(--campaign-cut) var(--campaign-cut) no-repeat,
+    linear-gradient(135deg, transparent 44%, var(--campaign-lemon) 46% 54%, transparent 56%) bottom right / var(--campaign-cut) var(--campaign-cut) no-repeat,
+    linear-gradient(45deg, transparent 44%, var(--campaign-lemon) 46% 54%, transparent 56%) bottom left / var(--campaign-cut) var(--campaign-cut) no-repeat,
+    linear-gradient(var(--campaign-yellow), var(--campaign-yellow)) top center / calc(100% - var(--campaign-cut) - var(--campaign-cut)) 2px no-repeat,
+    linear-gradient(var(--campaign-yellow), var(--campaign-yellow)) bottom center / calc(100% - var(--campaign-cut) - var(--campaign-cut)) 2px no-repeat,
+    linear-gradient(var(--campaign-yellow), var(--campaign-yellow)) center left / 2px calc(100% - var(--campaign-cut) - var(--campaign-cut)) no-repeat,
+    linear-gradient(var(--campaign-yellow), var(--campaign-yellow)) center right / 2px calc(100% - var(--campaign-cut) - var(--campaign-cut)) no-repeat,
+    var(--plate-overlay, linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 26%, transparent 76%, rgba(253, 205, 5, 0.08)));
   content: "";
   pointer-events: none;
 }
@@ -343,12 +352,6 @@ svg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.campaign-hero-fx {
-  z-index: -1;
-  opacity: 0.68;
-  mix-blend-mode: screen;
 }
 
 .campaign-hero-photo {
@@ -713,7 +716,12 @@ svg {
   overscroll-behavior-inline: contain;
   scroll-padding-inline: var(--campaign-gutter);
   scroll-snap-type: inline mandatory;
-  scrollbar-color: var(--campaign-yellow) rgba(1, 1, 0, 0.6);
+  scrollbar-width: none;
+}
+
+.campaign-gallery-rail::-webkit-scrollbar,
+.campaign-review-rail::-webkit-scrollbar {
+  display: none;
 }
 
 .campaign-gallery-card {
@@ -748,14 +756,8 @@ svg {
   object-fit: cover;
 }
 
-.campaign-gallery-card::after {
-  position: absolute;
-  z-index: 1;
-  inset: 2px;
-  clip-path: inherit;
-  background: linear-gradient(180deg, transparent 52%, rgba(0, 0, 0, 0.82));
-  content: "";
-  pointer-events: none;
+.campaign-gallery-card {
+  --plate-overlay: linear-gradient(180deg, transparent 52%, rgba(0, 0, 0, 0.82));
 }
 
 .campaign-gallery-card figcaption {
@@ -832,6 +834,8 @@ svg {
   min-height: 1120px;
   overflow: hidden;
   background:
+    linear-gradient(124deg, transparent 0 13%, rgba(1, 1, 0, 0.2) 13.1% 13.6%, transparent 13.7% 74%, rgba(255, 255, 255, 0.2) 74.1% 74.35%, transparent 74.45%),
+    linear-gradient(154deg, transparent 0 38%, rgba(111, 73, 0, 0.34) 38.1% 38.8%, transparent 38.9%),
     linear-gradient(143deg, transparent 0 8%, var(--campaign-yellow) 8% 88%, transparent 88%),
     var(--campaign-black);
   color: var(--campaign-black);
@@ -845,6 +849,17 @@ svg {
   box-shadow: 0 32px 90px rgba(255, 184, 0, 0.24);
   content: "";
   transform: rotate(-2deg);
+}
+
+.campaign-prices::after {
+  position: absolute;
+  z-index: 0;
+  inset: 10% -8% 5%;
+  background:
+    linear-gradient(132deg, transparent 0 22%, rgba(1, 1, 0, 0.22) 22.1% 22.45%, transparent 22.55%),
+    linear-gradient(48deg, transparent 0 76%, rgba(255, 255, 255, 0.24) 76.1% 76.35%, transparent 76.45%);
+  content: "";
+  pointer-events: none;
 }
 
 .campaign-prices .campaign-section-heading {
@@ -876,9 +891,10 @@ svg {
 
 .campaign-tariffs button {
   --plate-fill: #0a0905;
-  min-height: 60px;
+  min-height: 66px;
   padding: 12px 5px;
   color: var(--campaign-white);
+  font-family: "Oswald Variable", "Oswald", sans-serif;
   font-size: clamp(0.82rem, 4.2vw, 1.1rem);
   font-weight: 900;
   text-transform: uppercase;
@@ -898,31 +914,35 @@ svg {
 }
 
 .campaign-price-panel > p {
-  margin: 0 0 12px;
+  margin: 0 0 16px;
   color: rgba(1, 1, 0, 0.74);
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: 750;
   text-align: center;
 }
 
 .campaign-price-panel [role="table"] {
   display: grid;
-  gap: 8px;
+  gap: 13px;
 }
 
 .campaign-price-row {
-  --plate-fill: linear-gradient(109deg, #09090c 0 52%, var(--campaign-yellow) 52% 100%);
+  --plate-fill:
+    linear-gradient(112deg, transparent 0 50.7%, rgba(255, 255, 255, 0.88) 50.9% 51.35%, transparent 51.55%),
+    linear-gradient(112deg, #09090c 0 49.7%, #2d2005 49.8% 50.8%, var(--campaign-gold-deep) 50.9% 52%, var(--campaign-lemon) 52.1% 53%, var(--campaign-yellow) 53.1% 100%);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(118px, 0.68fr);
   align-items: center;
   min-height: 104px;
   padding: 8px 16px;
+  filter: drop-shadow(0 16px 19px rgba(0, 0, 0, 0.48)) drop-shadow(0 3px 0 rgba(111, 73, 0, 0.92));
 }
 
 .campaign-price-row strong {
   min-width: 0;
   overflow: hidden;
   color: var(--campaign-yellow);
+  font-family: "Oswald Variable", "Oswald", sans-serif;
   font-size: clamp(1.35rem, 7vw, 2.7rem);
   font-weight: 900;
   letter-spacing: -0.04em;
@@ -933,6 +953,7 @@ svg {
 .campaign-price-row b {
   justify-self: end;
   color: var(--campaign-black);
+  font-family: "Oswald Variable", "Oswald", sans-serif;
   font-size: clamp(3rem, 14vw, 5.6rem);
   font-weight: 900;
   letter-spacing: -0.04em;
@@ -988,6 +1009,7 @@ svg {
 }
 
 .campaign-device-tabs button {
+  --plate-fill: linear-gradient(145deg, #171308, #050504);
   display: grid;
   grid-template-columns: 72px minmax(0, 1fr);
   grid-template-rows: 1fr auto;
@@ -995,13 +1017,10 @@ svg {
   align-items: center;
   min-height: 106px;
   padding: 10px;
-  border: 1px solid rgba(253, 205, 5, 0.28);
-  background: linear-gradient(145deg, #171308, #050504);
   color: var(--campaign-muted);
   text-align: left;
   font-weight: 800;
   cursor: pointer;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 }
 
 .campaign-device-tabs button img {
@@ -1024,8 +1043,7 @@ svg {
 }
 
 .campaign-device-tabs button.is-active {
-  border-color: var(--campaign-lemon);
-  background: linear-gradient(135deg, var(--campaign-yellow), var(--campaign-amber));
+  --plate-fill: linear-gradient(135deg, var(--campaign-yellow), var(--campaign-amber));
   color: var(--campaign-black);
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.46), 0 0 16px rgba(253, 205, 5, 0.2);
 }
@@ -1188,7 +1206,9 @@ svg {
 }
 
 .campaign-bonus--welcome {
-  --plate-fill: linear-gradient(130deg, var(--campaign-lemon), var(--campaign-yellow) 58%, var(--campaign-amber));
+  --plate-fill:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent 28% 70%, rgba(111, 73, 0, 0.42)),
+    linear-gradient(130deg, rgba(255, 242, 0, 0.96), rgba(253, 205, 5, 0.82) 58%, rgba(206, 145, 0, 0.92));
   min-height: 310px;
   color: var(--campaign-black);
 }
@@ -1220,11 +1240,10 @@ svg {
 .campaign-bonus-prop {
   position: absolute;
   z-index: 1;
-  right: 0;
+  display: block;
   width: 48%;
-  aspect-ratio: 1;
-  background-repeat: no-repeat;
-  background-size: auto 180%;
+  height: auto;
+  object-fit: contain;
   filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.66));
   opacity: 0.94;
   pointer-events: none;
@@ -1233,26 +1252,37 @@ svg {
   will-change: transform;
 }
 
+.campaign-bonus-prop--welcome {
+  right: -4%;
+  bottom: -46%;
+  width: 48%;
+  opacity: 0.28;
+}
+
 .campaign-bonus-prop--friend {
-  top: 2%;
-  right: -2%;
-  width: 52%;
-  background-position: left 50%;
+  top: 5%;
+  right: -3%;
+  width: 50%;
 }
 
 .campaign-bonus-prop--safe {
-  top: 3%;
-  right: 1%;
-  width: 48%;
-  background-position: 43.7% 50%;
+  top: 5%;
+  right: -1%;
+  width: 46%;
 }
 
 .campaign-bonus-prop--taxi {
-  top: 8%;
-  right: -1%;
-  width: 60%;
-  aspect-ratio: 1.28;
-  background-position: 94% 50%;
+  top: 16%;
+  right: -3%;
+  width: 62%;
+}
+
+.campaign-bonus-prop--school,
+.campaign-bonus-prop--student {
+  right: -4%;
+  bottom: -2%;
+  width: 46%;
+  opacity: 0.9;
 }
 
 .campaign-bonus--friend > div,
@@ -1285,6 +1315,7 @@ svg {
 .campaign-bonus--school {
   --bonus-rotate: 0.45deg;
   --plate-fill: linear-gradient(140deg, #161207, #070604);
+  padding-right: 34%;
 }
 
 .campaign-bonus--school > strong {
@@ -1298,6 +1329,7 @@ svg {
 .campaign-bonus--student {
   --bonus-rotate: -0.35deg;
   --plate-fill: linear-gradient(140deg, #171208, #080706);
+  padding-right: 34%;
 }
 
 .campaign-bonus--student > strong {
@@ -1346,7 +1378,7 @@ svg {
   overscroll-behavior-inline: contain;
   scroll-padding-inline: var(--campaign-gutter);
   scroll-snap-type: inline mandatory;
-  scrollbar-color: var(--campaign-yellow) rgba(1, 1, 0, 0.6);
+  scrollbar-width: none;
 }
 
 .campaign-review {
@@ -1417,6 +1449,7 @@ svg {
   z-index: 7;
   width: min(100%, 800px);
   margin-inline: auto;
+  counter-reset: campaign-faq;
 }
 
 .campaign-faq h2 {
@@ -1430,24 +1463,40 @@ svg {
 }
 
 .campaign-faq details {
-  border-top: 1px solid rgba(253, 205, 5, 0.4);
+  --campaign-cut: 12px;
+  --plate-fill: linear-gradient(145deg, rgba(24, 20, 8, 0.98), rgba(5, 5, 4, 0.99));
+  margin-top: 9px;
+  padding: 2px;
+  counter-increment: campaign-faq;
 }
 
 .campaign-faq details:last-child {
-  border-bottom: 1px solid rgba(253, 205, 5, 0.4);
+  margin-bottom: 0;
+}
+
+.campaign-faq details[open] {
+  --plate-fill: linear-gradient(145deg, rgba(24, 23, 20, 0.99), rgba(8, 7, 4, 0.99));
 }
 
 .campaign-faq summary {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 18px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
   align-items: center;
-  min-height: 70px;
-  padding-block: 17px;
+  min-height: 76px;
+  padding: 17px 16px;
   font-weight: 760;
   line-height: 1.3;
   cursor: pointer;
   list-style: none;
+}
+
+.campaign-faq summary::before {
+  color: var(--campaign-yellow);
+  content: counter(campaign-faq, decimal-leading-zero);
+  font-family: "Oswald Variable", "Oswald", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
 }
 
 .campaign-faq summary::-webkit-details-marker {
@@ -1468,7 +1517,7 @@ svg {
 .campaign-faq details p {
   max-width: 68ch;
   margin: 0;
-  padding: 0 0 22px;
+  padding: 0 18px 24px 54px;
   color: var(--campaign-muted);
   line-height: 1.55;
 }
@@ -1558,7 +1607,47 @@ svg {
   margin: 0;
 }
 
+@keyframes campaign-card-scroll {
+  0% {
+    transform: perspective(1000px) translate3d(-10px, 14px, 0) rotateX(-1.5deg) rotateY(3deg) rotateZ(var(--bonus-rotate, 0deg)) scale(0.97);
+  }
+
+  50% {
+    transform: perspective(1000px) translate3d(0, 0, 14px) rotateX(0) rotateY(0) rotateZ(var(--bonus-rotate, 0deg)) scale(1);
+  }
+
+  100% {
+    transform: perspective(1000px) translate3d(10px, -10px, 0) rotateX(1.5deg) rotateY(-3deg) rotateZ(var(--bonus-rotate, 0deg)) scale(0.97);
+  }
+}
+
+@keyframes campaign-card-swipe {
+  0% {
+    transform: perspective(900px) translate3d(-14px, 0, 0) rotateY(8deg) scale(0.94);
+  }
+
+  50% {
+    transform: perspective(900px) translate3d(0, 0, 16px) rotateY(0) scale(1);
+  }
+
+  100% {
+    transform: perspective(900px) translate3d(14px, 0, 0) rotateY(-8deg) scale(0.94);
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
+  .campaign-gallery-rail,
+  .campaign-review-rail {
+    cursor: grab;
+  }
+
+  .campaign-gallery-rail.is-dragging,
+  .campaign-review-rail.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+  }
+
   .campaign-nav a,
   .campaign-menu-button,
   .campaign-cta,
@@ -1948,6 +2037,24 @@ svg {
   .campaign-four img {
     animation: none;
   }
+
+  @supports (animation-timeline: view()) {
+    .campaign-zone,
+    .campaign-price-row,
+    .campaign-bonus,
+    .campaign-faq details {
+      animation: campaign-card-scroll linear both;
+      animation-timeline: view(block);
+      animation-range: entry 0% exit 100%;
+    }
+
+    .campaign-gallery-card,
+    .campaign-review {
+      animation: campaign-card-swipe linear both;
+      animation-timeline: view(inline);
+      animation-range: entry 0% exit 100%;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1970,9 +2077,13 @@ svg {
   .campaign-chrome,
   .campaign-zone,
   .campaign-gallery-card,
+  .campaign-price-row,
   .campaign-device-visual img,
   .campaign-bonus,
-  .campaign-bonus-prop {
+  .campaign-bonus-prop,
+  .campaign-review,
+  .campaign-faq details {
+    animation: none;
     transform: none;
   }
 

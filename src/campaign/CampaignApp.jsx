@@ -18,7 +18,6 @@ import {
   X
 } from 'lucide-react';
 import { club, galleryItems, zones } from '../data/clubData';
-import AtmosphereFX from './AtmosphereFX';
 
 const asset = file => `${import.meta.env.BASE_URL}assets/${file}`;
 
@@ -122,7 +121,13 @@ function ChromeBlob({ className = '', eager = false }) {
   return <img className={`campaign-chrome ${className}`} src={asset('campaign/meta4pro-chrome-blob-gold.webp')} alt="" width="720" height="480" loading={eager ? 'eager' : 'lazy'} decoding="async" aria-hidden="true" />;
 }
 
-const bonusPropStyle = { backgroundImage: `url("${asset('campaign/meta4pro-bonus-props-gold.webp')}")` };
+const bonusAssets = {
+  friend: asset('campaign/bonus-friend-gold.webp'),
+  safe: asset('campaign/bonus-safe-gold.webp'),
+  taxi: asset('campaign/bonus-taxi-gold.webp'),
+  school: asset('campaign/bonus-school-gold.webp'),
+  student: asset('campaign/bonus-student-gold.webp')
+};
 
 function keyboardTabs(event, index, length, setIndex) {
   const next = {
@@ -140,12 +145,42 @@ function keyboardTabs(event, index, length, setIndex) {
   event.currentTarget.parentElement?.children[next]?.focus();
 }
 
+function useDragRail() {
+  const drag = useRef(null);
+
+  const finish = useCallback(event => {
+    if (!drag.current || drag.current.pointerId !== event.pointerId) return;
+    drag.current = null;
+    event.currentTarget.classList.remove('is-dragging');
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
+  }, []);
+
+  return {
+    onPointerDown: useCallback(event => {
+      if (event.pointerType !== 'mouse' || event.button !== 0 || event.target.closest?.('a, button')) return;
+      drag.current = { pointerId: event.pointerId, x: event.clientX, scrollLeft: event.currentTarget.scrollLeft };
+      event.currentTarget.setPointerCapture(event.pointerId);
+      event.currentTarget.classList.add('is-dragging');
+    }, []),
+    onPointerMove: useCallback(event => {
+      if (!drag.current || drag.current.pointerId !== event.pointerId) return;
+      event.preventDefault();
+      event.currentTarget.scrollLeft = drag.current.scrollLeft - (event.clientX - drag.current.x);
+    }, []),
+    onPointerUp: finish,
+    onPointerCancel: finish,
+    onLostPointerCapture: finish
+  };
+}
+
 export default function CampaignApp() {
   const rootRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeZone, setActiveZone] = useState(0);
   const [activeTariff, setActiveTariff] = useState(0);
   const [activeDevice, setActiveDevice] = useState(0);
+  const galleryDrag = useDragRail();
+  const reviewDrag = useDragRail();
 
   const selectedZone = zones[activeZone];
   const selectedTariff = tariffs[activeTariff];
@@ -209,7 +244,6 @@ export default function CampaignApp() {
         <section className="campaign-hero" aria-labelledby="campaign-hero-title">
           <img className="campaign-hero-photo" src={zones[1].image} alt="Игровой зал ARENA в META4PRO" width="1600" height="1068" fetchPriority="high" />
           <div className="campaign-hero-shade" aria-hidden="true" />
-          <AtmosphereFX className="campaign-hero-fx" />
           <Bolt className="campaign-hero-bolt" eager />
           <Bolt className="campaign-hero-bolt-secondary" eager />
           <ChromeBlob className="campaign-chrome--hero" eager />
@@ -256,7 +290,7 @@ export default function CampaignApp() {
                     aria-controls={`campaign-zone-${zone.id}`}
                     onClick={() => setActiveZone(index)}
                   >
-                    <img src={zone.image} alt="" width="1600" height={index < 2 ? '1068' : '1066'} loading="lazy" decoding="async" />
+                    <img src={zone.image} alt="" width="1600" height={index < 2 ? '1068' : '1066'} loading="lazy" decoding="async" draggable="false" />
                     <span className="campaign-zone-name">{zone.name}</span>
                     <span className="campaign-zone-price"><small>от</small>{zone.price}<small>₽/ч</small></span>
                   </button>
@@ -280,10 +314,10 @@ export default function CampaignApp() {
           <Bolt className="campaign-atmosphere-bolt" />
           <h2 className="campaign-display" id="campaign-atmosphere-title"><span>ВНУТРИ</span><span>META4PRO</span></h2>
 
-          <div className="campaign-gallery-rail" tabIndex="0" aria-label="Фотографии клуба META4PRO">
-            {galleryItems.map((item, index) => (
+          <div className="campaign-gallery-rail" tabIndex="0" aria-label="Фотографии клуба META4PRO" {...galleryDrag}>
+            {galleryItems.slice(0, -1).map((item, index) => (
               <figure className={`campaign-gallery-card campaign-gallery-card--${index % 3} campaign-plate`} key={`${item.image}-${index}`}>
-                <img src={item.image} alt={item.text} width="1600" height="1067" loading="lazy" decoding="async" />
+                <img src={item.image} alt={item.text} width="1600" height="1067" loading="lazy" decoding="async" draggable="false" />
                 <figcaption>{item.text}</figcaption>
               </figure>
             ))}
@@ -356,11 +390,11 @@ export default function CampaignApp() {
                 aria-selected={activeDevice === index}
                 aria-controls="campaign-device-panel"
                 tabIndex={activeDevice === index ? 0 : -1}
-                className={activeDevice === index ? 'is-active' : ''}
+                className={activeDevice === index ? 'campaign-plate is-active' : 'campaign-plate'}
                 onClick={() => setActiveDevice(index)}
                 onKeyDown={event => keyboardTabs(event, index, devices.length, setActiveDevice)}
               >
-                <img src={device.image} alt="" width="240" height="160" loading="lazy" decoding="async" />
+                <img src={device.image} alt="" width="1024" height="1024" loading="lazy" decoding="async" />
                 <span>{device.title}</span>
                 <small>от {device.from} ₽</small>
               </button>
@@ -369,7 +403,7 @@ export default function CampaignApp() {
 
           <div className="campaign-device-stage campaign-plate" id="campaign-device-panel" role="tabpanel" aria-labelledby={`campaign-device-${selectedDevice.id}`} tabIndex="0">
             <div className="campaign-device-visual">
-              <img src={selectedDevice.image} alt={`${selectedDevice.title} в аренду`} width="1200" height="800" loading="lazy" decoding="async" />
+              <img src={selectedDevice.image} alt={`${selectedDevice.title} в аренду`} width="1024" height="1024" loading="lazy" decoding="async" />
               <strong><small>от</small>{selectedDevice.from}<small>₽</small></strong>
             </div>
             <ul>
@@ -394,26 +428,27 @@ export default function CampaignApp() {
 
           <div className="campaign-bonus-field">
             <article className="campaign-bonus campaign-bonus--welcome campaign-plate">
+              <img className="campaign-bonus-prop campaign-bonus-prop--welcome" src={asset('campaign/meta4pro-acrylic-4-gold.webp')} alt="" width="900" height="1050" loading="lazy" decoding="async" />
               <strong>500 ₽</strong>
               <div><h3>Новым гостям</h3><p>Бонус на игровой баланс при первом посещении.</p></div>
             </article>
             <article className="campaign-bonus campaign-bonus--friend campaign-plate">
-              <span className="campaign-bonus-prop campaign-bonus-prop--friend" style={bonusPropStyle} aria-hidden="true" />
+              <img className="campaign-bonus-prop campaign-bonus-prop--friend" src={bonusAssets.friend} alt="" width="520" height="520" loading="lazy" decoding="async" />
               <strong>100%</strong>
               <div><h3>За друга</h3><p>Начислим сумму его пополнения на твой баланс.</p></div>
             </article>
             <article className="campaign-bonus campaign-bonus--safe campaign-plate">
-              <span className="campaign-bonus-prop campaign-bonus-prop--safe" style={bonusPropStyle} aria-hidden="true" />
+              <img className="campaign-bonus-prop campaign-bonus-prop--safe" src={bonusAssets.safe} alt="" width="530" height="530" loading="lazy" decoding="async" />
               <strong>от 600 ₽</strong>
               <div><h3>Сейф</h3><p>Угадай код сейфа и удвой сумму пополнения.</p></div>
             </article>
             <article className="campaign-bonus campaign-bonus--taxi campaign-plate">
-              <span className="campaign-bonus-prop campaign-bonus-prop--taxi" style={bonusPropStyle} aria-hidden="true" />
+              <img className="campaign-bonus-prop campaign-bonus-prop--taxi" src={bonusAssets.taxi} alt="" width="704" height="520" loading="lazy" decoding="async" />
               <strong>400 ₽</strong>
               <div><h3>Такси до клуба</h3><p>Вернём до 400 ₽ за поездку при пополнении от 500 ₽.</p></div>
             </article>
-            <article className="campaign-bonus campaign-bonus--school campaign-plate"><strong>−25%</strong><div><h3>Школьникам</h3><p>По дневнику.</p></div></article>
-            <article className="campaign-bonus campaign-bonus--student campaign-plate"><strong>−20%</strong><div><h3>Студентам</h3><p>И курсантам по документу.</p></div></article>
+            <article className="campaign-bonus campaign-bonus--school campaign-plate"><img className="campaign-bonus-prop campaign-bonus-prop--school" src={bonusAssets.school} alt="" width="768" height="768" loading="lazy" decoding="async" /><strong>−25%</strong><div><h3>Школьникам</h3><p>По дневнику.</p></div></article>
+            <article className="campaign-bonus campaign-bonus--student campaign-plate"><img className="campaign-bonus-prop campaign-bonus-prop--student" src={bonusAssets.student} alt="" width="768" height="768" loading="lazy" decoding="async" /><strong>−20%</strong><div><h3>Студентам</h3><p>И курсантам по документу.</p></div></article>
           </div>
         </section>
 
@@ -424,7 +459,7 @@ export default function CampaignApp() {
             <p>Отзывы гостей на картах и в социальных сетях.</p>
           </div>
 
-          <div className="campaign-review-rail" tabIndex="0" aria-label="Отзывы гостей">
+          <div className="campaign-review-rail" tabIndex="0" aria-label="Отзывы гостей" {...reviewDrag}>
             {reviews.map(([quote, name, source, href]) => (
               <figure className="campaign-review campaign-plate" key={`${name}-${source}`}>
                 <blockquote>{quote}</blockquote>
@@ -442,7 +477,7 @@ export default function CampaignApp() {
           <div className="campaign-faq">
             <h2>Ответы на вопросы</h2>
             {faq.map(([question, answer]) => (
-              <details key={question}>
+              <details className="campaign-plate" key={question}>
                 <summary>{question}</summary>
                 <p>{answer}</p>
               </details>
