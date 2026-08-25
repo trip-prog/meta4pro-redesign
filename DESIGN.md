@@ -1,19 +1,17 @@
 ---
 name: "META4PRO"
-description: "Charged Acrylic — mobile-first campaign with real club photography, compressed type and reactive electric material."
+description: "Black Gold Voltage — mobile-first campaign with real club photography, compressed type and reactive gold material."
 colors:
   campaign-black: "#050506"
   campaign-black-soft: "#0d0d11"
   campaign-black-raised: "#17151d"
   warm-white: "#f7f5f1"
   muted-metal: "#aaa5b0"
-  signal-yellow: "#ffe000"
-  signal-lemon: "#f2ff00"
-  signal-amber: "#ffbd00"
-  uv-violet: "#7c24ff"
-  acrylic-lilac: "#a966ff"
-  hot-magenta: "#ff27b7"
-  purple-depth: "#2a0649"
+  signal-yellow: "#fdcd05"
+  signal-lemon: "#fff200"
+  signal-amber: "#ce9100"
+  signal-gold: "#e7ab00"
+  gold-depth: "#6f4900"
 typography:
   display:
     fontFamily: "Oswald Variable, Oswald, sans-serif"
@@ -132,9 +130,9 @@ components:
 
 ## Overview
 
-**Creative North Star: "Charged Acrylic"**
+**Creative North Star: "Black Gold Voltage"**
 
-META4PRO выглядит как живая рекламная кампания компьютерного клуба: реальная фотография ARENA держит сцену правдивой, а сигнальный жёлтый, ультрафиолетовый акрил, magenta-свет, хром и молнии дают ей физическое напряжение. Это не каталог карточек и не интерфейсный glassmorphism.
+META4PRO выглядит как живая рекламная кампания компьютерного клуба: реальная фотография ARENA держит сцену правдивой, а сигнальный жёлтый, золото, тёмный хром и молнии дают ей физическое напряжение. Это не каталог карточек и не интерфейсный glassmorphism.
 
 Главный образ — огромная жёлто-белая типографика рядом с прозрачной объёмной `4`. Canvas-атмосфера, хромированные объекты и электрические края усиливают материал, но не несут смысл и не мешают чтению, прокрутке или действию. Этот файл фиксирует проверенное SHIP-состояние campaign surface.
 
@@ -148,19 +146,18 @@ META4PRO выглядит как живая рекламная кампания 
 
 ## Colors
 
-Палитра строится на почти абсолютном чёрном и тёплом белом; жёлтый отвечает за сообщение и действие, UV и magenta — за глубину, края и электрический свет.
+Палитра строится на почти абсолютном чёрном и тёплом белом; жёлтый отвечает за сообщение и действие, золото и янтарь — за глубину, края и электрический свет.
 
 ### Primary
 
 - **Signal Yellow**: основные слова, выбранные состояния, CTA и крупные поля.
 - **Signal Lemon**: горячая кромка электрического градиента и focus-visible.
-- **Signal Amber**: тёплый конец жёлтого градиента; нормативный тон — `#ffbd00`, а `#ffb800` остаётся утверждённой калибровкой shipped CSS.
+- **Signal Amber** и **Signal Gold**: тёплая глубина, металлические блики и дальний край свечения.
 
 ### Secondary
 
-- **UV Violet**: акриловые рёбра, световые шлейфы и глубина.
-- **Hot Magenta**: второй электрический канал, активный glow и акционные акценты.
-- **Acrylic Lilac** и **Purple Depth**: блики прозрачного материала и тёмная цветная глубина.
+- **Gold Depth**: тёмная золотая глубина прозрачных объектов и plate.
+- **Warm White**: холодный контраст для текста, бликов и хромированных граней.
 
 ### Neutral
 
@@ -168,7 +165,7 @@ META4PRO выглядит как живая рекламная кампания 
 - **Warm White**: основной светлый текст и белая половина display-композиций.
 - **Muted Metal**: пояснения, вторичные данные и служебный текст.
 
-**The Lit Face Rule.** Сплошная жёлтая грань означает выбранное или кликабельное; UV и magenta остаются светом и кромкой, а не вторым основным брендом.
+**The Lit Face Rule.** Сплошная жёлтая грань означает выбранное или кликабельное; золото и янтарь остаются светом и кромкой, а не вторым основным брендом.
 
 ## Typography
 
@@ -200,12 +197,12 @@ META4PRO выглядит как живая рекламная кампания 
 
 ## Elevation & Depth
 
-Глубина создаётся не обычными карточными тенями, а сочетанием реальной фотографии, прозрачного растра, screen-blend Canvas, двухпиксельной электрической кромки и направленных drop-shadow. Plate получает чёрную внутреннюю грань и UV/magenta/yellow border; активная зона усиливает magenta glow, а хром и девайсы получают тяжёлую нижнюю тень.
+Глубина создаётся не обычными карточными тенями, а сочетанием реальной фотографии, прозрачного растра, screen-blend Canvas, двухпиксельной золотой кромки и направленных drop-shadow. Plate получает чёрную внутреннюю грань и lemon/yellow/amber border; активная зона усиливает золотой glow, а хром и девайсы получают тяжёлую нижнюю тень.
 
 ### Shadow Vocabulary
 
-- **Plate Depth** (`drop-shadow(0 18px 26px rgba(0,0,0,.46))` + UV glow): базовое физическое отделение plate.
-- **Active Portal** (`drop-shadow(0 22px 34px rgba(0,0,0,.6))` + magenta glow): только выбранная зона.
+- **Plate Depth** (`drop-shadow(0 18px 26px rgba(0,0,0,.46))` + gold glow): базовое физическое отделение plate.
+- **Active Portal** (`drop-shadow(0 22px 34px rgba(0,0,0,.6))` + amber glow): только выбранная зона.
 - **Object Weight** (`drop-shadow(0 24px 28px rgba(0,0,0,.72))`): прозрачные девайсы, хром и 3D-объекты.
 
 **The Material Shadow Rule.** Тень должна объяснять вес, прозрачность или активное электрическое состояние; нейтральные floating-card shadows не добавляются.
@@ -220,7 +217,7 @@ META4PRO выглядит как живая рекламная кампания 
 
 ### Campaign plate
 
-- **Shape:** общий chamfered polygon с электрическим UV/magenta/yellow контуром и inset fill.
+- **Shape:** общий chamfered polygon с электрическим lemon/yellow/amber контуром и inset fill.
 - **State:** переменная внутренней грани меняет материал без смены геометрии.
 - **Depth:** одна направленная тень и один цветной glow.
 
@@ -233,7 +230,7 @@ META4PRO выглядит как живая рекламная кампания 
 ### Zone portals
 
 - **Structure:** реальное фото, крупное имя, стартовая цена и раскрываемые характеристики в одном plate.
-- **State:** активная зона получает violet-black fill и magenta glow; факты остаются текстом, не частью изображения.
+- **State:** активная зона получает black-gold fill и amber glow; факты остаются текстом, не частью изображения.
 
 ### Tabs and price rows
 
@@ -249,7 +246,7 @@ META4PRO выглядит как живая рекламная кампания 
 ### Acrylic objects and atmosphere
 
 - **Objects:** прозрачная 3D `4`, chrome blobs и lightning используются как крупные сценические слои, а не как иконки.
-- **Canvas:** UV/magenta ribbons, световые blobs, yellow bolts и touch impulses реагируют на pointer/touch; на mobile работают с меньшей плотностью и частотой.
+- **Canvas:** gold/amber ribbons, световые blobs, yellow bolts и touch impulses реагируют на pointer/touch; на mobile работают с меньшей плотностью и частотой.
 - **Reduced motion:** animation loop останавливается и показывает статичный кадр; смысловой контент не зависит от Canvas.
 
 ### Navigation and booking

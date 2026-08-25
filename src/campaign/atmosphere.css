@@ -8,6 +8,10 @@
   contain: strict;
 }
 
+.atmosphere-fx.campaign-hero-fx {
+  mix-blend-mode: normal;
+}
+
 .atmosphere-fx::before,
 .atmosphere-fx::after {
   content: "";
@@ -18,16 +22,19 @@
 .atmosphere-fx::before {
   inset: -18%;
   background:
-    radial-gradient(circle at 18% 24%, rgb(124 34 255 / 0.34), transparent 30%),
-    radial-gradient(circle at 76% 68%, rgb(255 31 184 / 0.27), transparent 33%),
-    radial-gradient(circle at 86% 8%, rgb(255 212 0 / 0.13), transparent 22%);
-  filter: blur(22px);
+    radial-gradient(circle at 18% 24%, rgb(255 190 0 / 0.3), transparent 30%),
+    radial-gradient(circle at 76% 68%, rgb(255 154 0 / 0.2), transparent 33%),
+    radial-gradient(circle at 86% 8%, rgb(255 244 196 / 0.11), transparent 22%),
+    linear-gradient(125deg, rgb(2 2 2 / 0.56), rgb(23 18 7 / 0.16) 46%, rgb(3 3 3 / 0.52));
+  filter: blur(18px);
 }
 
 .atmosphere-fx::after {
   inset: 0;
   z-index: 2;
-  background: linear-gradient(110deg, transparent 10%, rgb(255 255 255 / 0.035) 48%, transparent 72%);
+  background:
+    radial-gradient(circle at 72% 18%, rgb(255 220 118 / 0.06), transparent 24%),
+    linear-gradient(110deg, transparent 10%, rgb(255 248 219 / 0.05) 48%, transparent 72%);
   mix-blend-mode: screen;
 }
 

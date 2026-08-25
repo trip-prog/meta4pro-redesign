@@ -41,11 +41,11 @@ export default function AtmosphereFX({ className = '' }) {
 
       ribbons = Array.from({ length: ribbonCount }, (_, index) => {
         const gradient = context.createLinearGradient(-width * 0.1, 0, width * 1.1, 0);
-        gradient.addColorStop(0, 'rgba(73, 18, 255, 0)');
-        gradient.addColorStop(0.2, index % 2 ? '#6b26ff' : '#a232ff');
-        gradient.addColorStop(0.52, '#ff2dbd');
-        gradient.addColorStop(0.78, index % 2 ? '#7b38ff' : '#d630ff');
-        gradient.addColorStop(1, 'rgba(89, 24, 255, 0)');
+        gradient.addColorStop(0, 'rgba(255, 184, 0, 0)');
+        gradient.addColorStop(0.2, index % 2 ? '#c98200' : '#ffb800');
+        gradient.addColorStop(0.52, '#ffe56c');
+        gradient.addColorStop(0.78, index % 2 ? '#ffca28' : '#d89100');
+        gradient.addColorStop(1, 'rgba(255, 184, 0, 0)');
         return {
           y: (index + 0.55) / ribbonCount,
           phase: random(0, TAU),
@@ -65,7 +65,7 @@ export default function AtmosphereFX({ className = '' }) {
         phase: random(0, TAU),
         speed: random(0.05, 0.13),
         stretch: random(0.65, 1.45),
-        violet: index % 2 === 0
+        brightGold: index % 2 === 0
       }));
 
       bolts = [];
@@ -115,13 +115,13 @@ export default function AtmosphereFX({ className = '' }) {
       context.lineWidth = ribbon.width;
       context.lineCap = 'round';
       context.lineJoin = 'round';
-      context.shadowColor = '#9a24ff';
+      context.shadowColor = '#ffb400';
       context.shadowBlur = mobile ? 15 : 24;
       context.stroke();
       context.globalAlpha = 0.72;
       context.lineWidth = Math.max(1.2, ribbon.width * 0.075);
       context.shadowBlur = 10;
-      context.strokeStyle = '#f7d8ff';
+      context.strokeStyle = '#fff7d6';
       context.stroke();
       context.restore();
     }
@@ -135,11 +135,11 @@ export default function AtmosphereFX({ className = '' }) {
       y += (pointer.y - y) * influence * 0.09;
       const radius = blob.radius * (0.92 + Math.sin(seconds * 0.4 + blob.phase) * 0.08);
       const gradient = context.createRadialGradient(-radius * 0.25, -radius * 0.28, radius * 0.04, 0, 0, radius);
-      gradient.addColorStop(0, 'rgba(255,255,255,.86)');
-      gradient.addColorStop(0.13, blob.violet ? 'rgba(154,75,255,.72)' : 'rgba(255,55,196,.75)');
-      gradient.addColorStop(0.48, blob.violet ? 'rgba(65,16,173,.3)' : 'rgba(127,10,104,.3)');
-      gradient.addColorStop(0.76, 'rgba(238,143,255,.17)');
-      gradient.addColorStop(1, 'rgba(54,7,92,0)');
+      gradient.addColorStop(0, 'rgba(255,255,247,.9)');
+      gradient.addColorStop(0.13, blob.brightGold ? 'rgba(255,213,74,.72)' : 'rgba(255,174,0,.72)');
+      gradient.addColorStop(0.48, blob.brightGold ? 'rgba(116,70,0,.34)' : 'rgba(68,53,20,.34)');
+      gradient.addColorStop(0.76, 'rgba(255,199,65,.14)');
+      gradient.addColorStop(1, 'rgba(4,4,3,0)');
 
       context.save();
       context.translate(x, y);
@@ -151,13 +151,13 @@ export default function AtmosphereFX({ className = '' }) {
       context.arc(0, 0, radius, 0, TAU);
       context.fill();
       context.globalAlpha = 0.5;
-      context.strokeStyle = blob.violet ? '#a966ff' : '#ff56ce';
+      context.strokeStyle = blob.brightGold ? '#ffd45a' : '#c88912';
       context.lineWidth = 1.2;
       context.stroke();
       context.restore();
     }
 
-    function spawnBolt(targetX, targetY, born = performance.now()) {
+    function spawnBolt(targetX, targetY, born = performance.now(), strong = false) {
       const fromLeft = Math.random() > 0.5;
       const startX = fromLeft ? -width * 0.08 : width * 1.08;
       const startY = random(-height * 0.05, height * 0.8);
@@ -177,7 +177,7 @@ export default function AtmosphereFX({ className = '' }) {
           y: startY + dy * progress + normalY * jitter
         });
       }
-      bolts.push({ points, born, life: random(360, 560) });
+      bolts.push({ points, born, strong, life: random(strong ? 500 : 360, strong ? 720 : 560) });
       if (bolts.length > 3) bolts.shift();
     }
 
@@ -194,22 +194,22 @@ export default function AtmosphereFX({ className = '' }) {
         if (index === 0) context.moveTo(point.x, point.y);
         else context.lineTo(point.x, point.y);
       });
-      context.globalAlpha = alpha * 0.46;
-      context.strokeStyle = '#ffd400';
-      context.lineWidth = mobile ? 7 : 11;
-      context.shadowColor = '#ffd400';
-      context.shadowBlur = mobile ? 18 : 28;
+      context.globalAlpha = alpha * (bolt.strong ? 0.62 : 0.46);
+      context.strokeStyle = '#ffb800';
+      context.lineWidth = mobile ? (bolt.strong ? 10 : 7) : (bolt.strong ? 13 : 11);
+      context.shadowColor = '#ffc400';
+      context.shadowBlur = mobile ? (bolt.strong ? 24 : 18) : 28;
       context.stroke();
       context.globalAlpha = alpha;
-      context.strokeStyle = '#fff8a8';
-      context.lineWidth = mobile ? 1.2 : 1.7;
+      context.strokeStyle = '#fff7d6';
+      context.lineWidth = mobile ? (bolt.strong ? 1.8 : 1.2) : 1.7;
       context.shadowBlur = 6;
       context.stroke();
       context.restore();
     }
 
-    function addImpulse(x, y, now = performance.now()) {
-      impulses.push({ x, y, born: now, life: 620 });
+    function addImpulse(x, y, now = performance.now(), strong = false) {
+      impulses.push({ x, y, born: now, life: strong ? (mobile ? 760 : 700) : 620, strong, angle: random(0, TAU) });
       if (impulses.length > 6) impulses.shift();
     }
 
@@ -219,13 +219,45 @@ export default function AtmosphereFX({ className = '' }) {
       context.save();
       context.globalCompositeOperation = 'screen';
       context.globalAlpha = Math.pow(1 - progress, 2) * 0.82;
-      context.strokeStyle = '#ffd400';
-      context.shadowColor = '#ffd400';
-      context.shadowBlur = 14;
-      context.lineWidth = 1.5;
+      context.strokeStyle = '#ffc400';
+      context.shadowColor = '#ffb800';
+      context.shadowBlur = impulse.strong && mobile ? 20 : 14;
+      context.lineWidth = impulse.strong && mobile ? 2.2 : 1.5;
       context.beginPath();
       context.arc(impulse.x, impulse.y, 10 + progress * (mobile ? 64 : 92), 0, TAU);
       context.stroke();
+
+      if (impulse.strong) {
+        const sparkFade = Math.pow(1 - progress, 3);
+        const sparkCount = mobile ? 7 : 5;
+        context.translate(impulse.x, impulse.y);
+        context.rotate(impulse.angle);
+        context.globalAlpha = sparkFade * 0.94;
+        context.strokeStyle = '#fff4c7';
+        context.shadowColor = '#ffc400';
+        context.shadowBlur = mobile ? 12 : 10;
+        context.lineWidth = mobile ? 1.8 : 1.4;
+        context.lineCap = 'round';
+        context.beginPath();
+        for (let index = 0; index < sparkCount; index += 1) {
+          const angle = index / sparkCount * TAU;
+          const inner = 8 + progress * 14;
+          const outer = inner + (mobile ? 28 : 22) * (1 - progress);
+          context.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+          context.lineTo(Math.cos(angle) * outer, Math.sin(angle) * outer);
+        }
+        context.stroke();
+
+        const flare = context.createRadialGradient(0, 0, 0, 0, 0, mobile ? 26 : 20);
+        flare.addColorStop(0, 'rgba(255,255,255,.96)');
+        flare.addColorStop(0.28, 'rgba(255,205,64,.72)');
+        flare.addColorStop(1, 'rgba(255,178,0,0)');
+        context.globalAlpha = sparkFade * 0.72;
+        context.fillStyle = flare;
+        context.beginPath();
+        context.arc(0, 0, mobile ? 26 : 20, 0, TAU);
+        context.fill();
+      }
       context.restore();
     }
 
@@ -312,8 +344,10 @@ export default function AtmosphereFX({ className = '' }) {
     function onPointerDown(event) {
       if (reducedMotion || !visible || !localPoint(event)) return;
       const now = performance.now();
-      addImpulse(pointer.x, pointer.y, now);
-      spawnBolt(pointer.x, pointer.y, now);
+      const strongTouch = event.pointerType !== 'mouse';
+      addImpulse(pointer.x, pointer.y, now, strongTouch);
+      spawnBolt(pointer.x, pointer.y, now, strongTouch);
+      if (strongTouch) pointer.energy = Math.max(pointer.energy, mobile ? 0.98 : 0.82);
       pointer.lastImpulse = now;
     }
 

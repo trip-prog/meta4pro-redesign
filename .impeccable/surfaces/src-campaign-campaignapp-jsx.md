@@ -18,13 +18,13 @@ Young players arrive mainly from a phone. In seconds they should recognize META4
 
 ## Approved visual contract
 
-- Approved comp: `concepts/iziplay-blocks/01-hero.png`
-- Section comps: `02-zones.png`, `03-atmosphere.png`, `04-prices.png`, `05-rental.png`, `06-bonuses.png`, `07-reviews-booking.png` in the same directory.
-- User approved the complete pack on 2026-08-25 and explicitly requested the shipped site in the same design and style.
+- Approved comp pack: `concepts/yellow-black-blocks/contact-sheet-yellow-black.png`.
+- Section comps: `01-hero-yellow-black.png` through `07-reviews-booking-yellow-black.png` in the same directory.
+- User approved this exact yellow-black pack on 2026-08-25 and explicitly requested the shipped site to follow it closely, with the dimensional objects implemented as reactive layers rather than a screenshot wallpaper.
 
 ## Chosen direction
 
-**Charged Acrylic Campaign.** Acid-yellow advertising fields collide with real club photography, deep black stages, ultraviolet and hot-magenta light, transparent acrylic, liquid chrome and oversized lightning. The page behaves like one continuous esports campaign, not a stack of conventional gaming cards.
+**Black Gold Voltage.** Signal-yellow and gold advertising fields collide with real club photography, deep black stages, transparent black-gold acrylic, liquid chrome and oversized lightning. Purple, magenta, cyan and blue neon are excluded. The page behaves like one continuous esports campaign, not a stack of conventional gaming cards.
 
 The memorable moment is the first viewport: the real Arena photo stays legible while a dimensional number 4, lightning and liquid color react to pointer or finger movement. Motion continues as one bounded atmosphere system; controls remain semantic and readable without it.
 
@@ -35,9 +35,9 @@ The memorable moment is the first viewport: the real Arena photo stays legible w
 | Navigation and CTA | Small black header, yellow action visible immediately | Semantic HTML/CSS |
 | Hero headline | Huge condensed white/yellow type overlapping the scene | Semantic HTML/CSS |
 | Real club scene | Full-bleed Arena photograph | Existing `zone-arena.webp` |
-| Acrylic 4 and chrome | Large dimensional objects with real highlights and transparency | Produced transparent raster assets |
+| Acrylic 4 and chrome | Large dimensional objects with black, gold and white highlights, transparency and pointer/touch parallax | Produced transparent raster assets + CSS transforms |
 | Lightning and diagonal tape | Oversized sharp yellow energy shapes | Authored SVG/CSS plus produced raster where depth is required |
-| Reactive atmosphere | UV/magenta liquid field and yellow impulses following pointer/touch | Canvas, reduced-motion fallback |
+| Reactive atmosphere | Gold/amber ribbons, warm-white highlights and yellow impulses following pointer/touch | Canvas, reduced-motion fallback |
 | Four zones | Large photographic portals with live selection and specifications | Semantic React + existing zone photos |
 | Club atmosphere | Uneven real-photo collage, not an equal carousel | Semantic HTML/CSS + existing gallery photos |
 | Prices | Dominant yellow field, large tariff values and tabs | Semantic HTML/CSS |
@@ -47,12 +47,12 @@ The memorable moment is the first viewport: the real Arena photo stays legible w
 
 ## Sampled visual record
 
-- Page ground: `#050505`
-- Signal yellow: `#FFD400`
-- Hot yellow highlight: `#FFF000`
-- Ultraviolet: `#6B22FF`
-- Hot magenta: `#FF2DBD`
-- Paper white: `#F7F5EC`
+- Page ground: `#010100` sampled from the approved hero.
+- Raised graphite: `#181714` sampled from the hero fact plate.
+- Signal yellow/gold: `#FDCD05` sampled from the approved hero title.
+- Hot yellow highlight: `#FFF200`.
+- Deep amber: `#CE9100` sampled from the approved price material.
+- Paper white: `#FEFEFE` sampled from the approved hero title.
 - Corners: 8–14px on dimensional plates; CTAs may use clipped corners, never generic pills.
 - Lines: 1px luminous plate edge or no border; depth comes from offset soft shadow and authored material.
 - Display: very condensed, heavy, uppercase; body: compact neutral sans with clear Russian readability.
@@ -62,4 +62,4 @@ The memorable moment is the first viewport: the real Arena photo stays legible w
 - Preserve verified prices, address, phone, zones and device inventory already in the project.
 - No invented booking backend or long fabricated reviews.
 - Work from 360px, keep 44px interaction targets, keyboard focus and `prefers-reduced-motion`.
-- The approved comps are reference images only; core UI text and controls cannot be rasterized.
+- The approved comps are reference images only; core UI text and controls cannot be rasterized. Image-native chrome, acrylic and object props stay raster; precise lightning, pointer response and control geometry stay code.

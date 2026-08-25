@@ -1,9 +1,9 @@
 /*
 THESIS: META4PRO is a playable campaign poster, not a polite catalogue of gaming PCs.
-OWN-WORLD: acid-yellow signal fields, black club photography, ultraviolet acrylic edges, chrome light and chamfered plates.
+OWN-WORLD: black club photography, signal-yellow and gold fields, warm white highlights, black-gold chrome and chamfered plates.
 STORY: choose one of four real zones, compare exact prices and hardware, see the club, then contact the administrator.
 FIRST VIEWPORT: full-bleed club photo, compressed yellow/white title, touch-reactive acrylic 4, fact rail and one booking action.
-FORM: approved seven-block iziplay campaign comps; semantic React reconstruction, never screenshot wallpaper.
+FORM: user-pinned seven-block yellow-black campaign comps, seed user-pinned-yellow-black-2026-08-25; semantic React reconstruction, never screenshot wallpaper.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 */
 
@@ -107,22 +107,22 @@ const faq = [
 function AcrylicFour({ className = '' }) {
   return (
     <div className={`campaign-four ${className}`} aria-hidden="true">
-      <img src={asset('campaign/meta4pro-acrylic-4.png')} alt="" width="1161" height="1354" decoding="async" />
+      <img src={asset('campaign/meta4pro-acrylic-4-gold.png')} alt="" width="1161" height="1354" decoding="async" />
     </div>
   );
 }
 
 function Bolt({ className = '' }) {
   return (
-    <img className={`campaign-bolt ${className}`} src={asset('campaign/meta4pro-lightning.png')} alt="" width="947" height="1661" decoding="async" aria-hidden="true" />
+    <img className={`campaign-bolt ${className}`} src={asset('campaign/meta4pro-lightning-gold.png')} alt="" width="947" height="1661" decoding="async" aria-hidden="true" />
   );
 }
 
 function ChromeBlob({ className = '' }) {
-  return <img className={`campaign-chrome ${className}`} src={asset('campaign/meta4pro-chrome-blob.png')} alt="" width="1536" height="1024" decoding="async" aria-hidden="true" />;
+  return <img className={`campaign-chrome ${className}`} src={asset('campaign/meta4pro-chrome-blob-gold.png')} alt="" width="1536" height="1024" decoding="async" aria-hidden="true" />;
 }
 
-const bonusPropStyle = { backgroundImage: `url("${asset('campaign/meta4pro-bonus-props.png')}")` };
+const bonusPropStyle = { backgroundImage: `url("${asset('campaign/meta4pro-bonus-props-gold.png')}")` };
 
 function keyboardTabs(event, index, length, setIndex) {
   const next = {
@@ -157,18 +157,29 @@ export default function CampaignApp() {
   const reactToPointer = useCallback(event => {
     const root = rootRef.current;
     if (!root || typeof window === 'undefined') return;
-    const x = event.clientX / Math.max(window.innerWidth, 1) - 0.5;
-    const y = event.clientY / Math.max(window.innerHeight, 1) - 0.5;
+    const x = Math.max(-0.5, Math.min(0.5, event.clientX / Math.max(window.innerWidth, 1) - 0.5));
+    const y = Math.max(-0.5, Math.min(0.5, event.clientY / Math.max(window.innerHeight, 1) - 0.5));
     root.style.setProperty('--pointer-x', x.toFixed(3));
     root.style.setProperty('--pointer-y', y.toFixed(3));
+    root.style.setProperty('--pointer-glow-x', `${((x + 0.5) * 100).toFixed(1)}%`);
+    root.style.setProperty('--pointer-glow-y', `${((y + 0.5) * 100).toFixed(1)}%`);
+    root.style.setProperty('--tilt-x', `${(y * -10).toFixed(2)}deg`);
+    root.style.setProperty('--tilt-y', `${(x * 14).toFixed(2)}deg`);
+    root.style.setProperty('--shift-x', `${(x * 28).toFixed(2)}px`);
+    root.style.setProperty('--shift-y', `${(y * 20).toFixed(2)}px`);
+    root.style.setProperty('--shift-soft-x', `${(x * 14).toFixed(2)}px`);
+    root.style.setProperty('--shift-soft-y', `${(y * 10).toFixed(2)}px`);
+    root.style.setProperty('--shift-reverse-x', `${(x * -18).toFixed(2)}px`);
+    root.style.setProperty('--shift-reverse-y', `${(y * -12).toFixed(2)}px`);
   }, []);
 
   return (
-    <div className="campaign-app" id="top" ref={rootRef} onPointerMove={reactToPointer}>
+    <div className="campaign-app" id="top" ref={rootRef} onPointerDown={reactToPointer} onPointerMove={reactToPointer}>
       <a className="campaign-skip" href="#campaign-main">К основному содержанию</a>
 
       <header className="campaign-header">
         <a className="campaign-brand" href="#top" aria-label="META4PRO — в начало страницы">
+          <img src={asset('favicon.svg')} alt="" width="32" height="32" />
           <span>META<b>4</b>PRO</span>
         </a>
 
@@ -200,7 +211,9 @@ export default function CampaignApp() {
           <div className="campaign-hero-shade" aria-hidden="true" />
           <AtmosphereFX className="campaign-hero-fx" />
           <Bolt className="campaign-hero-bolt" />
+          <Bolt className="campaign-hero-bolt-secondary" />
           <ChromeBlob className="campaign-chrome--hero" />
+          <ChromeBlob className="campaign-chrome--hero-secondary" />
 
           <div className="campaign-hero-copy">
             <h1 className="campaign-display" id="campaign-hero-title">
@@ -350,7 +363,9 @@ export default function CampaignApp() {
                 onClick={() => setActiveDevice(index)}
                 onKeyDown={event => keyboardTabs(event, index, devices.length, setActiveDevice)}
               >
-                {device.title}
+                <img src={device.image} alt="" width="240" height="160" loading="lazy" decoding="async" />
+                <span>{device.title}</span>
+                <small>от {device.from} ₽</small>
               </button>
             ))}
           </div>
@@ -453,11 +468,12 @@ export default function CampaignApp() {
           </div>
 
           <AcrylicFour className="campaign-four--close" />
+          <ChromeBlob className="campaign-chrome--close" />
         </section>
       </main>
 
       <footer className="campaign-footer">
-        <a className="campaign-brand" href="#top"><span>META<b>4</b>PRO</span></a>
+        <a className="campaign-brand" href="#top"><img src={asset('favicon.svg')} alt="" width="32" height="32" /><span>META<b>4</b>PRO</span></a>
         <p>Компьютерный клуб в Ростове-на-Дону</p>
         <small>© 2020–2026 META4PRO BOOTCAMP</small>
       </footer>
