@@ -1,208 +1,276 @@
 ---
 name: "META4PRO"
-description: "Live Match Lobby — mobile-first интерфейс компьютерного клуба с реальным железом и одним жёлтым сигналом."
+description: "Charged Acrylic — mobile-first campaign with real club photography, compressed type and reactive electric material."
 colors:
-  arena-black: "#070706"
-  arena-soft: "#121210"
-  graphite: "#1d1d1a"
-  warm-paper: "#f3f1e8"
-  paper-muted: "#d0cec5"
-  steel: "#84847d"
-  signal-yellow: "#ffd400"
-  signal-deep: "#9f8300"
+  campaign-black: "#050506"
+  campaign-black-soft: "#0d0d11"
+  campaign-black-raised: "#17151d"
+  warm-white: "#f7f5f1"
+  muted-metal: "#aaa5b0"
+  signal-yellow: "#ffe000"
+  signal-lemon: "#f2ff00"
+  signal-amber: "#ffbd00"
+  uv-violet: "#7c24ff"
+  acrylic-lilac: "#a966ff"
+  hot-magenta: "#ff27b7"
+  purple-depth: "#2a0649"
 typography:
   display:
-    fontFamily: "Unbounded Variable, sans-serif"
-    fontSize: "clamp(2.8rem, 13vw, 6rem)"
-    fontWeight: 700
-    lineHeight: 0.86
+    fontFamily: "Oswald Variable, Oswald, sans-serif"
+    fontSize: "clamp(4.65rem, 22vw, 11rem)"
+    fontWeight: 900
+    lineHeight: 0.76
+    letterSpacing: "-0.04em"
+  display-close:
+    fontFamily: "Oswald Variable, Oswald, sans-serif"
+    fontSize: "clamp(3.3rem, 16.5vw, 9rem)"
+    fontWeight: 900
+    lineHeight: 0.76
+    letterSpacing: "-0.04em"
+  brand:
+    fontFamily: "Unbounded Variable, Unbounded, sans-serif"
+    fontSize: "clamp(0.9rem, 4vw, 1.2rem)"
+    fontWeight: 760
     letterSpacing: "-0.035em"
-  headline:
-    fontFamily: "Onest Variable, sans-serif"
-    fontSize: "clamp(2.65rem, 10vw, 6rem)"
-    fontWeight: 700
-    lineHeight: 0.88
-    letterSpacing: "-0.035em"
+  action:
+    fontFamily: "Onest Variable, Onest, sans-serif"
+    fontSize: "clamp(1rem, 5vw, 1.28rem)"
+    fontWeight: 900
+    lineHeight: 1
+    letterSpacing: "-0.02em"
   body:
-    fontFamily: "Onest Variable, sans-serif"
-    fontSize: "1rem"
-    fontWeight: 470
+    fontFamily: "Onest Variable, Onest, sans-serif"
+    fontSize: "clamp(0.96rem, 2.2vw, 1.18rem)"
+    fontWeight: 590
     lineHeight: 1.55
   label:
-    fontFamily: "Onest Variable, sans-serif"
-    fontSize: "0.625rem"
-    fontWeight: 700
+    fontFamily: "Onest Variable, Onest, sans-serif"
+    fontSize: "0.67rem"
+    fontWeight: 760
     lineHeight: 1.2
-    letterSpacing: "0.07em"
-rounded:
-  square: "0px"
-  control: "12px"
-  floating: "16px"
-  pill: "999px"
+  scale:
+    micro-067: "0.67rem"
+    micro-068: "0.68rem"
+    caption-076: "0.76rem"
+    caption-078: "0.78rem"
+    label-080: "0.8rem"
+    label-082: "0.82rem"
+    copy-086: "0.86rem"
+    copy-088: "0.88rem"
+    copy-090: "0.9rem"
+    copy-095: "0.95rem"
+    copy-096: "0.96rem"
+    body-100: "1rem"
+    body-108: "1.08rem"
+    body-110: "1.1rem"
+    lead-118: "1.18rem"
+    lead-120: "1.2rem"
+    action-128: "1.28rem"
+    title-130: "1.3rem"
+    title-135: "1.35rem"
+    quote-170: "1.7rem"
+    heading-200: "2rem"
+    heading-230: "2.3rem"
+    metric-235: "2.35rem"
+    heading-260: "2.6rem"
+    heading-270: "2.7rem"
+    metric-300: "3rem"
+    metric-330: "3.3rem"
+    metric-340: "3.4rem"
+    poster-400: "4rem"
+    poster-440: "4.4rem"
+    poster-465: "4.65rem"
+    poster-500: "5rem"
+    poster-525: "5.25rem"
+    poster-560: "5.6rem"
+    poster-600: "6rem"
+    poster-700: "7rem"
+    poster-800: "8rem"
+    poster-900: "9rem"
+    poster-1100: "11rem"
+    object-2500: "25rem"
+    object-4200: "42rem"
 spacing:
-  xs: "8px"
-  sm: "12px"
-  md: "18px"
-  lg: "24px"
-  xl: "48px"
-  page: "clamp(18px, 4vw, 68px)"
+  cluster: "10px"
+  plate: "24px"
+  cta: "17px 24px"
+  page: "clamp(18px, 5vw, 72px)"
+  section-y: "clamp(86px, 18vw, 190px)"
 components:
-  button-primary:
+  campaign-cta:
     backgroundColor: "{colors.signal-yellow}"
-    textColor: "{colors.arena-black}"
-    typography: "{typography.body}"
-    rounded: "{rounded.control}"
-    height: "52px"
-    padding: "0 17px"
-  button-ink:
-    backgroundColor: "{colors.arena-black}"
-    textColor: "{colors.warm-paper}"
-    typography: "{typography.body}"
-    rounded: "{rounded.control}"
-    height: "52px"
-    padding: "0 17px"
+    textColor: "{colors.campaign-black}"
+    typography: "{typography.action}"
+    height: "66px"
+    padding: "{spacing.cta}"
+  campaign-cta-dark:
+    backgroundColor: "{colors.campaign-black-raised}"
+    textColor: "{colors.warm-white}"
+    typography: "{typography.action}"
+    height: "66px"
+    padding: "{spacing.cta}"
+  campaign-plate:
+    backgroundColor: "{colors.campaign-black-raised}"
+    textColor: "{colors.warm-white}"
+    padding: "{spacing.plate}"
   zone-active:
-    backgroundColor: "{colors.arena-black}"
-    textColor: "{colors.warm-paper}"
-    rounded: "{rounded.control}"
-    padding: "14px"
-  mobile-booking:
+    backgroundColor: "{colors.campaign-black-soft}"
+    textColor: "{colors.warm-white}"
+    typography: "{typography.body}"
+  tariff-active:
     backgroundColor: "{colors.signal-yellow}"
-    textColor: "{colors.arena-black}"
-    rounded: "{rounded.floating}"
-    height: "58px"
-    padding: "0 15px"
-  final-cta:
-    backgroundColor: "{colors.arena-black}"
-    textColor: "{colors.warm-paper}"
-    rounded: "{rounded.pill}"
-    height: "58px"
-    padding: "0 17px"
-  photo-frame:
-    backgroundColor: "{colors.graphite}"
-    rounded: "{rounded.square}"
+    textColor: "{colors.campaign-black}"
+    height: "60px"
+    padding: "12px 5px"
+  review-plate:
+    backgroundColor: "{colors.signal-yellow}"
+    textColor: "{colors.campaign-black}"
+    padding: "32px 26px"
 ---
 
 # Design System: META4PRO
 
 ## Overview
 
-**Creative North Star: "Live Match Lobby"**
+**Creative North Star: "Charged Acrylic"**
 
-META4PRO выглядит как момент перед стартом матча: глубокая тёмная арена, точный жёлтый сигнал, крупная типографика и реальное железо. Система энергичная, но не типично «геймерская»: реальные фотографии и характеристики важнее декоративного шума.
+META4PRO выглядит как живая рекламная кампания компьютерного клуба: реальная фотография ARENA держит сцену правдивой, а сигнальный жёлтый, ультрафиолетовый акрил, magenta-свет, хром и молнии дают ей физическое напряжение. Это не каталог карточек и не интерфейсный glassmorphism.
 
-Главный выразительный приём — mobile-first hero со сборкой компьютера и отзывчивым к касанию Liquid Ether. Остальные поверхности спокойнее: они помогают сравнить четыре зоны, увидеть клуб и перейти к честному контакту с администратором.
+Главный образ — огромная жёлто-белая типографика рядом с прозрачной объёмной `4`. Canvas-атмосфера, хромированные объекты и электрические края усиливают материал, но не несут смысл и не мешают чтению, прокрутке или действию. Этот файл фиксирует проверенное SHIP-состояние campaign surface.
 
 **Key Characteristics:**
 
-- Мобильная версия является основной, desktop расширяет тот же мир.
-- Чёрный создаёт атмосферу, тёплая бумага даёт контрастный информационный ритм.
-- Жёлтый обозначает действие, выбранное состояние или важный статус.
-- Реальные фотографии клуба и зарегистрированные стадии сборки ПК — основа доверия.
+- Реальные фотографии клуба остаются главным доказательством места.
+- Основа mobile-first рассчитана на 360–430px; desktop расширяет ту же композицию.
+- Oswald ведёт гигантские сообщения, Onest — текст, данные и UI, Unbounded — только бренд.
+- Чёрные сцены чередуются с жёлтыми полями и неровными авторскими блоками.
+- Прозрачный акрил, хром, молнии и реактивный свет образуют одну среду.
 
 ## Colors
 
-Палитра построена на контрасте тёмной арены, тёплой светлой поверхности и одного сигнального жёлтого.
+Палитра строится на почти абсолютном чёрном и тёплом белом; жёлтый отвечает за сообщение и действие, UV и magenta — за глубину, края и электрический свет.
 
 ### Primary
 
-- **Signal Yellow** (#ffd400): главный CTA, выбранные состояния, прогресс сборки и важные значения.
-- **Deep Signal** (#9f8300): читаемый жёлто-оливковый акцент на светлых поверхностях.
+- **Signal Yellow**: основные слова, выбранные состояния, CTA и крупные поля.
+- **Signal Lemon**: горячая кромка электрического градиента и focus-visible.
+- **Signal Amber**: тёплый конец жёлтого градиента; нормативный тон — `#ffbd00`, а `#ffb800` остаётся утверждённой калибровкой shipped CSS.
+
+### Secondary
+
+- **UV Violet**: акриловые рёбра, световые шлейфы и глубина.
+- **Hot Magenta**: второй электрический канал, активный glow и акционные акценты.
+- **Acrylic Lilac** и **Purple Depth**: блики прозрачного материала и тёмная цветная глубина.
 
 ### Neutral
 
-- **Arena Black** (#070706): главный тёмный фон, тёмные кнопки и активные зоны.
-- **Arena Soft** (#121210) и **Graphite** (#1d1d1a): вторичные тёмные поверхности.
-- **Warm Paper** (#f3f1e8): светлые информационные секции и основной светлый текст.
-- **Paper Muted** (#d0cec5) и **Steel** (#84847d): вторичный текст, границы и служебные подписи.
+- **Campaign Black**, **Black Soft** и **Black Raised**: фон страницы, сцен и внутренних поверхностей plate.
+- **Warm White**: основной светлый текст и белая половина display-композиций.
+- **Muted Metal**: пояснения, вторичные данные и служебный текст.
 
-**The One Signal Rule.** На одном экране жёлтый должен оставаться редким сигналом, а не фоновым украшением.
+**The Lit Face Rule.** Сплошная жёлтая грань означает выбранное или кликабельное; UV и magenta остаются светом и кромкой, а не вторым основным брендом.
 
 ## Typography
 
-**Display Font:** Unbounded Variable (sans-serif fallback), только логотип и hero wordmark.
-**Body Font:** Onest Variable (sans-serif fallback), для заголовков секций, текста, цифр и всего UI.
+**Display Font:** Oswald Variable (Oswald, sans-serif fallback)
+**Brand Font:** Unbounded Variable (Unbounded, sans-serif fallback)
+**Body Font:** Onest Variable (Onest, sans-serif fallback)
 
-**Character:** Unbounded фиксирует узнаваемость META4PRO в двух фирменных точках. Onest ведёт весь остальной интерфейс и сохраняет быструю читаемость на телефоне.
+**Character:** Oswald даёт сжатый рекламный удар и работает только в огромных uppercase-сообщениях. Onest быстро читается по-русски и несёт весь UI, цены, характеристики и текст; Unbounded сохраняет уникальную форму логотипа.
 
 ### Hierarchy
 
-- **Display** (700, fluid, 0.86): только логотип и слово META4PRO в hero.
-- **Headline** (700, fluid, 0.88): крупные заголовки смысловых секций в Onest.
-- **Body** (470, 1rem, 1.55): описания, характеристики и пояснения длиной до 57ch.
-- **Label** (700, 0.625rem, 0.07em, uppercase): статусы, частоты и компактные метаданные.
+- **Display** (900, `clamp(4.65rem, 22vw, 11rem)`, 0.76): hero и заголовки основных сцен; жёлтый и белый могут делить одну фразу.
+- **Display Close** (900, `clamp(3.3rem, 16.5vw, 9rem)`, 0.76): финальный booking headline с более сильным горизонтальным сжатием.
+- **Brand** (760, `clamp(0.9rem, 4vw, 1.2rem)`): только META4PRO в header и footer.
+- **Action** (900, `clamp(1rem, 5vw, 1.28rem)`, uppercase): CTA и крупные управляющие подписи.
+- **Body** (570–620, 0.86–1.18rem, 1.45–1.55): описания и пояснения длиной до 57ch.
+- **Data / Metric** (790–900, 1.2–9rem): цены, бонусы, названия зон и ключевые числа; остаётся в Onest.
+- **Label** (700–820, 0.67–0.8rem, uppercase): характеристики, вкладки и компактные метаданные.
 
-**The Brand-Only Display Rule.** Не использовать Unbounded в заголовках секций, карточках, подписях или элементах управления.
-
-**The Headline Carries It Rule.** Не ставить kicker или eyebrow над заголовком; статус располагается после тезиса либо в функциональном рельсе.
+**The Three-Typeface Rule.** Oswald — кампания, Onest — интерфейс и данные, Unbounded — только знак META4PRO; не возвращать старую Onest-display систему и не расширять Unbounded на заголовки.
 
 ## Layout
 
-Система mobile-first: базовая композиция — один вертикальный поток с полями страницы от 18px до 68px и контейнером до 1440px. SHIP-состояние проверено на ширинах 360px, 390px, 430px и на desktop.
+Система mobile-first: один вертикальный поток, поля страницы `clamp(18px, 5vw, 72px)` и максимальная ширина сцены 1500px. Hero заполняет первый экран реальной фотографией ARENA; заголовок, акриловая `4`, lightning, fact plate и бронь образуют одну наложенную композицию. Ниже семь авторских сцен меняют плотность: порталы зон, фото-коллаж, жёлтая таблица цен, аренда, неровное bonus field, горизонтальный review rail и финальная бронь.
 
-Hero — длинная sticky-сцена в одном viewport. Неподвижный зарегистрированный корпус остаётся в центре, семь переходов по очереди фиксируются семью полными зарегистрированными stage-изображениями. Текст уходит в начале прокрутки, а финальный CTA появляется только после завершения сборки.
+Ширины 360–430px являются основным контрольным диапазоном. При 700px Canvas повышает плотность только для точного указателя; с 720px раскрываются desktop-навигация и широкие композиции, с 1100px — асимметричное редакционное расширение. Контент и порядок действий не меняются между устройствами.
 
-На mobile фотографии клуба образуют вертикальную sticky-колоду; при reduced motion становятся обычным статичным списком. На desktop с широким точным указателем и WebGL, начиная с 1000px, тот же контент показывает Circular Gallery. С 820px выбор зон и бронирование переходят в двухколоночные композиции.
+**The Authored Density Rule.** Не превращать сцены в равномерную сетку одинаковых карточек: каждая секция сохраняет собственный масштаб, перекрытия и ритм.
 
 ## Elevation & Depth
 
-Система плоская по умолчанию. Глубину создают реальные фотографии, затемнения, сборочные перекрытия и Liquid Ether; тени обозначают только физическое наложение: финальный ПК (0 32px 48px rgba(0,0,0,0.7)), mobile photo stack (0 26px 56px rgba(0,0,0,0.42)) и плавающая бронь (0 18px 42px rgba(0,0,0,0.4)).
+Глубина создаётся не обычными карточными тенями, а сочетанием реальной фотографии, прозрачного растра, screen-blend Canvas, двухпиксельной электрической кромки и направленных drop-shadow. Plate получает чёрную внутреннюю грань и UV/magenta/yellow border; активная зона усиливает magenta glow, а хром и девайсы получают тяжёлую нижнюю тень.
 
-**The Flat-by-Default Rule.** Тень появляется только там, где объясняет реальное наложение или фиксированное состояние.
+### Shadow Vocabulary
+
+- **Plate Depth** (`drop-shadow(0 18px 26px rgba(0,0,0,.46))` + UV glow): базовое физическое отделение plate.
+- **Active Portal** (`drop-shadow(0 22px 34px rgba(0,0,0,.6))` + magenta glow): только выбранная зона.
+- **Object Weight** (`drop-shadow(0 24px 28px rgba(0,0,0,.72))`): прозрачные девайсы, хром и 3D-объекты.
+
+**The Material Shadow Rule.** Тень должна объяснять вес, прозрачность или активное электрическое состояние; нейтральные floating-card shadows не добавляются.
 
 ## Shapes
 
-Основные кнопки и интерактивные контролы имеют уверенный радиус 12px. Плавающая mobile-панель бронирования отделена радиусом 16px. Финальное действие после сборки — единственная pill-форма (999px) с Electric Border. Крупные фотографии, выбранная зона на desktop и booking console остаются прямоугольными без скругления.
+Главная форма — восьмиугольная chamfered plate с адаптивным срезом `clamp(12px, 3.8vw, 26px)`. Двухпиксельный inset оставляет видимой электрическую границу, а внутреннее fill определяет состояние. Фото-коллаж использует крупные несимметричные polygon crops; круглые формы остаются только у фактических точек-индикаторов.
 
-**The One Pill Rule.** Полная pill-форма принадлежит финальному Electric Border CTA и не размножается по странице.
+**The Chamfer Rule.** CTA, зоны, цены, бонусы и отзывы используют срезанные углы; обычные rounded rectangles и универсальные pill-кнопки этому миру не принадлежат.
 
 ## Components
 
+### Campaign plate
+
+- **Shape:** общий chamfered polygon с электрическим UV/magenta/yellow контуром и inset fill.
+- **State:** переменная внутренней грани меняет материал без смены геометрии.
+- **Depth:** одна направленная тень и один цветной glow.
+
 ### Buttons
 
-- **Shape:** основные действия — компактные прямоугольники с радиусом 12px и высотой не менее 52px.
-- **Primary:** Signal Yellow на тёмной поверхности; Ink — Arena Black на Warm Paper.
-- **Hover / Focus:** локальное осветление или затемнение; focus-visible — внешний жёлтый контур 3px.
-- **Final:** чёрная pill-кнопка внутри одного Electric Border появляется после полной сборки ПК.
+- **Primary:** лимонно-жёлто-янтарная грань, чёрный uppercase Onest, высота не менее 66px.
+- **Dark:** та же геометрия на чёрной грани с тёплым белым текстом.
+- **Hover / Focus:** подъём на 3px доступен только точному указателю; focus-visible всегда использует 3px Signal Lemon с offset 5px.
 
-### Zone selector
+### Zone portals
 
-- **Mobile:** доступная сетка 2×2 с контролами 12px.
-- **Desktop:** вертикальный редакционный список без скруглений рядом с одним фото и блоком характеристик.
-- **State:** выбор обозначается цветом и `aria-selected`; клавиатура использует Arrow, Home и End.
+- **Structure:** реальное фото, крупное имя, стартовая цена и раскрываемые характеристики в одном plate.
+- **State:** активная зона получает violet-black fill и magenta glow; факты остаются текстом, не частью изображения.
 
-### Club gallery
+### Tabs and price rows
 
-- **Mobile / touch:** пять реальных фотографий в вертикальной sticky-колоде с прямыми углами.
-- **Desktop:** Circular Gallery включается только при ширине от 1000px, точном указателе, WebGL и без reduced motion.
-- **Fallback:** тот же полный набор контента остаётся доступным без canvas.
+- **Tariffs:** четыре равных chamfered tab; жёлтая грань означает `aria-selected=true`.
+- **Device tabs:** горизонтальный scroll-snap rail на mobile и жёлтая нижняя линия активной категории.
+- **Price rows:** чёрно-жёлтая split plate с крупным Onest-числом.
 
-### Scroll-built PC
+### Real-photo collage and reviews
 
-Неподвижный зарегистрированный корпус служит общей системой координат. Семь последовательных переходов — плата, процессор, память, охлаждение, видеокарта, питание и стекло — закрепляются полными stage-изображениями; последняя стадия показывает реальный собранный ПК. Liquid Ether реагирует на touch и pointer, но не несёт смысловой информации. Reduced motion сразу показывает готовую машину.
+- **Collage:** три реальные фотографии разного масштаба и наклона плюс отдельный 24/7 plate.
+- **Reviews:** горизонтальный scroll-snap rail из жёлтых quote plates; источник остаётся ссылкой.
 
-### Booking contacts
+### Acrylic objects and atmosphere
 
-Выбранная зона и цена переходят в booking console. Основное действие открывает Telegram с заранее составленным черновиком сообщения для выбранной зоны; рядом всегда есть прямой телефонный звонок. Это контактный сценарий, а не имитация формы или подтверждённой онлайн-брони.
+- **Objects:** прозрачная 3D `4`, chrome blobs и lightning используются как крупные сценические слои, а не как иконки.
+- **Canvas:** UV/magenta ribbons, световые blobs, yellow bolts и touch impulses реагируют на pointer/touch; на mobile работают с меньшей плотностью и частотой.
+- **Reduced motion:** animation loop останавливается и показывает статичный кадр; смысловой контент не зависит от Canvas.
 
-### Navigation
+### Navigation and booking
 
-Фиксированная верхняя навигация прозрачна над hero и получает плотный чёрный фон при открытии mobile menu. На desktop ссылки компактны; на mobile используется одна кнопка меню с доступным состоянием.
+- **Navigation:** mobile menu раскрывается под абсолютным header; с 720px превращается в открытую горизонтальную навигацию с телефоном.
+- **Booking:** финальный блок повторяет выбранную зону и даёт два реальных действия — звонок и Telegram.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** использовать реальные фото клуба и реальные характеристики.
-- **Do** проверять новые изменения минимум на ширинах 360px, 390px, 430px и на desktop.
-- **Do** оставлять один главный жёлтый сигнал в пределах viewport.
-- **Do** сохранять touch-реакцию Liquid Ether и полноценный reduced-motion fallback.
-- **Do** вести бронирование через Telegram-черновик и прямой телефон, пока нет backend.
+- **Do** начинать ключевые сцены с реальных фотографий клуба и проверенных данных.
+- **Do** сохранять жёлто-белые Oswald-сообщения крупнее обычного UI.
+- **Do** проверять каждый новый блок на 360px и 430px до desktop-расширения.
+- **Do** сохранять pointer/touch реакцию и статичный reduced-motion fallback.
+- **Do** использовать chamfered plate и электрическую кромку для состояния и действия.
 
 ### Don't:
 
-- **Don't** строить страницу из одинаковых карточек «иконка + заголовок + текст».
-- **Don't** использовать фиолетово-синий неон, голограммы, glassmorphism или игровых персонажей.
-- **Don't** использовать Unbounded вне логотипа и hero wordmark.
-- **Don't** заменять вертикальную mobile photo stack горизонтальной лентой.
-- **Don't** имитировать форму или подтверждение бронирования без рабочего backend.
+- **Don't** возвращать Live Match Lobby, сборку ПК или старую бумажно-жёлтую систему как визуальную основу.
+- **Don't** использовать Unbounded вне знака META4PRO или заменять Oswald на Onest в display-ролях.
+- **Don't** строить страницу из одинаковых rounded cards, pill-кнопок или шаблонного glassmorphism.
+- **Don't** подменять реальный зал игровыми персонажами, абстрактным фоном или rasterized UI.
+- **Don't** давать Canvas, хрому или молниям перехватывать pointer, touch, прокрутку или смысл.
