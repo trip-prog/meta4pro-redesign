@@ -4,7 +4,7 @@ MATERIAL: black club photography under signal-yellow lacquer, black-gold acrylic
 TYPE: extremely large compressed Onest statements; Unbounded is reserved for the META4PRO mark and data remains plainly readable.
 TOPOLOGY: seven authored campaign scenes alternate image, plate and information density instead of repeating a generic card grid.
 STATE: a lit yellow face means selected or actionable; graphite and amber create depth without introducing another brand color.
-MOTION: the acrylic MP mark follows pointer or touch and breathes once as the page's authored moment; reduced motion freezes it cleanly.
+MOTION: the acrylic MP mark follows a fine pointer; touch keeps heavy layers static for responsive scrolling.
 */
 
 :root {
@@ -2177,6 +2177,14 @@ svg {
 }
 
 @media (hover: none), (pointer: coarse) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .campaign-match-rail a {
+    backdrop-filter: none;
+  }
+
   .campaign-bolt,
   .campaign-chrome,
   .campaign-four,
@@ -2189,22 +2197,35 @@ svg {
     animation: none;
   }
 
-  @supports (animation-timeline: view()) {
-    .campaign-zone,
-    .campaign-price-row,
-    .campaign-bonus,
-    .campaign-faq details {
-      animation: campaign-card-scroll linear both;
-      animation-timeline: view(block);
-      animation-range: entry 0% exit 100%;
-    }
+  .campaign-zone,
+  .campaign-zone.is-active {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
 
-    .campaign-gallery-card,
-    .campaign-review {
-      animation: campaign-card-swipe linear both;
-      animation-timeline: view(inline);
-      animation-range: entry 0% exit 100%;
-    }
+  .campaign-zone-control img,
+  .campaign-zone.is-active .campaign-zone-control img {
+    transform: none;
+    transition: none;
+  }
+
+  .campaign-zone-specs,
+  .campaign-zone-specs.is-open {
+    max-height: none;
+    padding: 18px 16px 22px;
+    border-top-width: 1px;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .campaign-zone-specs {
+    display: none;
+  }
+
+  .campaign-zone-specs.is-open {
+    display: grid;
   }
 }
 

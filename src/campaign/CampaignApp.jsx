@@ -208,9 +208,9 @@ export default function CampaignApp() {
   }, []);
 
   const reactToPointer = useCallback(event => {
+    if (event.pointerType !== 'mouse') return;
     const root = rootRef.current;
     if (!root || typeof window === 'undefined') return;
-    if (event.type === 'pointermove' && event.pointerType !== 'mouse') return;
     const x = Math.max(-0.5, Math.min(0.5, event.clientX / Math.max(window.innerWidth, 1) - 0.5));
     const y = Math.max(-0.5, Math.min(0.5, event.clientY / Math.max(window.innerHeight, 1) - 0.5));
     root.style.setProperty('--pointer-x', x.toFixed(3));
@@ -228,7 +228,7 @@ export default function CampaignApp() {
   }, []);
 
   return (
-    <div className="campaign-app" id="top" ref={rootRef} onPointerDown={reactToPointer} onPointerMove={reactToPointer}>
+    <div className="campaign-app" id="top" ref={rootRef} onPointerMove={reactToPointer}>
       <a className="campaign-skip" href="#campaign-main">К основному содержанию</a>
 
       <header className="campaign-header">
