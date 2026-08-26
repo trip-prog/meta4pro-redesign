@@ -2,12 +2,12 @@
 THESIS: META4PRO is a playable campaign poster, not a polite catalogue of gaming PCs.
 OWN-WORLD: black club photography, signal-yellow and gold fields, warm white highlights, black-gold chrome and chamfered plates.
 STORY: choose one of four real zones, compare exact prices and hardware, see the club, then contact the administrator.
-FIRST VIEWPORT: full-bleed club photo, compressed yellow/white title, touch-reactive acrylic 4, fact rail and one booking action.
+FIRST VIEWPORT: full-bleed club photo, compressed yellow/white title, touch-reactive acrylic MP mark, fact rail and one booking action.
 FORM: user-pinned seven-block yellow-black campaign comps, seed user-pinned-yellow-black-2026-08-25; semantic React reconstruction, never screenshot wallpaper.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 */
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ArrowDown,
   ArrowRight,
@@ -103,10 +103,18 @@ const faq = [
   ['Есть ночные игровые сессии?', 'Да. Клуб работает круглосуточно, ночной пакет действует с 21:00 до 05:00.']
 ];
 
+const railSections = [
+  ['campaign-hero', 'Старт'],
+  ['zones', 'Зоны'],
+  ['prices', 'Цены'],
+  ['rental', 'Аренда'],
+  ['booking', 'Бронь']
+];
+
 function AcrylicFour({ className = '', eager = false }) {
   return (
     <div className={`campaign-four ${className}`} aria-hidden="true">
-      <img src={asset('campaign/meta4pro-acrylic-4-gold.webp')} alt="" width="900" height="1050" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+      <img src={asset('campaign/meta4pro-mp-electric-gold.webp')} alt="" width="1024" height="1024" loading={eager ? 'eager' : 'lazy'} decoding="async" />
     </div>
   );
 }
@@ -179,6 +187,7 @@ export default function CampaignApp() {
   const [activeZone, setActiveZone] = useState(0);
   const [activeTariff, setActiveTariff] = useState(0);
   const [activeDevice, setActiveDevice] = useState(0);
+  const [activeSection, setActiveSection] = useState('campaign-hero');
   const galleryDrag = useDragRail();
   const reviewDrag = useDragRail();
 
@@ -187,6 +196,19 @@ export default function CampaignApp() {
   const selectedDevice = devices[activeDevice];
   const telegramMessage = encodeURIComponent(`Здравствуйте! Хочу забронировать место в зоне ${selectedZone.name}. Подскажите свободное время.`);
   const telegramUrl = `${club.telegram}?text=${telegramMessage}`;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.find(entry => entry.isIntersecting);
+      if (visible) setActiveSection(visible.target.id);
+    }, { rootMargin: '-35% 0px -55%', threshold: 0 });
+
+    railSections.forEach(([id]) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const reactToPointer = useCallback(event => {
     const root = rootRef.current;
@@ -214,7 +236,7 @@ export default function CampaignApp() {
 
       <header className="campaign-header">
         <a className="campaign-brand" href="#top" aria-label="META4PRO — в начало страницы">
-          <img src={asset('favicon.svg')} alt="" width="32" height="32" />
+          <img src={asset('campaign/meta4pro-mp-electric-gold.webp')} alt="" width="40" height="40" />
           <span>META<b>4</b>PRO</span>
         </a>
 
@@ -240,8 +262,17 @@ export default function CampaignApp() {
         <a className="campaign-header-phone" href={club.phoneHref}>{club.phone}</a>
       </header>
 
+      <nav className="campaign-match-rail" aria-label="Быстрая навигация">
+        {railSections.map(([id, label]) => (
+          <a href={`#${id}`} aria-current={activeSection === id ? 'location' : undefined} key={id}>
+            <i aria-hidden="true" />
+            <span>{label}</span>
+          </a>
+        ))}
+      </nav>
+
       <main id="campaign-main">
-        <section className="campaign-hero" aria-labelledby="campaign-hero-title">
+        <section className="campaign-hero" id="campaign-hero" aria-labelledby="campaign-hero-title">
           <img className="campaign-hero-photo" src={zones[1].image} alt="Игровой зал ARENA в META4PRO" width="1600" height="1068" fetchPriority="high" />
           <div className="campaign-hero-shade" aria-hidden="true" />
           <Bolt className="campaign-hero-bolt" eager />
@@ -429,10 +460,10 @@ export default function CampaignApp() {
           <div className="campaign-bonus-field">
             <article className="campaign-bonus campaign-bonus--welcome campaign-plate">
               <div className="campaign-bonus-welcome-brand" aria-hidden="true">
-                <img src={asset('campaign/meta4pro-acrylic-mark-gold.webp')} alt="" width="32" height="32" />
+                <img src={asset('campaign/meta4pro-mp-electric-gold.webp')} alt="" width="32" height="32" />
                 <span>META<b>4</b>PRO</span>
               </div>
-              <img className="campaign-bonus-welcome-emblem" src={asset('campaign/meta4pro-acrylic-mark-gold.webp')} alt="" width="768" height="768" loading="lazy" decoding="async" />
+              <img className="campaign-bonus-welcome-emblem" src={asset('campaign/meta4pro-mp-electric-gold.webp')} alt="" width="1024" height="1024" loading="lazy" decoding="async" />
               <strong>500 ₽</strong>
               <div><h3>Новым гостям</h3><p>Бонус на игровой баланс при первом посещении.</p></div>
             </article>
@@ -504,7 +535,7 @@ export default function CampaignApp() {
       </main>
 
       <footer className="campaign-footer">
-        <a className="campaign-brand" href="#top"><img src={asset('favicon.svg')} alt="" width="32" height="32" /><span>META<b>4</b>PRO</span></a>
+        <a className="campaign-brand" href="#top"><img src={asset('campaign/meta4pro-mp-electric-gold.webp')} alt="" width="40" height="40" /><span>META<b>4</b>PRO</span></a>
         <p>Компьютерный клуб в Ростове-на-Дону</p>
         <small>© 2020–2026 META4PRO BOOTCAMP</small>
       </footer>

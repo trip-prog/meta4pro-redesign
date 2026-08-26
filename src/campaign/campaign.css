@@ -4,7 +4,7 @@ MATERIAL: black club photography under signal-yellow lacquer, black-gold acrylic
 TYPE: extremely large compressed Onest statements; Unbounded is reserved for the META4PRO mark and data remains plainly readable.
 TOPOLOGY: seven authored campaign scenes alternate image, plate and information density instead of repeating a generic card grid.
 STATE: a lit yellow face means selected or actionable; graphite and amber create depth without introducing another brand color.
-MOTION: the acrylic 4 follows pointer or touch and breathes once as the page's authored moment; reduced motion freezes it cleanly.
+MOTION: the acrylic MP mark follows pointer or touch and breathes once as the page's authored moment; reduced motion freezes it cleanly.
 */
 
 :root {
@@ -283,8 +283,13 @@ svg {
 }
 
 .campaign-brand img {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.campaign-match-rail {
+  display: none;
 }
 
 .campaign-brand b {
@@ -1916,6 +1921,60 @@ svg {
 }
 
 @media (min-width: 1100px) {
+  .campaign-match-rail {
+    position: fixed;
+    z-index: 60;
+    top: 50%;
+    right: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+    transform: translateY(-50%);
+  }
+
+  .campaign-match-rail a {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 122px;
+    min-height: 46px;
+    padding: 10px 15px;
+    overflow: hidden;
+    border: 1px solid rgba(253, 205, 5, 0.28);
+    border-radius: 999px;
+    background: rgba(9, 9, 12, 0.92);
+    color: var(--campaign-muted);
+    font-size: 0.69rem;
+    font-weight: 850;
+    text-decoration: none;
+    text-transform: uppercase;
+    transform: translateX(92px);
+    transition: color 160ms ease, background-color 160ms ease, transform 180ms ease;
+    backdrop-filter: blur(12px);
+  }
+
+  .campaign-match-rail a:hover,
+  .campaign-match-rail a:focus-visible,
+  .campaign-match-rail a[aria-current] {
+    transform: translateX(0);
+  }
+
+  .campaign-match-rail a[aria-current] {
+    border-color: var(--campaign-yellow);
+    background: var(--campaign-yellow);
+    box-shadow: inset 0 0 0 2px var(--campaign-black);
+    color: var(--campaign-black);
+  }
+
+  .campaign-match-rail i {
+    flex: 0 0 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
   .campaign-section {
     padding-inline: max(var(--campaign-gutter), calc((100vw - var(--campaign-max)) / 2 + var(--campaign-gutter)));
   }
