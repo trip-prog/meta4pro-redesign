@@ -937,7 +937,7 @@ svg {
   align-items: center;
   min-height: 104px;
   padding: 8px 16px;
-  clip-path: polygon(3% 0, 97% 0, 100% 7%, 100% 42%, 98% 46%, 98% 54%, 100% 58%, 100% 93%, 97% 100%, 3% 100%, 0 93%, 0 58%, 2% 54%, 2% 46%, 0 42%, 0 7%);
+  clip-path: polygon(4% 0, 96% 0, 100% 10%, 100% 90%, 96% 100%, 4% 100%, 0 90%, 0 10%);
   background: #050504;
   filter: drop-shadow(0 16px 19px rgba(0, 0, 0, 0.48)) drop-shadow(0 3px 0 rgba(111, 73, 0, 0.92));
 }
@@ -948,7 +948,7 @@ svg {
 
 .campaign-price-row::after {
   z-index: 0;
-  background: url("/assets/campaign/price-plate-general-electric.webp") center / 100% 100% no-repeat;
+  background: url("/assets/campaign/price-plate-sigma-electric.webp") center / 100% 100% no-repeat;
 }
 
 .campaign-price-row > * {

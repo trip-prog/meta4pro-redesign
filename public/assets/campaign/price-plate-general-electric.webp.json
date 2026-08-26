@@ -1,7 +1,0 @@
-{
-  "tool": "built-in imagegen",
-  "mode": "generate",
-  "use_case": "stylized-concept",
-  "prompt": "Create a preview-only extremely wide 3:1 website pricing-panel background in the META4PRO electric acrylic style. Light, open GENERAL variant: smoked-black acrylic and graphite glass, signal-yellow/gold closed double outline around every chamfered corner, sparse circuit traces, one clean diagonal energy sweep, tiny white highlights, broad calm empty center for HTML copy. No text, letters, numbers, logos, icons, people, devices, watermark, orange, bronze, red, green, blue or purple.",
-  "source": "concepts/price-plate-variants/01-general.png"
-}

@@ -1,0 +1,7 @@
+{
+  "tool": "built-in imagegen",
+  "mode": "generate",
+  "use_case": "stylized-concept",
+  "prompt": "Create a preview-only extremely wide 3:1 website pricing-panel background in the META4PRO electric acrylic style. Premium SIGMA variant: deep smoked glass and black obsidian, signal-yellow/gold closed double outline around every chamfered corner, layered crystal bevels and a few restrained golden particles trapped inside the acrylic edges, tiny white highlights, broad calm empty center for HTML copy. No text, letters, numbers, logos, icons, people, devices, watermark, orange, bronze, red, green, blue or purple.",
+  "source": "concepts/price-plate-variants/04-sigma.png"
+}
