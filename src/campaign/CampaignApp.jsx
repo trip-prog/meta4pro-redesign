@@ -429,12 +429,10 @@ export default function CampaignApp() {
           <div className="campaign-bonus-field">
             <article className="campaign-bonus campaign-bonus--welcome campaign-plate">
               <div className="campaign-bonus-welcome-brand" aria-hidden="true">
-                <img src={asset('favicon.svg')} alt="" width="32" height="32" />
+                <img src={asset('campaign/meta4pro-acrylic-mark-gold.webp')} alt="" width="32" height="32" />
                 <span>META<b>4</b>PRO</span>
               </div>
-              <div className="campaign-bonus-welcome-emblem" aria-hidden="true">
-                <img src={asset('favicon.svg')} alt="" width="160" height="160" loading="lazy" decoding="async" />
-              </div>
+              <img className="campaign-bonus-welcome-emblem" src={asset('campaign/meta4pro-acrylic-mark-gold.webp')} alt="" width="768" height="768" loading="lazy" decoding="async" />
               <strong>500 ₽</strong>
               <div><h3>Новым гостям</h3><p>Бонус на игровой баланс при первом посещении.</p></div>
             </article>

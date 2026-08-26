@@ -1246,33 +1246,12 @@ svg {
   position: absolute;
   z-index: 1;
   top: 52%;
-  right: -3%;
-  display: grid;
-  place-items: center;
-  width: min(43%, 300px);
-  aspect-ratio: 1;
-  clip-path: polygon(17% 0, 83% 0, 100% 17%, 100% 83%, 83% 100%, 17% 100%, 0 83%, 0 17%);
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), #fff200 15%, #e7ab00 54%, #6f4900);
-  filter: drop-shadow(0 24px 24px rgba(54, 31, 0, 0.5)) drop-shadow(0 0 12px rgba(255, 242, 0, 0.52));
-  transform: translateY(-50%) rotate(-7deg);
-}
-
-.campaign-bonus-welcome-emblem::before {
-  position: absolute;
-  z-index: -1;
-  inset: 3px;
-  clip-path: inherit;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.3), transparent 30%),
-    linear-gradient(135deg, rgba(24, 23, 20, 0.9), rgba(111, 73, 0, 0.72));
-  content: "";
-}
-
-.campaign-bonus-welcome-emblem img {
-  width: 68%;
-  height: 68%;
-  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.58));
-  transform: rotate(7deg);
+  right: -1%;
+  width: min(46%, 340px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 22px rgba(54, 31, 0, 0.48)) drop-shadow(0 0 10px rgba(255, 242, 0, 0.48));
+  transform: translateY(-50%) rotate(-5deg);
 }
 
 .campaign-bonus--friend {
