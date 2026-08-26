@@ -936,7 +936,7 @@ svg {
   grid-template-columns: minmax(0, 1fr) minmax(118px, 0.68fr);
   align-items: center;
   min-height: 104px;
-  padding: 8px 16px;
+  padding: 8px clamp(42px, 8vw, 96px);
   clip-path: polygon(4% 0, 96% 0, 100% 10%, 100% 90%, 96% 100%, 4% 100%, 0 90%, 0 10%);
   background: #050504;
   filter: drop-shadow(0 16px 19px rgba(0, 0, 0, 0.48)) drop-shadow(0 3px 0 rgba(111, 73, 0, 0.92));
@@ -1853,7 +1853,6 @@ svg {
   .campaign-price-row {
     grid-template-columns: minmax(0, 1.25fr) minmax(250px, 0.75fr);
     min-height: 132px;
-    padding-inline: 30px;
   }
 
   .campaign-device-stage {
