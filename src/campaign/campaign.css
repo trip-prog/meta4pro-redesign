@@ -1625,6 +1625,7 @@ svg {
   z-index: 7;
   width: min(100%, 860px);
   margin: clamp(100px, 24vw, 220px) auto 0;
+  scroll-margin-top: 24px;
 }
 
 .campaign-booking h2 {

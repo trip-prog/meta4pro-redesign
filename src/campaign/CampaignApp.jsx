@@ -386,7 +386,7 @@ export default function CampaignApp() {
             </div>
           </div>
 
-          <a className="campaign-cta campaign-plate campaign-prices-cta" href="#booking">Выбрать зону <ArrowRight aria-hidden="true" /></a>
+          <a className="campaign-cta campaign-plate campaign-prices-cta" href="#zones">Выбрать зону <ArrowRight aria-hidden="true" /></a>
         </section>
 
         <section className="campaign-rental campaign-section" id="rental" aria-labelledby="campaign-rental-title">
@@ -493,7 +493,7 @@ export default function CampaignApp() {
           </div>
         </section>
 
-        <section className="campaign-close campaign-section" id="booking" aria-labelledby="campaign-booking-title">
+        <section className="campaign-close campaign-section" aria-label="Вопросы и бронирование">
           <Bolt className="campaign-close-bolt" />
           <div className="campaign-faq">
             <h2>Ответы на вопросы</h2>
@@ -505,7 +505,7 @@ export default function CampaignApp() {
             ))}
           </div>
 
-          <div className="campaign-booking">
+          <div className="campaign-booking" id="booking">
             <h2 className="campaign-display" id="campaign-booking-title">ЗАБРОНИРУЙ МЕСТО</h2>
             <p>Выбрана зона <strong>{selectedZone.name}</strong> — от {selectedZone.price} ₽ в час. Администратор проверит свободные места и подтвердит бронь.</p>
             <div className="campaign-booking-actions">
