@@ -12,10 +12,8 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
-  Menu,
   Phone,
-  Send,
-  X
+  Send
 } from 'lucide-react';
 import { club, galleryItems, zones } from '../data/clubData';
 
@@ -183,7 +181,6 @@ function useDragRail() {
 
 export default function CampaignApp() {
   const rootRef = useRef(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeZone, setActiveZone] = useState(0);
   const [activeTariff, setActiveTariff] = useState(0);
   const [activeDevice, setActiveDevice] = useState(0);
@@ -240,23 +237,12 @@ export default function CampaignApp() {
           <span>META<b>4</b>PRO</span>
         </a>
 
-        <button
-          className="campaign-menu-button"
-          type="button"
-          aria-expanded={menuOpen}
-          aria-controls="campaign-navigation"
-          aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
-          onClick={() => setMenuOpen(value => !value)}
-        >
-          {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
-
-        <nav className={menuOpen ? 'campaign-nav is-open' : 'campaign-nav'} id="campaign-navigation" aria-label="Основная навигация">
-          <a href="#zones" onClick={() => setMenuOpen(false)}>Зоны</a>
-          <a href="#prices" onClick={() => setMenuOpen(false)}>Цены</a>
-          <a href="#rental" onClick={() => setMenuOpen(false)}>Аренда</a>
-          <a href="#bonuses" onClick={() => setMenuOpen(false)}>Бонусы</a>
-          <a href="#booking" onClick={() => setMenuOpen(false)}>Бронь</a>
+        <nav className="campaign-nav" id="campaign-navigation" aria-label="Основная навигация">
+          <a href="#zones">Зоны</a>
+          <a href="#prices">Цены</a>
+          <a href="#rental">Аренда</a>
+          <a href="#bonuses">Бонусы</a>
+          <a href="#booking">Бронь</a>
         </nav>
 
         <a className="campaign-header-phone" href={club.phoneHref}>{club.phone}</a>
