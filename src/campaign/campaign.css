@@ -1828,37 +1828,6 @@ svg {
   }
 }
 
-@media (max-width: 719px) {
-  .campaign-zones {
-    min-height: auto;
-  }
-
-  .campaign-zone-stack {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    width: calc(100% + var(--campaign-gutter) * 2);
-    margin-left: calc(var(--campaign-gutter) * -1);
-    padding: 2px var(--campaign-gutter) 24px;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scroll-padding-inline: var(--campaign-gutter);
-    scroll-snap-type: inline mandatory;
-    scrollbar-width: none;
-    perspective: none;
-  }
-
-  .campaign-zone-stack::-webkit-scrollbar {
-    display: none;
-  }
-
-  .campaign-zone {
-    flex: 0 0 min(86vw, 420px);
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-  }
-}
-
 @media (min-width: 720px) {
   .campaign-app {
     padding-bottom: 0;
