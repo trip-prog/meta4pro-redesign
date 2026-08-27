@@ -380,7 +380,7 @@ export default function CampaignApp() {
               {zones.map(zone => (
                 <div className="campaign-price-row campaign-plate" role="row" key={zone.id}>
                   <strong role="rowheader">{zone.name}</strong>
-                  <b role="cell">{prices[zone.id][selectedTariff.id]} <small>₽</small></b>
+                  <b role="cell" key={selectedTariff.id}>{prices[zone.id][selectedTariff.id]} <small>₽</small></b>
                 </div>
               ))}
             </div>

@@ -25,6 +25,9 @@ MOTION: the acrylic MP mark follows a fine pointer; touch keeps heavy layers sta
   --campaign-gutter: clamp(18px, 5vw, 72px);
   --campaign-max: 1500px;
   --campaign-cut: clamp(12px, 3.8vw, 26px);
+  --campaign-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --campaign-motion-fast: 100ms;
+  --campaign-motion-normal: 180ms;
   --pointer-x: 0;
   --pointer-y: 0;
   --pointer-glow-x: 50%;
@@ -602,6 +605,27 @@ svg {
     rotateY(var(--tilt-y));
 }
 
+.campaign-zone.is-active::after {
+  animation: campaign-zone-charge 420ms var(--campaign-ease-out) both;
+}
+
+@keyframes campaign-zone-charge {
+  0% {
+    opacity: 0.52;
+    filter: brightness(0.78);
+  }
+
+  48% {
+    opacity: 1;
+    filter: brightness(1.9) drop-shadow(0 0 9px rgba(255, 242, 0, 0.88));
+  }
+
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+}
+
 .campaign-zone-control {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(126px, 0.85fr);
@@ -937,6 +961,11 @@ svg {
   font-weight: 900;
   text-transform: uppercase;
   cursor: pointer;
+  transition: transform var(--campaign-motion-fast) var(--campaign-ease-out);
+}
+
+.campaign-tariffs button:active {
+  transform: scale(0.97);
 }
 
 .campaign-tariffs button.is-active {
@@ -1025,6 +1054,24 @@ svg {
 
 .campaign-price-row b small {
   font-size: 0.35em;
+}
+
+@keyframes campaign-price-value {
+  from {
+    opacity: 0.46;
+    transform: translate3d(0, 7px, 0) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .campaign-price-row b {
+    animation: campaign-price-value var(--campaign-motion-normal) var(--campaign-ease-out) both;
+  }
 }
 
 .campaign-prices-cta {
@@ -1781,6 +1828,37 @@ svg {
   }
 }
 
+@media (max-width: 719px) {
+  .campaign-zones {
+    min-height: auto;
+  }
+
+  .campaign-zone-stack {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    width: calc(100% + var(--campaign-gutter) * 2);
+    margin-left: calc(var(--campaign-gutter) * -1);
+    padding: 2px var(--campaign-gutter) 24px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--campaign-gutter);
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+    perspective: none;
+  }
+
+  .campaign-zone-stack::-webkit-scrollbar {
+    display: none;
+  }
+
+  .campaign-zone {
+    flex: 0 0 min(86vw, 420px);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+}
+
 @media (min-width: 720px) {
   .campaign-app {
     padding-bottom: 0;
@@ -2270,6 +2348,10 @@ svg {
   }
 
   .campaign-four img {
+    animation: none;
+  }
+
+  .campaign-zone.is-active::after {
     animation: none;
   }
 }

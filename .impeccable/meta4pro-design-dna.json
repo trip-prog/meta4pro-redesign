@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "name": "META4PRO Black Gold Voltage",
+    "description": "Mobile-first esports campaign built from real club photography, signal-yellow lacquer, black-gold acrylic and short energetic feedback.",
+    "source_references": [
+      "https://trip-prog.github.io/meta4pro-redesign/",
+      "https://iziplayclub.ru/",
+      "PRODUCT.md",
+      "DESIGN.md",
+      "concepts/yellow-black-blocks/contact-sheet-yellow-black.png"
+    ],
+    "created_at": "2026-08-27"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "monochromatic warm-neutral with signal-yellow accent",
+      "primary": { "hex": "#FDCD05", "role": "selected states, calls to action and campaign fields" },
+      "secondary": { "hex": "#010100", "role": "page ground and high-contrast plate faces" },
+      "accent": { "hex": "#FFF200", "role": "hot edge, focus ring and electric highlight" },
+      "neutral": {
+        "scale": ["#010100", "#090804", "#181714", "#C6C1B3", "#FEFEFE"],
+        "usage": "near-black stages, graphite depth, muted metal copy and warm-white text"
+      },
+      "semantic": {
+        "success": "#FEFEFE",
+        "warning": "#FDCD05",
+        "error": "#FF6B57",
+        "info": "#C6C1B3"
+      },
+      "surface": {
+        "background": "#010100",
+        "card": "#090804",
+        "elevated": "#181714"
+      },
+      "contrast_strategy": "near-black and warm-white body contrast; solid yellow means selected or actionable"
+    },
+    "typography": {
+      "type_scale": {
+        "display": { "size": "clamp(4.65rem, 22vw, 11rem)", "weight": 900, "line_height": 0.76, "tracking": "-0.04em" },
+        "heading_1": { "size": "clamp(4.65rem, 22vw, 11rem)", "weight": 900, "line_height": 0.76, "tracking": "-0.04em" },
+        "heading_2": { "size": "clamp(3.3rem, 16.5vw, 9rem)", "weight": 900, "line_height": 0.8, "tracking": "-0.04em" },
+        "heading_3": { "size": "clamp(1.35rem, 6vw, 2.7rem)", "weight": 900, "line_height": 0.92, "tracking": "-0.02em" },
+        "body": { "size": "clamp(0.96rem, 2.2vw, 1.18rem)", "weight": 590, "line_height": 1.55, "tracking": "0" },
+        "body_small": { "size": "0.86rem", "weight": 620, "line_height": 1.35, "tracking": "0" },
+        "caption": { "size": "0.76rem", "weight": 720, "line_height": 1.3, "tracking": "0" },
+        "overline": { "size": "0.67rem", "weight": 760, "line_height": 1.2, "tracking": "0.04em" }
+      },
+      "font_families": {
+        "heading": "Oswald Variable, Oswald, sans-serif",
+        "body": "Onest Variable, Onest, sans-serif",
+        "mono": "not used"
+      },
+      "font_style_notes": "Oswald is reserved for compressed campaign statements, Onest carries UI and data, Unbounded appears only in the META4PRO wordmark."
+    },
+    "spacing": {
+      "base_unit": "4px",
+      "scale": ["4px", "8px", "10px", "14px", "18px", "24px", "32px", "44px", "72px"],
+      "content_density": "rich but grouped",
+      "section_rhythm": "large campaign scenes separated by clamp(86px, 18vw, 190px), with tight 10-14px component clusters"
+    },
+    "layout": {
+      "grid_system": "mobile single-flow; authored asymmetric desktop composition",
+      "max_content_width": "1500px",
+      "columns": "1 on mobile, contextual 2-12 column compositions from 720px",
+      "gutter": "clamp(18px, 5vw, 72px)",
+      "breakpoints": ["360px", "430px", "720px", "1100px"],
+      "alignment_tendency": "asymmetric with strict local alignment"
+    },
+    "shape": {
+      "border_radius": { "small": "0", "medium": "0", "large": "0", "pill": "999px only for compact navigation" },
+      "border_usage": "2px luminous chamfered plate edge",
+      "divider_style": "thin warm-gold lines"
+    },
+    "elevation": {
+      "shadow_style": "offset soft black weight plus bounded gold emission",
+      "levels": {
+        "low": "0 12px 18px rgba(0,0,0,.42)",
+        "medium": "0 18px 26px rgba(0,0,0,.52)",
+        "high": "0 22px 34px rgba(0,0,0,.64)"
+      },
+      "depth_cues": "overlap, image scale, acrylic transparency, beveled edges and directed light"
+    },
+    "iconography": {
+      "style": "simple Lucide outline icons plus authored lightning assets",
+      "stroke_weight": "2.4",
+      "size_scale": ["20px", "24px", "32px"],
+      "preferred_set": "lucide-react and authored META4PRO assets"
+    },
+    "motion": {
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "duration_scale": { "micro": "100ms", "normal": "180ms", "macro": "260ms" },
+      "entrance_pattern": "short edge charge followed by a 16px directional settle",
+      "exit_pattern": "faster 120ms accelerate or immediate replacement",
+      "philosophy": "Energetic feedback, never continuous spectacle: transform and opacity on touch, richer pointer response only on fine pointers."
+    },
+    "components": {
+      "button_style": "66px minimum chamfered yellow or graphite plate with immediate press compression",
+      "input_style": "not present on this surface",
+      "card_style": "full electric chamfer, real photography and black-gold face",
+      "navigation_pattern": "five safe-area-aware bottom pills on mobile; open header navigation on desktop",
+      "modal_style": "not used",
+      "list_style": "native horizontal scroll-snap rails or authored vertical data plates",
+      "component_notes": "Do not introduce generic rounded cards, decorative glass panels or rasterized UI text."
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": ["energetic", "competitive", "physical", "premium", "youthful"],
+      "visual_metaphor": "an electrified black-and-gold esports campaign poster",
+      "era_influence": "contemporary gaming broadcast graphics and dimensional outdoor advertising",
+      "genre": "high-impact esports campaign",
+      "personality_traits": ["confident", "fast", "direct", "tactile"],
+      "adjectives": ["electric", "lacquered", "compressed", "dimensional", "real"]
+    },
+    "visual_language": {
+      "complexity": "rich",
+      "ornamentation": "decorative but bounded to lightning, acrylic and chrome",
+      "whitespace_usage": "large scene breaks with dense local groups",
+      "visual_weight_distribution": "oversized type and one dimensional object balanced by real photography",
+      "focal_strategy": "one dominant statement per scene",
+      "contrast_level": "very high",
+      "texture_usage": "real club imagery, glossy acrylic and metallic raster surfaces"
+    },
+    "composition": {
+      "hierarchy_method": "scale contrast, color weight and deliberate overlap",
+      "balance_type": "asymmetric",
+      "flow_direction": "vertical campaign flow with horizontal swipe moments",
+      "grouping_strategy": "each section is a distinct authored scene",
+      "negative_space_role": "black breathing room isolates bright objects and data"
+    },
+    "imagery": {
+      "photo_treatment": "real club photography at natural brightness with restrained warm-yellow grading",
+      "illustration_style": "transparent photoreal black-gold acrylic and chrome props",
+      "graphic_elements": "lightning, diagonal lacquer fields and beveled electric contours",
+      "pattern_usage": "no generic grids; only subject-specific electric lines",
+      "image_shape": "full-bleed scenes and chamfered portals"
+    },
+    "interaction_feel": {
+      "feedback_style": "snappy, physical and directional",
+      "hover_behavior": "subtle lift or image scale on fine pointers only",
+      "transition_personality": "energetic with confident ease-out landing",
+      "loading_style": "content-first static fallback",
+      "microinteraction_density": "medium; only selection, swipe and primary actions move"
+    },
+    "brand_voice_in_ui": {
+      "tone": "direct and conversational Russian",
+      "formality": "informal but clear",
+      "cta_style": "direct imperative",
+      "empty_state_approach": "not used",
+      "error_tone": "plain problem plus recovery action"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "moderate",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "static acrylic assets, native swipe and immediate state changes on reduced motion or coarse pointers",
+      "primary_technology": "CSS, semantic React and native scroll-snap"
+    },
+    "background_effects": {
+      "type": "bounded radial light",
+      "description": "static gold light fields with a fine-pointer spotlight in the hero",
+      "technology": "CSS gradients",
+      "params": { "color_palette": ["#FDCD05", "#CE9100", "#010100"], "speed": "pointer-driven only", "density": "low", "opacity": "0.15", "blend_mode": "normal" }
+    },
+    "particle_systems": {
+      "enabled": false,
+      "type": "none",
+      "description": "No particles on the production surface.",
+      "technology": "none",
+      "params": { "count": 0, "shape": "none", "size_range": "none", "movement_pattern": "none", "color_behavior": "none", "interaction": "none", "spawn_area": "none" }
+    },
+    "3d_elements": {
+      "enabled": false,
+      "type": "pre-rendered object illusion",
+      "description": "Acrylic MP, chrome and device objects are transparent WebP assets moved with CSS; no main-page WebGL runtime.",
+      "technology": "responsive images and CSS transforms",
+      "params": { "renderer": "browser compositor", "lighting": "baked warm key light", "camera": "baked three-quarter view", "materials": "black acrylic, gold edge and chrome", "geometry": "pre-rendered", "post_processing": ["baked bloom"], "interaction_model": "fine-pointer parallax; static touch fallback" }
+    },
+    "shader_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "No runtime shaders.",
+      "technology": "none",
+      "params": { "uniforms": [], "vertex_manipulation": "none", "fragment_output": "none", "noise_type": "none", "distortion": "none" }
+    },
+    "scroll_effects": {
+      "parallax": { "enabled": false, "layers": 0, "depth_range": "none", "speed_curve": "none" },
+      "scroll_triggered_animations": { "enabled": false, "trigger_points": "none", "animation_type": "none", "scrub_behavior": "none" },
+      "scroll_morphing": { "enabled": false, "description": "No scroll-scrubbed morphing on mobile." }
+    },
+    "text_effects": {
+      "type": "none",
+      "description": "Typography stays semantic and readable.",
+      "technology": "CSS",
+      "params": { "split_strategy": "none", "animation_per_unit": "none", "stagger": "none", "effect_style": "none" }
+    },
+    "cursor_effects": {
+      "enabled": true,
+      "type": "spotlight and bounded parallax",
+      "description": "The hero light and dimensional rasters react only to a fine mouse pointer.",
+      "params": { "shape": "radial light", "size": "260px", "blend_mode": "normal", "trail": false, "interaction_zone": "campaign root on fine pointers" }
+    },
+    "image_effects": {
+      "type": "selection scale and swipe depth",
+      "description": "Zone photography acknowledges selection; galleries use native scroll-snap.",
+      "technology": "CSS transforms and native scrolling",
+      "params": { "filter_pipeline": "none on touch", "hover_transform": "scale(1.055) on fine pointers", "reveal_animation": "16px energetic settle", "distortion_type": "none" }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": false,
+      "style": "none",
+      "params": { "blur_radius": "0", "transparency": "0", "border_treatment": "electric chamfer instead", "shadow_type": "offset material shadow", "light_source_angle": "upper-left" }
+    },
+    "canvas_drawings": {
+      "enabled": false,
+      "type": "none",
+      "description": "No canvas loop on the production page.",
+      "technology": "none",
+      "params": { "draw_method": "none", "animation_loop": false, "color_scheme": "black and signal yellow", "responsiveness": "static", "interaction": "none" }
+    },
+    "svg_animations": {
+      "enabled": false,
+      "type": "none",
+      "description": "Lightning remains a static authored asset.",
+      "params": { "animation_method": "none", "path_morphing": false, "stroke_animation": false, "filter_effects": "none" }
+    },
+    "composite_notes": "The authored moment is tariff switching: a short electric trace leads four staggered price plates. Zone selection receives one contour charge. Mobile uses native swipe and no parallax, blur, canvas or WebGL."
+  }
+}
